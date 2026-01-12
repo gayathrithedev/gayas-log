@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply transition-colors duration-claude;
+    @apply transition-colors duration-200;
   }
   
   /* Light mode defaults */
@@ -40,37 +40,37 @@
 @layer components {
   /* Claude-inspired button */
   .btn-primary {
-    @apply bg-[var(--accent)] text-white px-6 py-2 rounded-claude 
-           hover:opacity-90 transition-all duration-claude
+    @apply bg-[var(--accent)] text-white px-6 py-2.5 rounded-lg
+           hover:opacity-90 transition-all duration-200
            font-medium shadow-sm;
   }
   
   .btn-secondary {
     @apply bg-[var(--content-bg)] text-[var(--text-primary)] 
-           border border-[var(--border)] px-6 py-2 rounded-claude
-           hover:bg-[var(--hover)] transition-all duration-claude
+           border border-[var(--border)] px-6 py-2.5 rounded-lg
+           hover:bg-[var(--hover)] transition-all duration-200
            font-medium;
   }
   
   /* Input fields */
   .input-field {
-    @apply w-full px-4 py-2 bg-[var(--content-bg)] 
-           border border-[var(--border)] rounded-claude
+    @apply w-full px-4 py-2.5 bg-[var(--content-bg)] 
+           border border-[var(--border)] rounded-lg
            text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]
-           focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-opacity-50
-           transition-all duration-claude;
+           focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-opacity-30
+           transition-all duration-200;
   }
   
   /* Card style */
   .card {
-    @apply bg-[var(--content-bg)] rounded-claude shadow-sm 
-           border border-[var(--border)] p-4;
+    @apply bg-[var(--content-bg)] rounded-lg shadow-sm 
+           border border-[var(--border)] p-6;
   }
   
   /* Tab navigation */
   .tab {
-    @apply px-6 py-2 text-[var(--text-secondary)] font-medium
-           hover:text-[var(--text-primary)] transition-colors duration-claude
+    @apply px-6 py-3 text-[var(--text-secondary)] font-medium
+           hover:text-[var(--text-primary)] transition-colors duration-200
            cursor-pointer relative;
   }
   
@@ -81,5 +81,60 @@
   .tab-active::after {
     content: '';
     @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent)];
+  }
+  
+  /* Energy level buttons */
+  .energy-btn {
+    @apply flex-1 py-2.5 px-4 rounded-lg border-2 transition-all duration-200
+           font-medium text-sm;
+  }
+  
+  .energy-btn-high {
+    @apply border-[#059669] bg-[#059669] bg-opacity-10 text-[#059669];
+  }
+  
+  .energy-btn-high-inactive {
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#059669] hover:bg-[#059669] hover:bg-opacity-5;
+  }
+  
+  .energy-btn-medium {
+    @apply border-[#D97706] bg-[#D97706] bg-opacity-10 text-[#D97706];
+  }
+  
+  .energy-btn-medium-inactive {
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#D97706] hover:bg-[#D97706] hover:bg-opacity-5;
+  }
+  
+  .energy-btn-low {
+    @apply border-[#DC2626] bg-[#DC2626] bg-opacity-10 text-[#DC2626];
+  }
+  
+  .energy-btn-low-inactive {
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#DC2626] hover:bg-[#DC2626] hover:bg-opacity-5;
+  }
+  
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-label {
+    @apply bg-[#CC785C] bg-opacity-10 text-[#CC785C];
+  }
+  
+  .dark .badge-label {
+    @apply bg-[#D4916C] bg-opacity-10 text-[#D4916C];
+  }
+  
+  .badge-energy-high {
+    @apply bg-[#059669] bg-opacity-10 text-[#059669] font-semibold;
+  }
+  
+  .badge-energy-medium {
+    @apply bg-[#D97706] bg-opacity-10 text-[#D97706] font-semibold;
+  }
+  
+  .badge-energy-low {
+    @apply bg-[#DC2626] bg-opacity-10 text-[#DC2626] font-semibold;
   }
 }
