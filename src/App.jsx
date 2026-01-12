@@ -7,11 +7,15 @@ import ArchivesView from './components/ArchivesView'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
 
+// Check if this is the admin site
+const IS_ADMIN = import.meta.env.VITE_IS_ADMIN === 'true'
+
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [activeTab, setActiveTab] = useState('today')
   const [user, setUser] = useState(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [checkingAuth, setCheckingAuth] = useState(true)
 
   // Check if user is logged in on mount
   useEffect(() => {
@@ -34,9 +38,17 @@ function App() {
     }
   }, [])
 
+  // Show login modal on admin site if not logged in
+  useEffect(() => {
+    if (IS_ADMIN && !user && !checkingAuth) {
+      setShowLoginModal(true)
+    }
+  }, [user, checkingAuth])
+
   const checkUser = async () => {
     const { data: { user } } = await supabase.auth.getUser()
     setUser(user)
+    setCheckingAuth(false)
   }
 
   const toggleDarkMode = () => {
@@ -45,13 +57,18 @@ function App() {
     localStorage.setItem('darkMode', !darkMode)
   }
 
-  const handleLogin = () => {
-    setShowLoginModal(true)
-  }
-
   const handleLogout = async () => {
     await supabase.auth.signOut()
     setUser(null)
+  }
+
+  // Show loading while checking auth on admin site
+  if (IS_ADMIN && checkingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--bg)]">
+        <div className="text-[var(--text-secondary)]">Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -59,8 +76,8 @@ function App() {
       <Header 
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
+        isAdmin={IS_ADMIN}
         user={user}
-        onLogin={handleLogin}
         onLogout={handleLogout}
       />
       
@@ -70,15 +87,15 @@ function App() {
       />
       
       <main className="flex-1 w-full max-w-[60%] mx-auto px-4 py-8 md:max-w-[60%] sm:max-w-full">
-        {activeTab === 'today' && <TodayView user={user} />}
+        {activeTab === 'today' && <TodayView user={user} isAdmin={IS_ADMIN} />}
         {activeTab === 'archives' && <ArchivesView />}
       </main>
       
       <Footer />
       
-      {showLoginModal && (
+      {IS_ADMIN && showLoginModal && !user && (
         <LoginModal 
-          onClose={() => setShowLoginModal(false)}
+          onClose={() => {}} // Prevent closing on admin site
           onSuccess={() => {
             setShowLoginModal(false)
             checkUser()

@@ -29,12 +29,6 @@ function LoginModal({ onClose, onSuccess }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="card max-w-md w-full relative">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-        >
-          <X size={20} />
-        </button>
 
         <h2 className="text-xl font-semibold mb-6 text-[var(--text-primary)]">
           Admin Login
