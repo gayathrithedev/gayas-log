@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Header from './components/Header'
-import TabNavigation from './components/TabNavigation'
 import TodayView from './components/TodayView'
 import ArchivesView from './components/ArchivesView'
 import Footer from './components/Footer'
@@ -79,14 +78,11 @@ function App() {
         isAdmin={IS_ADMIN}
         user={user}
         onLogout={handleLogout}
-      />
-      
-      <TabNavigation 
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
       
-      <main className="flex-1 w-full max-w-[60%] mx-auto px-4 py-8 md:max-w-[60%] sm:max-w-full">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-8">
         {activeTab === 'today' && <TodayView user={user} isAdmin={IS_ADMIN} />}
         {activeTab === 'archives' && <ArchivesView />}
       </main>
@@ -95,7 +91,7 @@ function App() {
       
       {IS_ADMIN && showLoginModal && !user && (
         <LoginModal 
-          onClose={() => {}} // Prevent closing on admin site
+          onClose={() => {}} 
           onSuccess={() => {
             setShowLoginModal(false)
             checkUser()

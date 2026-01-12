@@ -1,37 +1,56 @@
-import { Sun, Moon, LogOut } from 'lucide-react'
+import { Moon, Sun, LogOut } from 'lucide-react'
 
-function Header({ darkMode, toggleDarkMode, isAdmin, user, onLogout }) {
+function Header({ darkMode, toggleDarkMode, isAdmin, user, onLogout, activeTab, setActiveTab }) {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--content-bg)] border-b border-[var(--border)] shadow-sm">
-      <div className="w-full max-w-[60%] mx-auto px-4 py-4 flex justify-between items-center md:max-w-[60%] sm:max-w-full">
-        <h1 className="text-2xl font-semibold text-[var(--text-primary)]">
-          Gaya's Log {isAdmin && <span className="text-sm text-[var(--text-secondary)] font-normal">(Admin)</span>}
-        </h1>
-        
-        <div className="flex items-center gap-4">
-          {/* Logout Button - Only on admin site when logged in */}
-          {isAdmin && user && (
+    <header className="border-b border-[var(--border)] bg-[var(--bg)]">
+      <div className="max-w-4xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Left: Logo and theme toggle */}
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-[var(--text-primary)]">
+              Gaya's Log
+            </h1>
             <button
-              onClick={onLogout}
-              className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-claude"
-              title="Logout"
+              onClick={toggleDarkMode}
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              aria-label="Toggle theme"
             >
-              <LogOut size={20} />
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-          )}
-          
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-claude hover:bg-[var(--hover)] transition-all duration-claude"
-            aria-label="Toggle dark mode"
-          >
-            {darkMode ? (
-              <Sun size={20} className="text-[var(--text-secondary)]" />
-            ) : (
-              <Moon size={20} className="text-[var(--text-secondary)]" />
+            {isAdmin && user && (
+              <button
+                onClick={onLogout}
+                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                title="Logout"
+              >
+                <LogOut size={18} />
+              </button>
             )}
-          </button>
+          </div>
+          
+          {/* Right: Navigation tabs */}
+          <nav className="flex items-center gap-6">
+            <button
+              onClick={() => setActiveTab('today')}
+              className={`text-base transition-colors ${
+                activeTab === 'today' 
+                  ? 'text-[var(--text-primary)] font-medium' 
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              Today
+            </button>
+            <button
+              onClick={() => setActiveTab('archives')}
+              className={`text-base transition-colors ${
+                activeTab === 'archives' 
+                  ? 'text-[var(--text-primary)] font-medium' 
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              Archive
+            </button>
+          </nav>
         </div>
       </div>
     </header>
