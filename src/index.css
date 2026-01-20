@@ -44,6 +44,10 @@
            font-medium text-sm;
   }
   
+  .dark .btn-primary {
+    @apply text-black;
+  }
+  
   .btn-secondary {
     @apply bg-transparent text-[var(--text-primary)] 
            border border-[var(--border)] px-6 py-2.5 rounded-md

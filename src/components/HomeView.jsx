@@ -4,9 +4,9 @@ import {
 
 function HomeView() {
     return (
-        <div className="max-w-3xl">
+        <div className="max-w-2xl mx-auto">
             <div className="mb-6">
-                <h1 className="text-4xl font-bold mb-4 text-[var(--text-primary)]">
+                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--text-primary)]">
                     👋 Welcome to Gaya's Log
                 </h1>
 

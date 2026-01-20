@@ -90,9 +90,6 @@ function PomodoroView() {
 
     return (
         <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
-                Pomodoro Timer
-            </h2>
             <p className="text-sm text-[var(--text-secondary)] mb-8">
                 I use pomodoro for my daily tasks. If you wanna try it, go ahead and try it for yourself.
                 I know you can do at least 3 pomodoros continuously. Let's GO!
@@ -100,7 +97,7 @@ function PomodoroView() {
 
             {/* Settings */}
             <div className="card mb-8">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
                             Focus Time (minutes)
@@ -142,7 +139,7 @@ function PomodoroView() {
 
                 {/* Circular Progress */}
                 <div className="relative inline-flex items-center justify-center mb-8">
-                    <svg className="w-64 h-64 transform -rotate-90">
+                    <svg className="w-48 h-48 md:w-64 md:h-64 transform -rotate-90" viewBox="0 0 256 256">
                         <circle
                             cx="128"
                             cy="128"

@@ -19,16 +19,16 @@ function ActivityList({ activities, loading }) {
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp)
-    return date.toLocaleTimeString('en-US', { 
+    return date.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     })
   }
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp)
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
       year: 'numeric'
@@ -47,9 +47,9 @@ function ActivityList({ activities, loading }) {
           <p className="text-[var(--text-primary)] text-base leading-relaxed mb-4">
             {activity.activity_text}
           </p>
-          
+
           {/* Metadata line - removed date */}
-          <div className="text-xs text-[var(--text-secondary)] flex items-center gap-2">
+          <div className="text-xs text-[var(--text-secondary)] flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-1">
               <Clock size={11} />
               {formatTime(activity.created_at)}

@@ -17,19 +17,19 @@ function ArchivesView() {
 
   const fetchAllActivities = async () => {
     setLoading(true)
-    
+
     const { data, error } = await supabase
       .from('activities')
       .select('*')
       .order('created_at', { ascending: false })
-    
+
     if (error) {
       console.error('Error fetching activities:', error)
     } else {
       setActivities(data || [])
       groupByWeek(data || [])
     }
-    
+
     setLoading(false)
   }
 
@@ -37,18 +37,18 @@ function ArchivesView() {
     if (!data.length) return
 
     const groups = {}
-    
+
     data.forEach(activity => {
       const date = new Date(activity.created_at)
       const weekNumber = getWeekNumber(date)
       const year = date.getFullYear()
       const weekKey = `${year}-W${weekNumber}`
-      
+
       if (!groups[weekKey]) {
         const weekStart = getWeekStartDate(date)
         const weekEnd = new Date(weekStart)
         weekEnd.setDate(weekStart.getDate() + 6)
-        
+
         groups[weekKey] = {
           weekNumber,
           year,
@@ -58,7 +58,7 @@ function ArchivesView() {
           dates: {}
         }
       }
-      
+
       const dateKey = date.toISOString().split('T')[0]
       if (!groups[weekKey].dates[dateKey]) {
         groups[weekKey].dates[dateKey] = {
@@ -66,14 +66,14 @@ function ArchivesView() {
           activities: []
         }
       }
-      
+
       groups[weekKey].dates[dateKey].activities.push(activity)
     })
-    
-    const sortedGroups = Object.values(groups).sort((a, b) => 
+
+    const sortedGroups = Object.values(groups).sort((a, b) =>
       b.weekStart - a.weekStart
     )
-    
+
     setWeekGroups(sortedGroups)
   }
 
@@ -99,11 +99,11 @@ function ArchivesView() {
   }
 
   const formatDateFull = (date) => {
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString('en-US', {
       weekday: 'long',
-      month: 'long', 
+      month: 'long',
       day: 'numeric',
-      year: 'numeric' 
+      year: 'numeric'
     })
   }
 
@@ -141,25 +141,21 @@ function ArchivesView() {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-[var(--text-primary)]">
-        Archives
-      </h2>
-
+    <div className="max-w-2xl mx-auto">
       <div className="space-y-4">
         {weekGroups.map(week => (
           <div key={week.weekKey} className="border border-[var(--border)] rounded-lg overflow-hidden">
             {/* Week Header */}
             <button
               onClick={() => handleWeekClick(week.weekKey)}
-              className="w-full px-6 py-4 bg-[var(--content-bg)] hover:bg-[var(--hover)] transition-colors flex items-center justify-between"
+              className="w-full px-4 md:px-6 py-4 bg-[var(--content-bg)] hover:bg-[var(--hover)] transition-colors flex items-center justify-between"
             >
               <div className="flex items-center gap-3">
                 {expandedWeek === week.weekKey ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
                 <span className="font-medium text-[var(--text-primary)]">
                   Week {week.weekNumber}, {week.year}
                 </span>
-                <span className="text-sm text-[var(--text-secondary)]">
+                <span className="text-sm text-[var(--text-secondary)] hidden md:inline">
                   {formatWeekRange(week.weekStart, week.weekEnd)}
                 </span>
               </div>
@@ -175,9 +171,8 @@ function ArchivesView() {
                   <div key={dateKey}>
                     <button
                       onClick={() => handleDateClick(dateKey, dateData.activities)}
-                      className={`w-full px-8 py-3 text-left hover:bg-[var(--hover)] transition-colors flex items-center justify-between ${
-                        selectedDate === dateKey ? 'bg-[var(--hover)]' : ''
-                      }`}
+                      className={`w-full px-4 md:px-8 py-3 text-left hover:bg-[var(--hover)] transition-colors flex items-center justify-between ${selectedDate === dateKey ? 'bg-[var(--hover)]' : ''
+                        }`}
                     >
                       <span className="text-[var(--text-primary)]">
                         {formatDateFull(dateData.date)}
@@ -189,7 +184,7 @@ function ArchivesView() {
 
                     {/* Activities for selected date */}
                     {selectedDate === dateKey && (
-                      <div className="px-8 py-6 bg-[var(--bg)]">
+                      <div className="px-4 md:px-8 py-6 bg-[var(--bg)]">
                         <ActivityList activities={filteredActivities} loading={false} />
                       </div>
                     )}
