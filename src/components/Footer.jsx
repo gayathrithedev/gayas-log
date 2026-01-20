@@ -8,7 +8,7 @@ function Footer() {
             href="https://claude.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[var(--text-primary)] transition-colors"
+            className="underline hover:text-[var(--text-primary)] transition-colors"
           >
             Claude
           </a>
@@ -17,7 +17,7 @@ function Footer() {
             href="https://twitter.com/gayathrithedev"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[var(--text-primary)] transition-colors"
+            className="underline hover:text-[var(--text-primary)] transition-colors"
           >
             Twitter
           </a>
@@ -26,7 +26,7 @@ function Footer() {
             href="https://hashnode.com/@gayathrithedev"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[var(--text-primary)] transition-colors"
+            className="underline hover:text-[var(--text-primary)] transition-colors"
           >
             Hashnode
           </a>
@@ -35,7 +35,7 @@ function Footer() {
             href="https://github.com/gayathrithedev"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[var(--text-primary)] transition-colors"
+            className="underline hover:text-[var(--text-primary)] transition-colors"
           >
             GitHub
           </a>

@@ -42,7 +42,7 @@ function ActivityList({ activities, loading }) {
   return (
     <div className="space-y-6">
       {activities.map((activity) => (
-        <div key={activity.id} className="card">
+        <div key={activity.id} className="bg-[var(--content-bg)] rounded-lg p-6">
           {/* Activity text */}
           <p className="text-[var(--text-primary)] text-base leading-relaxed mb-4">
             {activity.activity_text}

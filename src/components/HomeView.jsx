@@ -19,7 +19,7 @@ function HomeView() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4 text-[var(--text-secondary)]">
+            <div className="flex items-center gap-4 text-[#1e1e1e]">
                 <a
                     href="https://twitter.com/gayathrithedev"
                     target="_blank"
