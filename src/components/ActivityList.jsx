@@ -42,7 +42,7 @@ function ActivityList({ activities, loading }) {
   return (
     <div className="space-y-6">
       {activities.map((activity) => (
-        <div key={activity.id} className="card hover:shadow-md transition-shadow duration-200">
+        <div key={activity.id} className="card">
           {/* Activity text */}
           <p className="text-[var(--text-primary)] text-base leading-relaxed mb-4">
             {activity.activity_text}

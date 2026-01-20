@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Header from './components/Header'
+import HomeView from './components/HomeView'
 import TodayView from './components/TodayView'
 import ArchivesView from './components/ArchivesView'
+import PomodoroView from './components/PomodoroView'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
 
@@ -11,7 +13,7 @@ const IS_ADMIN = import.meta.env.VITE_IS_ADMIN === 'true'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
-  const [activeTab, setActiveTab] = useState('today')
+  const [activeTab, setActiveTab] = useState('home')
   const [user, setUser] = useState(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [checkingAuth, setCheckingAuth] = useState(true)
@@ -19,7 +21,7 @@ function App() {
   // Check if user is logged in on mount
   useEffect(() => {
     checkUser()
-    
+
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
@@ -72,7 +74,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header 
+      <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
         isAdmin={IS_ADMIN}
@@ -81,17 +83,19 @@ function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      
-      <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-8">
+
+      <main className="flex-1 w-full max-w-5xl mx-auto px-8 py-12">
+        {activeTab === 'home' && <HomeView />}
         {activeTab === 'today' && <TodayView user={user} isAdmin={IS_ADMIN} />}
         {activeTab === 'archives' && <ArchivesView />}
+        {activeTab === 'pomodoro' && <PomodoroView />}
       </main>
-      
+
       <Footer />
-      
+
       {IS_ADMIN && showLoginModal && !user && (
-        <LoginModal 
-          onClose={() => {}} 
+        <LoginModal
+          onClose={() => { }}
           onSuccess={() => {
             setShowLoginModal(false)
             checkUser()

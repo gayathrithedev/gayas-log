@@ -164,7 +164,7 @@ function ArchivesView() {
                 </span>
               </div>
               <span className="text-sm text-[var(--text-secondary)]">
-                {Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0)} activities
+                {Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0)} {Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0) === 1 ? 'activity' : 'activities'}
               </span>
             </button>
 
@@ -183,7 +183,7 @@ function ArchivesView() {
                         {formatDateFull(dateData.date)}
                       </span>
                       <span className="text-sm text-[var(--text-secondary)]">
-                        {dateData.activities.length} activities
+                        {dateData.activities.length} {dateData.activities.length === 1 ? 'activity' : 'activities'}
                       </span>
                     </button>
 
