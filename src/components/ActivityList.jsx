@@ -48,6 +48,20 @@ function ActivityList({ activities, loading }) {
             {activity.activity_text}
           </p>
 
+          {/* Resource Link - Show for study category */}
+          {activity.label === 'study' && activity.resource_link && (
+            <div className="mb-4">
+              <a
+                href={activity.resource_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--accent)] hover:underline inline-flex items-center gap-1"
+              >
+                📎 View Resource
+              </a>
+            </div>
+          )}
+
           {/* Metadata line - removed date */}
           <div className="text-xs text-[var(--text-secondary)] flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-1">

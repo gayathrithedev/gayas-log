@@ -2,14 +2,9 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const LABELS = [
-  { value: 'workout', label: 'Workout' },
-  { value: 'food', label: 'Food' },
-  { value: 'meditation', label: 'Meditation' },
-  { value: 'family_friends', label: 'Family & Friends' },
-  { value: 'study', label: 'Study' },
   { value: 'work', label: 'Work' },
-  { value: 'leisure', label: 'Leisure' },
-  { value: 'walking', label: 'Walking' }
+  { value: 'study', label: 'Study' },
+  { value: 'workout', label: 'Workout' }
 ]
 
 const ENERGY_LEVELS = [
@@ -22,6 +17,7 @@ function ActivityForm({ onActivityAdded }) {
   const [activityText, setActivityText] = useState('')
   const [label, setLabel] = useState('work')
   const [energyLevel, setEnergyLevel] = useState('medium')
+  const [resourceLink, setResourceLink] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -36,7 +32,8 @@ function ActivityForm({ onActivityAdded }) {
         {
           activity_text: activityText,
           label: label,
-          energy_level: energyLevel
+          energy_level: energyLevel,
+          ...(label === 'study' && resourceLink && { resource_link: resourceLink })
         }
       ])
       .select()
@@ -49,6 +46,7 @@ function ActivityForm({ onActivityAdded }) {
       setActivityText('')
       setLabel('work')
       setEnergyLevel('medium')
+      setResourceLink('')
       setLoading(false)
       
       // Notify parent to refresh list
@@ -96,6 +94,22 @@ function ActivityForm({ onActivityAdded }) {
             ))}
           </select>
         </div>
+
+        {/* Resource Link - Only show for Study category */}
+        {label === 'study' && (
+          <div>
+            <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
+              Resource Link (Optional)
+            </label>
+            <input
+              type="url"
+              value={resourceLink}
+              onChange={(e) => setResourceLink(e.target.value)}
+              className="input-field"
+              placeholder="https://example.com/video"
+            />
+          </div>
+        )}
 
         {/* Energy Level */}
         <div>
