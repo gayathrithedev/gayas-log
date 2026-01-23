@@ -44,18 +44,18 @@ function ActivityList({ activities, loading }) {
       {activities.map((activity) => (
         <div key={activity.id} className="bg-[var(--content-bg)] rounded-lg p-6">
           {/* Activity text */}
-          <p className="text-[var(--text-primary)] text-base leading-relaxed mb-4">
+          <p className="text-[var(--text-primary)] text-base leading-relaxed mb-2">
             {activity.activity_text}
           </p>
 
           {/* Resource Link - Show for study category */}
           {activity.label === 'study' && activity.resource_link && (
-            <div className="mb-4">
+            <div className="mb-2">
               <a
                 href={activity.resource_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-[var(--accent)] hover:underline inline-flex items-center gap-1"
+                className="text-sm text-blue-600 hover:underline inline-flex items-center gap-1"
               >
                 📎 View Resource
               </a>
