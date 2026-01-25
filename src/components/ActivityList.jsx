@@ -48,8 +48,8 @@ function ActivityList({ activities, loading }) {
             {activity.activity_text}
           </p>
 
-          {/* Resource Link - Show for study category */}
-          {activity.label === 'study' && activity.resource_link && (
+          {/* Resource Link - Show if link exists */}
+          {activity.resource_link && (
             <div className="mb-2">
               <a
                 href={activity.resource_link}

@@ -33,7 +33,7 @@ function ActivityForm({ onActivityAdded }) {
           activity_text: activityText,
           label: label,
           energy_level: energyLevel,
-          ...(label === 'study' && resourceLink && { resource_link: resourceLink })
+          ...(resourceLink && { resource_link: resourceLink })
         }
       ])
       .select()
@@ -48,7 +48,7 @@ function ActivityForm({ onActivityAdded }) {
       setEnergyLevel('medium')
       setResourceLink('')
       setLoading(false)
-      
+
       // Notify parent to refresh list
       if (onActivityAdded) {
         onActivityAdded(data[0])
@@ -95,21 +95,19 @@ function ActivityForm({ onActivityAdded }) {
           </select>
         </div>
 
-        {/* Resource Link - Only show for Study category */}
-        {label === 'study' && (
-          <div>
-            <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
-              Resource Link (Optional)
-            </label>
-            <input
-              type="url"
-              value={resourceLink}
-              onChange={(e) => setResourceLink(e.target.value)}
-              className="input-field"
-              placeholder="https://example.com/video"
-            />
-          </div>
-        )}
+        {/* Resource Link - Available for all categories */}
+        <div>
+          <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
+            Link (Optional)
+          </label>
+          <input
+            type="url"
+            value={resourceLink}
+            onChange={(e) => setResourceLink(e.target.value)}
+            className="input-field"
+            placeholder="https://example.com"
+          />
+        </div>
 
         {/* Energy Level */}
         <div>
@@ -122,11 +120,10 @@ function ActivityForm({ onActivityAdded }) {
                 key={level.value}
                 type="button"
                 onClick={() => setEnergyLevel(level.value)}
-                className={`energy-btn ${
-                  energyLevel === level.value 
-                    ? level.activeClass
-                    : level.inactiveClass
-                }`}
+                className={`energy-btn ${energyLevel === level.value
+                  ? level.activeClass
+                  : level.inactiveClass
+                  }`}
               >
                 {level.label}
               </button>
