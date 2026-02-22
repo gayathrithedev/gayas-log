@@ -4,28 +4,42 @@
 
 @layer base {
 
-  /* Light mode defaults */
-  :root {
-    --bg: #f5f5f5;
-    --content-bg: #ffffff;
-    --text-primary: #1e1e1e;
-    --text-secondary: #737373;
-    --accent: #000000;
-    --border: #e5e5e5;
-    --hover: #f5f5f5;
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Dark mode */
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  /* Clean minimal theme aligned with vkaas.space */
+  :root {
+    --bg: #FFFFFF;
+    --content-bg: #FFFFFF;
+    --text-primary: #0F0F0F;
+    --text-secondary: #A3A3A3;
+    --text-tertiary: #525252;
+    --border: #0F0F0F1A;
+    --border-accent: #0F0F0F1A;
+    --hover: #0F0F0F0D;
+    --accent: #00C853;
+  }
+
   .dark {
-    --bg: #0a0a0a;
-    --content-bg: #171717;
-    --text-primary: #e5e5e5;
-    --text-secondary: #a3a3a3;
-    --accent: #ffffff;
-    --border: #262626;
-    --hover: #262626;
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --bg: #000000;
+    --content-bg: #000000;
+    --text-primary: #F5F5F5;
+    --text-secondary: #A3A3A3;
+    --text-tertiary: #BDBDBD;
+    --border: #595959CC;
+    --border-accent: #595959CC;
+    --hover: #29292999;
+    --accent: #00E676;
   }
 
   body {
@@ -33,118 +47,68 @@
     color: var(--text-primary);
     font-size: 16px;
     line-height: 1.6;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  }
-
-  /* Dashed background lines */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-
-    /* Vertical Lines */
-    --line-spacing: 15%;
-    /* Mobile: every 15% width */
-    background-image: repeating-linear-gradient(90deg,
-        transparent,
-        transparent calc(var(--line-spacing) - 1px),
-        var(--border) calc(var(--line-spacing) - 1px),
-        var(--border) var(--line-spacing));
-
-    /* Dashed Mask */
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
-    mask-image: linear-gradient(to bottom, black 50%, transparent 50%);
-    -webkit-mask-size: 1px 12px;
-    /* 6px dash, 6px gap */
-    mask-size: 1px 12px;
-  }
-
-  @media (min-width: 768px) {
-    body::before {
-      --line-spacing: 10%;
-      /* Tablet: every 10% width */
-    }
-  }
-
-  @media (min-width: 1024px) {
-    body::before {
-      --line-spacing: 7.5%;
-      /* Laptop: every 7.5% width */
-    }
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer components {
 
-  /* Simple button */
+  /* Simple button - solid primary */
   .btn-primary {
-    @apply bg-[var(--accent)] text-white px-6 py-2.5 rounded-md hover:opacity-90 transition-opacity duration-200 font-medium text-sm;
+    @apply bg-[var(--text-primary)] text-[var(--bg)] px-6 py-2.5 rounded-[10px] font-medium text-sm border border-transparent hover:opacity-90 active:scale-[0.99] transition-all duration-150;
   }
 
-  .dark .btn-primary {
-    @apply text-black;
-  }
-
+  /* Secondary button - outlined */
   .btn-secondary {
-    @apply bg-transparent text-[var(--text-primary)] border border-[var(--border)] px-6 py-2.5 rounded-md hover:bg-[var(--hover)] transition-colors duration-200 font-medium text-sm;
+    @apply bg-transparent text-[var(--text-primary)] border border-[var(--border)] px-6 py-2.5 rounded-[10px] hover:bg-[var(--hover)] transition-all duration-150 font-medium text-sm active:scale-[0.99];
   }
 
-  /* Input fields */
+  /* Input fields - Clean border style */
   .input-field {
-    @apply w-full px-4 py-2.5 bg-[var(--content-bg)] border border-[var(--border)] rounded-md text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-opacity-20 transition-all duration-200 text-base;
+    @apply w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-[10px] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--text-primary)] transition-all duration-150 text-base;
   }
 
-  /* Card style - like Lilian's blog posts */
+  /* Card style */
   .card {
-    @apply bg-[var(--content-bg)] rounded-lg p-6 border border-[var(--border)];
-    box-shadow: var(--card-shadow);
+    @apply bg-[var(--bg)] rounded-[10px] p-6 border border-[var(--border)] transition-all duration-150 hover:border-[var(--border-accent)];
   }
 
   /* Tab navigation */
   .tab {
-    @apply px-0 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 cursor-pointer relative font-normal text-base;
+    @apply px-0 py-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:opacity-90 transition-all duration-150 cursor-pointer font-normal text-[16px];
   }
 
   .tab-active {
     @apply text-[var(--text-primary)] font-medium;
   }
 
-  .tab-active::after {
-    content: '';
-    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--text-primary)];
-  }
-
   /* Energy level buttons */
   .energy-btn {
-    @apply flex-1 py-2 px-3 rounded-md border transition-all duration-200 font-normal text-sm;
+    @apply flex-1 py-2 px-3 rounded-[10px] border transition-all duration-150 font-medium text-sm active:scale-[0.99];
   }
 
   .energy-btn-high {
-    @apply border-[#10b981] bg-[#10b981] bg-opacity-10 text-[#10b981];
+    @apply border-[#00E676] bg-[#00E676]/10 text-[#00E676];
   }
 
   .energy-btn-high-inactive {
-    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#10b981];
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#00E676] hover:text-[#00E676];
   }
 
   .energy-btn-medium {
-    @apply border-[#f59e0b] bg-[#f59e0b] bg-opacity-10 text-[#f59e0b];
+    @apply border-[#F59E0B] bg-[#F59E0B]/10 text-[#F59E0B];
   }
 
   .energy-btn-medium-inactive {
-    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#f59e0b];
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#F59E0B] hover:text-[#F59E0B];
   }
 
   .energy-btn-low {
-    @apply border-[#ef4444] bg-[#ef4444] bg-opacity-10 text-[#ef4444];
+    @apply border-[#EF4444] bg-[#EF4444]/10 text-[#EF4444];
   }
 
   .energy-btn-low-inactive {
-    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#ef4444];
+    @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#EF4444] hover:text-[#EF4444];
   }
 }

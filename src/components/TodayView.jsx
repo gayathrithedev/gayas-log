@@ -7,7 +7,41 @@ function TodayView({ user, isAdmin }) {
   const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(true)
 
+  const handleNewActivity = (newActivity) => {
+    // Check if it's from today
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const activityDate = new Date(newActivity.created_at)
+
+    if (activityDate >= today) {
+      setActivities((prev) => [newActivity, ...prev])
+    }
+  }
+
+  const fetchTodayActivities = async () => {
+    setLoading(true)
+
+    // Get start of today in user's timezone
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const { data, error } = await supabase
+      .from('activities')
+      .select('*')
+      .gte('created_at', today.toISOString())
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Error fetching activities:', error)
+    } else {
+      setActivities(data || [])
+    }
+
+    setLoading(false)
+  }
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTodayActivities()
 
     // Subscribe to real-time changes
@@ -32,38 +66,7 @@ function TodayView({ user, isAdmin }) {
     }
   }, [])
 
-  const fetchTodayActivities = async () => {
-    setLoading(true)
 
-    // Get start of today in user's timezone
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-
-    const { data, error } = await supabase
-      .from('activities')
-      .select('*')
-      .gte('created_at', today.toISOString())
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching activities:', error)
-    } else {
-      setActivities(data || [])
-    }
-
-    setLoading(false)
-  }
-
-  const handleNewActivity = (newActivity) => {
-    // Check if it's from today
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const activityDate = new Date(newActivity.created_at)
-
-    if (activityDate >= today) {
-      setActivities((prev) => [newActivity, ...prev])
-    }
-  }
 
   const handleActivityAdded = (newActivity) => {
     // Optimistically add to list

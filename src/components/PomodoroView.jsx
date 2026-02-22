@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Play, Pause, RotateCcw } from 'lucide-react'
+import { Play, Pause, RotateCcw } from './Icons'
 
 function PomodoroView() {
   const [focusTime, setFocusTime] = useState(() => {
@@ -22,11 +22,11 @@ function PomodoroView() {
     const saved = localStorage.getItem('pomodoroIsBreak')
     return saved === 'true'
   })
-  const [lastTick, setLastTick] = useState(() => {
+  const [, setLastTick] = useState(() => {
     const saved = localStorage.getItem('pomodoroLastTick')
     return saved ? parseInt(saved) : Date.now()
   })
-  
+
   const intervalRef = useRef(null)
   const audioRef = useRef(null)
 
@@ -50,6 +50,20 @@ function PomodoroView() {
     return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
 
+  const playBeep = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch(() => { })
+    }
+
+    // Also try browser notification
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('Pomodoro Timer', {
+        body: isBreak ? 'Break time is over!' : 'Focus time is over!',
+        icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>'
+      })
+    }
+  }
+
   // Main timer logic
   useEffect(() => {
     if (isRunning) {
@@ -57,32 +71,32 @@ function PomodoroView() {
         const now = Date.now()
         const savedLastTick = parseInt(localStorage.getItem('pomodoroLastTick') || now)
         const elapsed = Math.floor((now - savedLastTick) / 1000)
-        
+
         if (elapsed >= 1) {
           setCurrentTime((prev) => {
             const newTime = prev - elapsed
-            
+
             if (newTime <= 0) {
               // Timer finished
               playBeep()
               setIsRunning(false)
               localStorage.setItem('pomodoroIsRunning', 'false')
-              
+
               // Auto-switch between focus and break
               const newIsBreak = !isBreak
               const nextTime = newIsBreak ? breakTime * 60 : focusTime * 60
-              
+
               setIsBreak(newIsBreak)
               localStorage.setItem('pomodoroIsBreak', newIsBreak.toString())
               localStorage.setItem('pomodoroCurrentTime', nextTime.toString())
-              
+
               return nextTime
             }
-            
+
             localStorage.setItem('pomodoroCurrentTime', newTime.toString())
             localStorage.setItem('pomodoroLastTick', now.toString())
             setLastTick(now)
-            
+
             return newTime
           })
         }
@@ -98,6 +112,7 @@ function PomodoroView() {
         clearInterval(intervalRef.current)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRunning, isBreak, focusTime, breakTime])
 
   // Save state to localStorage whenever it changes
@@ -121,19 +136,6 @@ function PomodoroView() {
     localStorage.setItem('pomodoroIsBreak', isBreak.toString())
   }, [isBreak])
 
-  const playBeep = () => {
-    if (audioRef.current) {
-      audioRef.current.play().catch(() => {})
-    }
-    
-    // Also try browser notification
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('Pomodoro Timer', {
-        body: isBreak ? 'Break time is over!' : 'Focus time is over!',
-        icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>'
-      })
-    }
-  }
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60)
@@ -182,7 +184,7 @@ function PomodoroView() {
     }
   }
 
-  const progress = isBreak 
+  const progress = isBreak
     ? ((breakTime * 60 - currentTime) / (breakTime * 60)) * 100
     : ((focusTime * 60 - currentTime) / (focusTime * 60)) * 100
 
@@ -249,7 +251,7 @@ function PomodoroView() {
               cx="128"
               cy="128"
               r="120"
-              stroke={isBreak ? '#10b981' : '#3b82f6'}
+              stroke={isBreak ? '#00E676' : 'var(--text-primary)'}
               strokeWidth="8"
               fill="none"
               strokeDasharray={`${2 * Math.PI * 120}`}

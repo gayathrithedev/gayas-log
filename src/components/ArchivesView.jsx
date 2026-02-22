@@ -1,36 +1,28 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { ChevronDown, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight } from './Icons'
 import ActivityList from './ActivityList'
 
 function ArchivesView() {
-  const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(true)
   const [weekGroups, setWeekGroups] = useState([])
   const [expandedWeek, setExpandedWeek] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [filteredActivities, setFilteredActivities] = useState([])
 
-  useEffect(() => {
-    fetchAllActivities()
-  }, [])
+  const getWeekNumber = (date) => {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+    const dayNum = d.getUTCDay() || 7
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum)
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
+    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7)
+  }
 
-  const fetchAllActivities = async () => {
-    setLoading(true)
-
-    const { data, error } = await supabase
-      .from('activities')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching activities:', error)
-    } else {
-      setActivities(data || [])
-      groupByWeek(data || [])
-    }
-
-    setLoading(false)
+  const getWeekStartDate = (date) => {
+    const d = new Date(date)
+    const day = d.getDay()
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1)
+    return new Date(d.setDate(diff))
   }
 
   const groupByWeek = (data) => {
@@ -77,20 +69,29 @@ function ArchivesView() {
     setWeekGroups(sortedGroups)
   }
 
-  const getWeekNumber = (date) => {
-    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
-    const dayNum = d.getUTCDay() || 7
-    d.setUTCDate(d.getUTCDate() + 4 - dayNum)
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1))
-    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7)
+  const fetchAllActivities = async () => {
+    setLoading(true)
+
+    const { data, error } = await supabase
+      .from('activities')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Error fetching activities:', error)
+    } else {
+      groupByWeek(data || [])
+    }
+
+    setLoading(false)
   }
 
-  const getWeekStartDate = (date) => {
-    const d = new Date(date)
-    const day = d.getDay()
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1)
-    return new Date(d.setDate(diff))
-  }
+  useEffect(() => {
+    fetchAllActivities()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
 
   const formatWeekRange = (weekStart, weekEnd) => {
     const start = weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
