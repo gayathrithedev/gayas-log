@@ -1,3 +1,6 @@
+import GitHubContributions from './GitHubContributions'
+import BlogPosts from './BlogPosts'
+
 function HomeView() {
     return (
         <div className="w-full">
@@ -17,26 +20,34 @@ function HomeView() {
                 </p>
 
                 <div className="flex items-center gap-5 text-[16px]">
-                    <a href="mailto:gayathrithedev@gmail.com" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150" aria-label="Email">
+                    <a href="mailto:gayathrithedev@gmail.com" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="Email">
                         Email ↗
                     </a>
                     <span className="text-[var(--text-tertiary)]">·</span>
-                    <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150">
+                    <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150">
                         Twitter ↗
                     </a>
                     <span className="text-[var(--text-tertiary)]">·</span>
-                    <a href="https://linkedin.com/in/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150">
+                    <a href="https://linkedin.com/in/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150">
                         LinkedIn ↗
                     </a>
                     <span className="text-[var(--text-tertiary)]">·</span>
-                    <a href="https://github.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150">
+                    <a href="https://github.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150">
                         GitHub ↗
                     </a>
                     <span className="text-[var(--text-tertiary)]">·</span>
-                    <a href="https://hashnode.com/@gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150">
+                    <a href="https://hashnode.com/@gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150">
                         Hashnode ↗
                     </a>
                 </div>
+            </div>
+
+            <div className="mt-10">
+                <GitHubContributions />
+            </div>
+
+            <div className="mt-10">
+                <BlogPosts />
             </div>
         </div>
     )

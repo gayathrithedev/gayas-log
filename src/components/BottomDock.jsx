@@ -22,7 +22,7 @@ function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
                             className="relative flex flex-col items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg transition-all duration-300 group"
                             aria-label={item.label}
                         >
-                            <div className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg transition-all duration-300 ${isActive ? 'bg-[var(--accent-cyan)] text-black' : 'text-[var(--text-secondary)] group-hover:text-[var(--accent-cyan)]'}`}>
+                            <div className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg transition-all duration-300 ${isActive ? 'bg-[var(--accent)] text-black' : 'text-[var(--text-secondary)] group-hover:text-[var(--accent)]'}`}>
                                 <Icon size={22} />
                             </div>
                         </button>

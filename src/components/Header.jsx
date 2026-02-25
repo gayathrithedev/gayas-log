@@ -8,16 +8,16 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout }) {
           <h1 className="text-[36px] font-semibold text-[var(--text-primary)] leading-tight tracking-tight">Gayathri</h1>
         </div>
         <div className="flex items-center gap-5">
-          <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150" aria-label="X (Twitter)">
+          <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="X (Twitter)">
             <XSocial size={20} />
           </a>
-          <a href="https://linkedin.com/in/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150" aria-label="LinkedIn">
+          <a href="https://linkedin.com/in/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="LinkedIn">
             <Linkedin size={20} />
           </a>
-          <a href="https://hashnode.com/@gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150" aria-label="Hashnode">
+          <a href="https://hashnode.com/@gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="Hashnode">
             <BookOpen size={20} />
           </a>
-          <a href="https://github.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150" aria-label="GitHub">
+          <a href="https://github.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="GitHub">
             <Github size={20} />
           </a>
         </div>
