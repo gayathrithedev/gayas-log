@@ -1,7 +1,31 @@
+import { useState, useEffect } from 'react'
 import GitHubContributions from './GitHubContributions'
 import BlogPosts from './BlogPosts'
 
 function HomeView() {
+    const [lastPushDate, setLastPushDate] = useState(null)
+
+    useEffect(() => {
+        fetch('https://api.github.com/users/gayathrithedev/events/public?per_page=30')
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(events => {
+                const pushEvent = events.find(e => e.type === 'PushEvent')
+                if (pushEvent) {
+                    setLastPushDate(new Date(pushEvent.created_at))
+                }
+            })
+            .catch(() => { })
+    }, [])
+
+    const formatPushDate = (date) => {
+        return date.toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+        })
+    }
+
     return (
         <div className="w-full">
             <div className="mb-10 text-[16px] space-y-5 text-[var(--text-secondary)] leading-relaxed">
@@ -45,6 +69,13 @@ function HomeView() {
             <div className="mt-10">
                 <GitHubContributions />
             </div>
+
+            {lastPushDate && (
+                <p className="mt-4 text-[14px] text-[var(--text-secondary)] text-center">
+                    I last pushed code on{' '}
+                    <span className="text-[var(--text-primary)] font-medium">{formatPushDate(lastPushDate)}</span>
+                </p>
+            )}
 
             <div className="mt-10">
                 <BlogPosts />

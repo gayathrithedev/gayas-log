@@ -112,3 +112,27 @@
     @apply border-[var(--border)] text-[var(--text-secondary)] hover:border-[#EF4444] hover:text-[#EF4444];
   }
 }
+
+@keyframes gradient-float {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  25% {
+    background-position: 100% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+.animate-gradient-text {
+  animation: gradient-float 6s ease-in-out infinite;
+}

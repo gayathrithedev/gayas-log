@@ -6,15 +6,17 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout }) {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1
-            className="text-[36px] font-semibold leading-tight tracking-tight"
+            className="text-[42px] font-bold leading-tight tracking-tight animate-gradient-text"
             style={{
-              background: 'linear-gradient(135deg, #00E676 0%, #00C853 40%, #69F0AE 70%, #00E676 100%)',
+              fontFamily: "'Space Grotesk', sans-serif",
+              background: 'linear-gradient(135deg, #00C853, #69F0AE, #00E676, #A5D6A7, #00C853, #69F0AE)',
+              backgroundSize: '300% 300%',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
               filter: 'drop-shadow(0 0 20px rgba(0, 230, 118, 0.3))',
             }}
-          >Gayathri</h1>
+          >Gayathri Perumal</h1>
         </div>
         <div className="flex items-center gap-5">
           <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="X (Twitter)">
