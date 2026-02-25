@@ -5,7 +5,16 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout }) {
     <header className="pt-16 pb-6 w-[90%] md:w-[40%] mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-[36px] font-semibold text-[var(--text-primary)] leading-tight tracking-tight">Gayathri</h1>
+          <h1
+            className="text-[36px] font-semibold leading-tight tracking-tight"
+            style={{
+              background: 'linear-gradient(135deg, #00E676 0%, #00C853 40%, #69F0AE 70%, #00E676 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              filter: 'drop-shadow(0 0 20px rgba(0, 230, 118, 0.3))',
+            }}
+          >Gayathri</h1>
         </div>
         <div className="flex items-center gap-5">
           <a href="https://twitter.com/gayathrithedev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="X (Twitter)">

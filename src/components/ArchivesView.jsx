@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { ChevronDown, ChevronRight } from './Icons'
+import { ChevronRight, Calendar } from './Icons'
 import ActivityList from './ActivityList'
 
 function ArchivesView() {
@@ -67,6 +67,19 @@ function ArchivesView() {
     )
 
     setWeekGroups(sortedGroups)
+
+    // Auto-expand the most recent week so users know it's clickable
+    if (sortedGroups.length > 0) {
+      setExpandedWeek(sortedGroups[0].weekKey)
+
+      // Also auto-open the most recent day so users know dates are clickable too
+      const dates = Object.entries(sortedGroups[0].dates).sort((a, b) => b[1].date - a[1].date)
+      if (dates.length > 0) {
+        const [firstDateKey, firstDateData] = dates[0]
+        setSelectedDate(firstDateKey)
+        setFilteredActivities(firstDateData.activities)
+      }
+    }
   }
 
   const fetchAllActivities = async () => {
@@ -143,58 +156,162 @@ function ArchivesView() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="space-y-4">
-        {weekGroups.map(week => (
-          <div key={week.weekKey} className="border border-[var(--border)] rounded-lg overflow-hidden">
-            {/* Week Header */}
-            <button
-              onClick={() => handleWeekClick(week.weekKey)}
-              className="w-full px-4 md:px-6 py-4 bg-[var(--content-bg)] hover:bg-[var(--hover)] transition-colors flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                {expandedWeek === week.weekKey ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
-                <span className="font-medium text-[var(--text-primary)]">
-                  Week {week.weekNumber}, {week.year}
-                </span>
-                <span className="text-sm text-[var(--text-secondary)] hidden md:inline">
-                  {formatWeekRange(week.weekStart, week.weekEnd)}
-                </span>
-              </div>
-              <span className="text-sm text-[var(--text-secondary)]">
-                {Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0)} {Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0) === 1 ? 'activity' : 'activities'}
-              </span>
-            </button>
+      <div className="space-y-2">
+        {weekGroups.map((week) => {
+          const isExpanded = expandedWeek === week.weekKey
+          const totalActivities = Object.values(week.dates).reduce((sum, d) => sum + d.activities.length, 0)
 
-            {/* Dates List */}
-            {expandedWeek === week.weekKey && (
-              <div className="border-t border-[var(--border)]">
-                {Object.entries(week.dates).sort((a, b) => b[1].date - a[1].date).map(([dateKey, dateData]) => (
-                  <div key={dateKey}>
-                    <button
-                      onClick={() => handleDateClick(dateKey, dateData.activities)}
-                      className={`w-full px-4 md:px-8 py-3 text-left hover:bg-[var(--hover)] transition-colors flex items-center justify-between ${selectedDate === dateKey ? 'bg-[var(--hover)]' : ''
-                        }`}
-                    >
-                      <span className="text-[var(--text-primary)]">
-                        {formatDateFull(dateData.date)}
-                      </span>
-                      <span className="text-sm text-[var(--text-secondary)]">
-                        {dateData.activities.length} {dateData.activities.length === 1 ? 'activity' : 'activities'}
-                      </span>
-                    </button>
-
-                    {/* Activities for selected date */}
-                    {selectedDate === dateKey && (
-                      <div className="px-4 md:px-8 py-6 bg-[var(--bg)]">
-                        <ActivityList activities={filteredActivities} loading={false} />
-                      </div>
-                    )}
+          return (
+            <div key={week.weekKey}>
+              {/* Week folder */}
+              <button
+                onClick={() => handleWeekClick(week.weekKey)}
+                className="w-full group"
+              >
+                <div
+                  className="flex items-center gap-3 px-4 py-3 rounded-[10px] transition-all duration-150"
+                  style={{
+                    background: isExpanded ? 'rgba(0, 230, 118, 0.06)' : 'transparent',
+                    border: `1px solid ${isExpanded ? 'rgba(0, 230, 118, 0.15)' : 'var(--border)'}`,
+                  }}
+                >
+                  {/* Folder icon */}
+                  <div
+                    className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150"
+                    style={{
+                      background: isExpanded ? 'rgba(0, 230, 118, 0.12)' : 'var(--hover)',
+                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {isExpanded ? (
+                        <>
+                          <path d="M5 19a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v1" />
+                          <path d="M20.5 11.5 17 22H5.5L2 11.5z" fill="currentColor" opacity="0.15" />
+                          <path d="M20.5 11.5 17 22H5.5L2 11.5z" />
+                        </>
+                      ) : (
+                        <>
+                          <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
+                        </>
+                      )}
+                    </svg>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+
+                  {/* Week info */}
+                  <div className="flex-1 text-left min-w-0">
+                    <span
+                      className="font-medium text-[15px] transition-colors duration-150"
+                      style={{ color: isExpanded ? '#00E676' : 'var(--text-primary)' }}
+                    >
+                      Week {week.weekNumber}
+                    </span>
+                    <span className="text-[13px] text-[var(--text-secondary)] ml-2">
+                      {formatWeekRange(week.weekStart, week.weekEnd)}
+                    </span>
+                  </div>
+
+                  {/* Activity count badge */}
+                  <span
+                    className="flex-shrink-0 text-[12px] font-medium px-2.5 py-0.5 rounded-full transition-all duration-150"
+                    style={{
+                      background: isExpanded ? 'rgba(0, 230, 118, 0.1)' : 'var(--hover)',
+                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                    }}
+                  >
+                    {totalActivities}
+                  </span>
+
+                  {/* Chevron */}
+                  <div
+                    className="flex-shrink-0 transition-transform duration-200"
+                    style={{
+                      transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                    }}
+                  >
+                    <ChevronRight size={16} />
+                  </div>
+                </div>
+              </button>
+
+              {/* Dates list — nested inside */}
+              {isExpanded && (
+                <div className="ml-4 pl-2 mt-1 space-y-1">
+                  {Object.entries(week.dates)
+                    .sort((a, b) => b[1].date - a[1].date)
+                    .map(([dateKey, dateData], dateIndex) => {
+                      const isSelected = selectedDate === dateKey
+
+                      return (
+                        <div key={dateKey}>
+                          {/* Divider between dates */}
+                          {dateIndex > 0 && (
+                            <div className="mx-3 my-1 border-t border-[var(--border)]" />
+                          )}
+                          {/* Date sub-folder */}
+                          <button
+                            onClick={() => handleDateClick(dateKey, dateData.activities)}
+                            className="w-full group"
+                          >
+                            <div
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
+                              style={{
+                                background: isSelected ? 'rgba(0, 230, 118, 0.06)' : 'transparent',
+                              }}
+                            >
+                              {/* Date icon */}
+                              <div
+                                className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center transition-all duration-150"
+                                style={{
+                                  color: isSelected ? '#00E676' : 'var(--text-secondary)',
+                                }}
+                              >
+                                <Calendar size={14} />
+                              </div>
+
+                              {/* Date label */}
+                              <span
+                                className="flex-1 text-left text-[14px] transition-colors duration-150"
+                                style={{
+                                  color: isSelected ? '#00E676' : 'var(--text-primary)',
+                                }}
+                              >
+                                {formatDateFull(dateData.date)}
+                              </span>
+
+                              {/* Count */}
+                              <span className="flex-shrink-0 text-[12px] text-[var(--text-secondary)]">
+                                {dateData.activities.length} {dateData.activities.length === 1 ? 'item' : 'items'}
+                              </span>
+
+                              {/* Chevron */}
+                              <div
+                                className="flex-shrink-0 transition-transform duration-200"
+                                style={{
+                                  transform: isSelected ? 'rotate(90deg)' : 'rotate(0deg)',
+                                  color: isSelected ? '#00E676' : 'var(--text-secondary)',
+                                }}
+                              >
+                                <ChevronRight size={14} />
+                              </div>
+                            </div>
+                          </button>
+
+                          {/* Activities — nested deeper */}
+                          {isSelected && (
+                            <div className="ml-4 pl-2 py-3">
+                              <ActivityList activities={filteredActivities} loading={false} />
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

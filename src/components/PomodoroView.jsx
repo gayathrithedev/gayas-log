@@ -195,11 +195,11 @@ function PomodoroView() {
       </p>
 
       {/* Settings */}
-      <div className="card mb-8">
+      <div className="mb-8 border border-[var(--border)] rounded-[10px] p-6 transition-all duration-150">
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
-              Focus Time (minutes)
+            <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+              Focus Time (min)
             </label>
             <input
               type="number"
@@ -208,12 +208,12 @@ function PomodoroView() {
               value={focusTime}
               onChange={(e) => handleFocusChange(e.target.value)}
               disabled={isRunning}
-              className="input-field"
+              className="input-field !border-[var(--border)] focus:!border-[var(--accent)]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
-              Break Time (minutes)
+            <label className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">
+              Break Time (min)
             </label>
             <input
               type="number"
@@ -222,46 +222,76 @@ function PomodoroView() {
               value={breakTime}
               onChange={(e) => handleBreakChange(e.target.value)}
               disabled={isRunning}
-              className="input-field"
+              className="input-field !border-[var(--border)] focus:!border-[var(--accent)]"
             />
           </div>
         </div>
       </div>
 
       {/* Timer Display */}
-      <div className="card text-center">
-        <div className="mb-4">
-          <span className="text-sm font-medium text-[var(--text-secondary)]">
+      <div className="text-center border border-[var(--border)] rounded-[10px] p-8 transition-all duration-150">
+        {/* Mode badge */}
+        <div className="mb-6">
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[13px] font-medium"
+            style={{
+              background: isBreak ? 'rgba(105, 240, 174, 0.1)' : 'rgba(0, 230, 118, 0.1)',
+              color: isBreak ? '#69F0AE' : '#00E676',
+              border: `1px solid ${isBreak ? 'rgba(105, 240, 174, 0.2)' : 'rgba(0, 230, 118, 0.2)'}`,
+            }}
+          >
             {isBreak ? '☕ Break Time' : '🎯 Focus Time'}
           </span>
         </div>
 
         {/* Circular Progress */}
         <div className="relative inline-flex items-center justify-center mb-8">
-          <svg className="w-64 h-64 transform -rotate-90">
+          {/* Outer glow */}
+          <div
+            className="absolute w-64 h-64 rounded-full transition-opacity duration-500"
+            style={{
+              background: `radial-gradient(circle, ${isRunning ? 'rgba(0, 230, 118, 0.08)' : 'transparent'} 0%, transparent 70%)`,
+              filter: 'blur(10px)',
+            }}
+          />
+          <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 256 256">
+            {/* Track */}
             <circle
               cx="128"
               cy="128"
               r="120"
               stroke="var(--border)"
-              strokeWidth="8"
+              strokeWidth="6"
               fill="none"
             />
+            {/* Progress */}
             <circle
               cx="128"
               cy="128"
               r="120"
-              stroke={isBreak ? '#00E676' : 'var(--text-primary)'}
-              strokeWidth="8"
+              strokeWidth="6"
               fill="none"
               strokeDasharray={`${2 * Math.PI * 120}`}
               strokeDashoffset={`${2 * Math.PI * 120 * (1 - progress / 100)}`}
               strokeLinecap="round"
               className="transition-all duration-300"
+              style={{
+                stroke: isBreak
+                  ? '#69F0AE'
+                  : '#00E676',
+                filter: `drop-shadow(0 0 8px ${isBreak ? 'rgba(105, 240, 174, 0.5)' : 'rgba(0, 230, 118, 0.5)'})`,
+              }}
             />
           </svg>
           <div className="absolute">
-            <div className="text-6xl font-bold text-[var(--text-primary)]">
+            <div
+              className="text-6xl font-bold tracking-tight"
+              style={{
+                color: progress > 0 || isRunning ? '#00E676' : 'var(--text-primary)',
+                textShadow: isRunning ? '0 0 30px rgba(0, 230, 118, 0.3)' : 'none',
+                transition: 'color 0.3s ease, text-shadow 0.3s ease',
+              }}
+            >
               {formatTime(currentTime)}
             </div>
           </div>
@@ -271,7 +301,14 @@ function PomodoroView() {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={handleStart}
-            className="btn-primary px-8 py-3 flex items-center gap-2"
+            className="flex items-center gap-2 px-8 py-3 rounded-[10px] font-medium text-sm transition-all duration-150 active:scale-[0.97]"
+            style={{
+              background: isRunning
+                ? 'rgba(0, 230, 118, 0.1)'
+                : 'linear-gradient(135deg, #00E676 0%, #00C853 100%)',
+              color: isRunning ? '#00E676' : '#000',
+              border: isRunning ? '1px solid rgba(0, 230, 118, 0.3)' : '1px solid transparent',
+            }}
           >
             {isRunning ? (
               <>
@@ -287,7 +324,7 @@ function PomodoroView() {
           </button>
           <button
             onClick={handleReset}
-            className="btn-secondary px-8 py-3 flex items-center gap-2"
+            className="flex items-center gap-2 px-8 py-3 rounded-[10px] font-medium text-sm border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-all duration-150 active:scale-[0.97]"
           >
             <RotateCcw size={20} />
             Reset
@@ -295,7 +332,7 @@ function PomodoroView() {
         </div>
 
         {isRunning && (
-          <p className="mt-4 text-sm text-[var(--text-secondary)]">
+          <p className="mt-5 text-[13px] text-[var(--text-secondary)] opacity-70">
             Timer continues even if you switch tabs or close the window
           </p>
         )}
