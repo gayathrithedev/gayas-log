@@ -5,6 +5,7 @@ import HomeView from './components/HomeView'
 import TodayView from './components/TodayView'
 import ArchivesView from './components/ArchivesView'
 import PomodoroView from './components/PomodoroView'
+import FunView from './components/FunView'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
 
@@ -80,6 +81,7 @@ function App() {
           {activeTab === 'today' && <TodayView user={user} isAdmin={IS_ADMIN} />}
           {activeTab === 'archives' && <ArchivesView />}
           {activeTab === 'pomodoro' && <PomodoroView />}
+          {activeTab === 'fun' && <FunView />}
 
           <div className="mt-12">
             <Footer />

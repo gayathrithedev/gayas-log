@@ -50,6 +50,10 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout }) {
         <button onClick={() => setActiveTab('pomodoro')} className={`tab ${activeTab === 'pomodoro' ? 'tab-active' : ''}`}>
           Pomodoro
         </button>
+        <span className="text-[var(--text-tertiary)]">·</span>
+        <button onClick={() => setActiveTab('fun')} className={`tab ${activeTab === 'fun' ? 'tab-active' : ''}`}>
+          Fun
+        </button>
         {isAdmin && user && (
           <>
             <span className="text-[var(--text-tertiary)]">·</span>

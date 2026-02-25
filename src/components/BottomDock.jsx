@@ -1,5 +1,4 @@
-import React from 'react';
-import { Home, Calendar, Archive, Timer, LogOut } from './Icons';
+import { Home, Calendar, Archive, Timer, Gamepad, LogOut } from './Icons';
 
 function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
     const navItems = [
@@ -7,6 +6,7 @@ function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
         { id: 'today', icon: Calendar, label: 'Today' },
         { id: 'archives', icon: Archive, label: 'Archives' },
         { id: 'pomodoro', icon: Timer, label: 'Pomodoro' },
+        { id: 'fun', icon: Gamepad, label: 'Fun' },
     ];
 
     return (
