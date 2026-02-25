@@ -6,7 +6,7 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout }) {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1
-            className="text-[42px] font-bold leading-tight tracking-tight animate-gradient-text"
+            className="text-[24px] sm:text-[32px] md:text-[42px] font-bold leading-tight tracking-tight animate-gradient-text whitespace-nowrap"
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
               background: 'linear-gradient(135deg, #00C853, #69F0AE, #00E676, #A5D6A7, #00C853, #69F0AE)',
