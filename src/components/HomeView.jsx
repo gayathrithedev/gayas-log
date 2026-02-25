@@ -19,7 +19,7 @@ function HomeView() {
                     I'm always open to discussing tech, side projects, or interesting ideas. Feel free to reach out!
                 </p>
 
-                <div className="flex items-center gap-5 text-[16px]">
+                <div className="flex items-center flex-wrap gap-3 sm:gap-5 text-[16px]">
                     <a href="mailto:gayathrithedev@gmail.com" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-150" aria-label="Email">
                         Email ↗
                     </a>
