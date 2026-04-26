@@ -14,6 +14,60 @@ const LEVEL_COLORS = {
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const DAY_LABELS = ['Mon', 'Wed', 'Fri']
 
+const getLevel = (count) => {
+    if (count === 0) return 0
+    if (count <= 2) return 1
+    if (count <= 5) return 2
+    if (count <= 9) return 3
+    return 4
+}
+
+const formatDateKey = (date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+}
+
+const getPublicPushCountsByDate = (events) => {
+    const countsByDate = new Map()
+
+    events
+        .filter((event) => event.type === 'PushEvent')
+        .forEach((event) => {
+            const dateKey = formatDateKey(new Date(event.created_at))
+            countsByDate.set(dateKey, (countsByDate.get(dateKey) || 0) + 1)
+        })
+
+    return countsByDate
+}
+
+const normalizeContributionsThroughToday = (apiContributions, publicPushCountsByDate = new Map()) => {
+    const byDate = new Map(apiContributions.map((day) => [day.date, day]))
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const start = new Date(today)
+    start.setDate(start.getDate() - 364)
+
+    const days = []
+    for (const date = new Date(start); date <= today; date.setDate(date.getDate() + 1)) {
+        const dateKey = formatDateKey(date)
+        const apiDay = byDate.get(dateKey)
+        const apiCount = apiDay?.count || 0
+        const publicPushCount = publicPushCountsByDate.get(dateKey) || 0
+        const count = apiCount > 0 ? apiCount : publicPushCount
+
+        days.push({
+            date: dateKey,
+            count,
+            level: getLevel(count),
+        })
+    }
+
+    return days
+}
+
 function GitHubContributions() {
     const [contributions, setContributions] = useState([])
     const [totalContributions, setTotalContributions] = useState(0)
@@ -26,29 +80,31 @@ function GitHubContributions() {
     useEffect(() => {
         let isActive = true
 
-        const generateFallbackData = () => {
-            const today = new Date()
-            const days = []
-            for (let i = 364; i >= 0; i--) {
-                const date = new Date(today)
-                date.setDate(date.getDate() - i)
-                days.push({
-                    date: date.toISOString().split('T')[0],
-                    count: 0,
-                    level: 0,
-                })
-            }
+        const generateFallbackData = (publicPushCountsByDate = new Map()) => {
+            const days = normalizeContributionsThroughToday([], publicPushCountsByDate)
             setContributions(days)
-            setTotalContributions(0)
+            setTotalContributions(days.reduce((sum, day) => sum + day.count, 0))
+        }
+
+        const fetchPublicPushCounts = async () => {
+            try {
+                const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`)
+                if (!response.ok) return new Map()
+
+                const events = await response.json()
+                return getPublicPushCountsByDate(Array.isArray(events) ? events : [])
+            } catch {
+                return new Map()
+            }
         }
 
         const fetchContributions = async () => {
             try {
                 setLoading(true)
-                // Use GitHub's contributions page which returns an SVG
-                const response = await fetch(
-                    `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
-                )
+                const [response, publicPushCountsByDate] = await Promise.all([
+                    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`),
+                    fetchPublicPushCounts(),
+                ])
 
                 if (!response.ok) throw new Error('Failed to fetch contributions')
 
@@ -56,8 +112,9 @@ function GitHubContributions() {
                 if (!isActive) return
 
                 if (data.contributions && data.contributions.length > 0) {
-                    setContributions(data.contributions)
-                    setTotalContributions(data.total?.lastYear || data.contributions.reduce((sum, d) => sum + d.count, 0))
+                    const normalized = normalizeContributionsThroughToday(data.contributions, publicPushCountsByDate)
+                    setContributions(normalized)
+                    setTotalContributions(normalized.reduce((sum, day) => sum + day.count, 0))
                 } else {
                     throw new Error('No contribution data')
                 }
@@ -65,8 +122,7 @@ function GitHubContributions() {
                 if (!isActive) return
                 console.error('GitHub contributions error:', err)
                 setError(err.message)
-                // Generate fallback empty data
-                generateFallbackData()
+                generateFallbackData(await fetchPublicPushCounts())
             } finally {
                 if (isActive) {
                     setLoading(false)
@@ -87,14 +143,6 @@ function GitHubContributions() {
             scrollRef.current.scrollLeft = scrollRef.current.scrollWidth
         }
     }, [loading])
-
-    const getLevel = (count) => {
-        if (count === 0) return 0
-        if (count <= 2) return 1
-        if (count <= 5) return 2
-        if (count <= 9) return 3
-        return 4
-    }
 
     const formatDate = (dateStr) => {
         const date = new Date(dateStr)
