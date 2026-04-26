@@ -68,7 +68,7 @@ const normalizeContributionsThroughToday = (apiContributions, publicPushCountsBy
     return days
 }
 
-function GitHubContributions() {
+function GitHubContributions({ lastPushDate = null }) {
     const [contributions, setContributions] = useState([])
     const [totalContributions, setTotalContributions] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -79,6 +79,22 @@ function GitHubContributions() {
 
     useEffect(() => {
         let isActive = true
+
+        const getSeededPublicPushCounts = () => {
+            const countsByDate = new Map()
+            if (lastPushDate) {
+                countsByDate.set(formatDateKey(lastPushDate), 1)
+            }
+            return countsByDate
+        }
+
+        const mergePushCounts = (baseCounts, fetchedCounts) => {
+            const merged = new Map(baseCounts)
+            fetchedCounts.forEach((count, dateKey) => {
+                merged.set(dateKey, Math.max(merged.get(dateKey) || 0, count))
+            })
+            return merged
+        }
 
         const generateFallbackData = (publicPushCountsByDate = new Map()) => {
             const days = normalizeContributionsThroughToday([], publicPushCountsByDate)
@@ -105,6 +121,7 @@ function GitHubContributions() {
                     fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`),
                     fetchPublicPushCounts(),
                 ])
+                const mergedPushCountsByDate = mergePushCounts(getSeededPublicPushCounts(), publicPushCountsByDate)
 
                 if (!response.ok) throw new Error('Failed to fetch contributions')
 
@@ -112,7 +129,7 @@ function GitHubContributions() {
                 if (!isActive) return
 
                 if (data.contributions && data.contributions.length > 0) {
-                    const normalized = normalizeContributionsThroughToday(data.contributions, publicPushCountsByDate)
+                    const normalized = normalizeContributionsThroughToday(data.contributions, mergedPushCountsByDate)
                     setContributions(normalized)
                     setTotalContributions(normalized.reduce((sum, day) => sum + day.count, 0))
                 } else {
@@ -122,7 +139,7 @@ function GitHubContributions() {
                 if (!isActive) return
                 console.error('GitHub contributions error:', err)
                 setError(err.message)
-                generateFallbackData(await fetchPublicPushCounts())
+                generateFallbackData(mergePushCounts(getSeededPublicPushCounts(), await fetchPublicPushCounts()))
             } finally {
                 if (isActive) {
                     setLoading(false)
@@ -135,7 +152,7 @@ function GitHubContributions() {
         return () => {
             isActive = false
         }
-    }, [])
+    }, [lastPushDate])
 
     // Scroll to the end (most recent) on load
     useEffect(() => {

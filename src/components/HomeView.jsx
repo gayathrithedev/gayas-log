@@ -464,7 +464,7 @@ function HomeView({ setActiveTab }) {
             </section>
 
             <div className="section-shell p-6 sm:p-7">
-                <GitHubContributions />
+                <GitHubContributions lastPushDate={lastPushDate} />
                 {lastPushDate && (
                     <p className="mt-4 text-center text-[14px] text-[var(--text-secondary)]">
                         I last pushed code on{' '}
