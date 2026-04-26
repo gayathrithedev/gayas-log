@@ -4,6 +4,7 @@ function Header({ activeTab, setActiveTab, isAdmin, user, onLogout, theme, onTog
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'today', label: 'Today' },
+    { id: 'journey', label: 'Journey' },
     { id: 'pomodoro', label: 'Pomodoro' },
   ]
 

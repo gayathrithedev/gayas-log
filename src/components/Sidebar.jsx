@@ -27,6 +27,7 @@ function Sidebar({ darkMode, toggleDarkMode, isAdmin, user, onLogout, activeTab,
         { id: 'home', label: 'Home', icon: Home },
         { id: 'today', label: 'Today', icon: Calendar },
         { id: 'archives', label: 'Archives', icon: Archive },
+        { id: 'journey', label: 'Journey', icon: MapPin },
         { id: 'pomodoro', label: 'Pomodoro', icon: Timer },
     ]
 

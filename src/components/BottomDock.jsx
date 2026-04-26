@@ -1,10 +1,11 @@
-import { Home, Calendar, Archive, Timer, LogOut } from './Icons';
+import { Home, Calendar, Archive, Timer, LogOut, MapPin } from './Icons';
 
 function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
     const navItems = [
         { id: 'home', icon: Home, label: 'Home' },
         { id: 'today', icon: Calendar, label: 'Today' },
         { id: 'archives', icon: Archive, label: 'Archives' },
+        { id: 'journey', icon: MapPin, label: 'Journey' },
         { id: 'pomodoro', icon: Timer, label: 'Pomodoro' },
     ];
 

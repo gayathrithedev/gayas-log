@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase'
 import Header from './components/Header'
 import HomeView from './components/HomeView'
 import TodayView from './components/TodayView'
+import JourneyView from './components/JourneyView'
 import PomodoroView from './components/PomodoroView'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
@@ -64,7 +65,7 @@ function App() {
     setUser(null)
   }
 
-  const pageTabs = ['home', 'today', 'pomodoro']
+  const pageTabs = ['home', 'today', 'journey', 'pomodoro']
   const visibleTab = activeTab === 'archives'
     ? 'today'
     : pageTabs.includes(activeTab) ? activeTab : 'home'
@@ -93,6 +94,7 @@ function App() {
       <main className="flex-1 w-full pb-24">
         <div className="w-[92%] max-w-5xl mx-auto mt-4">
           {visibleTab === 'home' && <HomeView setActiveTab={setActiveTab} />}
+          {visibleTab === 'journey' && <JourneyView />}
           {visibleTab === 'today' && (
             <TodayView
               user={user}
