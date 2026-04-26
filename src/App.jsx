@@ -3,9 +3,7 @@ import { supabase } from './lib/supabase'
 import Header from './components/Header'
 import HomeView from './components/HomeView'
 import TodayView from './components/TodayView'
-import ArchivesView from './components/ArchivesView'
 import PomodoroView from './components/PomodoroView'
-import FunView from './components/FunView'
 import Footer from './components/Footer'
 import LoginModal from './components/LoginModal'
 
@@ -14,6 +12,11 @@ const IS_ADMIN = import.meta.env.VITE_IS_ADMIN === 'true'
 
 function App() {
   const [activeTab, setActiveTab] = useState('home')
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark'
+    return localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+  })
   const [user, setUser] = useState(null)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [checkingAuth, setCheckingAuth] = useState(true)
@@ -37,10 +40,15 @@ function App() {
     return () => subscription.unsubscribe()
   }, [])
 
-  // Force dark mode for now (can hook up to theme toggler later)
+  // Persist and apply dark/light mode
   useEffect(() => {
-    document.documentElement.classList.add('dark')
-  }, [])
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme((current) => current === 'dark' ? 'light' : 'dark')
+  }
 
   // Show login modal on admin site if not logged in
   useEffect(() => {
@@ -56,6 +64,11 @@ function App() {
     setUser(null)
   }
 
+  const pageTabs = ['home', 'today', 'pomodoro']
+  const visibleTab = activeTab === 'archives'
+    ? 'today'
+    : pageTabs.includes(activeTab) ? activeTab : 'home'
+
   // Show loading while checking auth on admin site
   if (IS_ADMIN && checkingAuth) {
     return (
@@ -66,22 +79,28 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] transition-colors duration-150 relative">
+    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] transition-colors duration-150 relative overflow-x-hidden">
       <Header
         isAdmin={IS_ADMIN}
         user={user}
         onLogout={handleLogout}
-        activeTab={activeTab}
+        activeTab={visibleTab}
         setActiveTab={setActiveTab}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       <main className="flex-1 w-full pb-24">
-        <div className="w-[90%] md:w-[40%] mx-auto mt-4">
-          {activeTab === 'home' && <HomeView />}
-          {activeTab === 'today' && <TodayView user={user} isAdmin={IS_ADMIN} />}
-          {activeTab === 'archives' && <ArchivesView />}
-          {activeTab === 'pomodoro' && <PomodoroView />}
-          {activeTab === 'fun' && <FunView />}
+        <div className="w-[92%] max-w-5xl mx-auto mt-4">
+          {visibleTab === 'home' && <HomeView setActiveTab={setActiveTab} />}
+          {visibleTab === 'today' && (
+            <TodayView
+              user={user}
+              isAdmin={IS_ADMIN}
+              showArchivesOnLoad={activeTab === 'archives'}
+            />
+          )}
+          {visibleTab === 'pomodoro' && <PomodoroView />}
 
           <div className="mt-12">
             <Footer />

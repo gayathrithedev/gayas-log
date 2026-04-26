@@ -236,7 +236,7 @@ function PomodoroView() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[13px] font-medium"
             style={{
               background: isBreak ? 'rgba(105, 240, 174, 0.1)' : 'rgba(0, 230, 118, 0.1)',
-              color: isBreak ? '#69F0AE' : '#00E676',
+              color: isBreak ? '#E7A178' : '#D99061',
               border: `1px solid ${isBreak ? 'rgba(105, 240, 174, 0.2)' : 'rgba(0, 230, 118, 0.2)'}`,
             }}
           >
@@ -277,8 +277,8 @@ function PomodoroView() {
               className="transition-all duration-300"
               style={{
                 stroke: isBreak
-                  ? '#69F0AE'
-                  : '#00E676',
+                  ? '#E7A178'
+                  : '#D99061',
                 filter: `drop-shadow(0 0 8px ${isBreak ? 'rgba(105, 240, 174, 0.5)' : 'rgba(0, 230, 118, 0.5)'})`,
               }}
             />
@@ -287,7 +287,7 @@ function PomodoroView() {
             <div
               className="text-6xl font-bold tracking-tight"
               style={{
-                color: progress > 0 || isRunning ? '#00E676' : 'var(--text-primary)',
+                color: progress > 0 || isRunning ? '#D99061' : 'var(--text-primary)',
                 textShadow: isRunning ? '0 0 30px rgba(0, 230, 118, 0.3)' : 'none',
                 transition: 'color 0.3s ease, text-shadow 0.3s ease',
               }}
@@ -305,8 +305,8 @@ function PomodoroView() {
             style={{
               background: isRunning
                 ? 'rgba(0, 230, 118, 0.1)'
-                : 'linear-gradient(135deg, #00E676 0%, #00C853 100%)',
-              color: isRunning ? '#00E676' : '#000',
+                : 'linear-gradient(135deg, #D99061 0%, #C8794B 100%)',
+              color: isRunning ? '#D99061' : '#000',
               border: isRunning ? '1px solid rgba(0, 230, 118, 0.3)' : '1px solid transparent',
             }}
           >

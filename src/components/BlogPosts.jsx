@@ -67,7 +67,7 @@ function BlogPosts() {
 
     if (loading) {
         return (
-            <div className="pt-8 border-t border-[var(--border)]">
+            <div className="pt-0">
                 <h2 className="text-[24px] font-semibold text-[var(--text-primary)] mb-5">Blog</h2>
                 <div className="flex items-center gap-3 text-[var(--text-secondary)] text-[14px]">
                     <div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
@@ -79,7 +79,7 @@ function BlogPosts() {
 
     if (error || posts.length === 0) {
         return (
-            <div className="pt-8 border-t border-[var(--border)]">
+            <div className="pt-0">
                 <h2 className="text-[24px] font-semibold text-[var(--text-primary)] mb-5">Blog</h2>
                 <p className="text-[14px] text-[var(--text-secondary)]">
                     Unable to load blog posts.{' '}
@@ -97,27 +97,31 @@ function BlogPosts() {
     }
 
     return (
-        <div className="pt-8 border-t border-[var(--border)]">
+        <div className="pt-0">
             <h2 className="text-[24px] font-semibold text-[var(--text-primary)] mb-6">Blog</h2>
 
             {/* 2-column grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[10px] overflow-hidden">
-                {posts.map((post, index) => (
-                    <a
-                        key={index}
-                        href={post.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block bg-[var(--bg)] p-5 group transition-colors duration-150 hover:bg-[var(--hover)]"
-                    >
-                        <h3 className="text-[15px] font-semibold text-[var(--text-primary)] leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors duration-150">
-                            {post.title}
-                        </h3>
-                        <span className="text-[13px] text-[var(--text-secondary)]">
-                            {formatDate(post.publishedAt)}
-                        </span>
-                    </a>
-                ))}
+                {posts.map((post, index) => {
+                    const isLonelyLastCard = posts.length % 2 === 1 && index === posts.length - 1
+
+                    return (
+                        <a
+                            key={index}
+                            href={post.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`block bg-[var(--surface)] p-5 group transition-colors duration-150 hover:bg-[var(--hover)] ${isLonelyLastCard ? 'sm:col-span-2' : ''}`}
+                        >
+                            <h3 className="text-[15px] font-semibold text-[var(--text-primary)] leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors duration-150">
+                                {post.title}
+                            </h3>
+                            <span className="text-[13px] text-[var(--text-secondary)]">
+                                {formatDate(post.publishedAt)}
+                            </span>
+                        </a>
+                    )
+                })}
             </div>
 
             {/* "All Posts" button */}

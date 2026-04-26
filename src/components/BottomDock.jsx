@@ -1,4 +1,4 @@
-import { Home, Calendar, Archive, Timer, Gamepad, LogOut } from './Icons';
+import { Home, Calendar, Archive, Timer, LogOut } from './Icons';
 
 function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
     const navItems = [
@@ -6,11 +6,10 @@ function BottomDock({ isAdmin, user, onLogout, activeTab, setActiveTab }) {
         { id: 'today', icon: Calendar, label: 'Today' },
         { id: 'archives', icon: Archive, label: 'Archives' },
         { id: 'pomodoro', icon: Timer, label: 'Pomodoro' },
-        { id: 'fun', icon: Gamepad, label: 'Fun' },
     ];
 
     return (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-2rem)]">
             <div className="flex items-center gap-1 sm:gap-2 px-3 py-2 rounded-lg bg-[var(--content-bg)] border border-[var(--border)] backdrop-blur-xl">
                 {navItems.map((item) => {
                     const Icon = item.icon;

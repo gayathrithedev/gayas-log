@@ -33,7 +33,7 @@ function ActivityList({ activities, loading }) {
   const getEnergyColor = (energy) => {
     switch (energy.toLowerCase()) {
       case 'high':
-        return 'text-[#00E676]'
+        return 'text-[#D99061]'
       case 'medium':
         return 'text-[#F59E0B]'
       case 'low':

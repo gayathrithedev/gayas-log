@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import { ChevronRight, Calendar } from './Icons'
 import ActivityList from './ActivityList'
 
-function ArchivesView() {
+function ArchivesView({ excludeToday = false }) {
   const [loading, setLoading] = useState(true)
   const [weekGroups, setWeekGroups] = useState([])
   const [expandedWeek, setExpandedWeek] = useState(null)
@@ -26,7 +26,13 @@ function ArchivesView() {
   }
 
   const groupByWeek = (data) => {
-    if (!data.length) return
+    if (!data.length) {
+      setWeekGroups([])
+      setExpandedWeek(null)
+      setSelectedDate(null)
+      setFilteredActivities([])
+      return
+    }
 
     const groups = {}
 
@@ -85,10 +91,18 @@ function ArchivesView() {
   const fetchAllActivities = async () => {
     setLoading(true)
 
-    const { data, error } = await supabase
+    let query = supabase
       .from('activities')
       .select('*')
       .order('created_at', { ascending: false })
+
+    if (excludeToday) {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      query = query.lt('created_at', today.toISOString())
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Error fetching activities:', error)
@@ -102,7 +116,7 @@ function ArchivesView() {
   useEffect(() => {
     fetchAllActivities()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [excludeToday])
 
 
 
@@ -180,7 +194,7 @@ function ArchivesView() {
                     className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150"
                     style={{
                       background: isExpanded ? 'rgba(0, 230, 118, 0.12)' : 'var(--hover)',
-                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                      color: isExpanded ? '#D99061' : 'var(--text-secondary)',
                     }}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -202,7 +216,7 @@ function ArchivesView() {
                   <div className="flex-1 text-left min-w-0">
                     <span
                       className="font-medium text-[15px] transition-colors duration-150"
-                      style={{ color: isExpanded ? '#00E676' : 'var(--text-primary)' }}
+                      style={{ color: isExpanded ? '#D99061' : 'var(--text-primary)' }}
                     >
                       Week {week.weekNumber}
                     </span>
@@ -216,7 +230,7 @@ function ArchivesView() {
                     className="flex-shrink-0 text-[12px] font-medium px-2.5 py-0.5 rounded-full transition-all duration-150"
                     style={{
                       background: isExpanded ? 'rgba(0, 230, 118, 0.1)' : 'var(--hover)',
-                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                      color: isExpanded ? '#D99061' : 'var(--text-secondary)',
                     }}
                   >
                     {totalActivities}
@@ -227,7 +241,7 @@ function ArchivesView() {
                     className="flex-shrink-0 transition-transform duration-200"
                     style={{
                       transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                      color: isExpanded ? '#00E676' : 'var(--text-secondary)',
+                      color: isExpanded ? '#D99061' : 'var(--text-secondary)',
                     }}
                   >
                     <ChevronRight size={16} />
@@ -264,7 +278,7 @@ function ArchivesView() {
                               <div
                                 className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center transition-all duration-150"
                                 style={{
-                                  color: isSelected ? '#00E676' : 'var(--text-secondary)',
+                                  color: isSelected ? '#D99061' : 'var(--text-secondary)',
                                 }}
                               >
                                 <Calendar size={14} />
@@ -274,7 +288,7 @@ function ArchivesView() {
                               <span
                                 className="flex-1 text-left text-[14px] transition-colors duration-150"
                                 style={{
-                                  color: isSelected ? '#00E676' : 'var(--text-primary)',
+                                  color: isSelected ? '#D99061' : 'var(--text-primary)',
                                 }}
                               >
                                 {formatDateFull(dateData.date)}
@@ -290,7 +304,7 @@ function ArchivesView() {
                                 className="flex-shrink-0 transition-transform duration-200"
                                 style={{
                                   transform: isSelected ? 'rotate(90deg)' : 'rotate(0deg)',
-                                  color: isSelected ? '#00E676' : 'var(--text-secondary)',
+                                  color: isSelected ? '#D99061' : 'var(--text-secondary)',
                                 }}
                               >
                                 <ChevronRight size={14} />

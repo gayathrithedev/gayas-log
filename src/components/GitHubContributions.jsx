@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react'
 
 const GITHUB_USERNAME = 'gayathrithedev'
 
-// Theme-aligned contribution colors (dark mode green accent)
+// Theme-aligned contribution colors (theme-aware dim orange accent)
 const LEVEL_COLORS = {
-    0: 'rgba(255, 255, 255, 0.04)',  // empty - very subtle
-    1: '#00E67633',                   // level 1 - light green
-    2: '#00E67666',                   // level 2 - medium green  
-    3: '#00E67699',                   // level 3 - dark green
-    4: '#00E676',                     // level 4 - full green (accent)
+    0: 'var(--contrib-0)',
+    1: 'var(--contrib-1)',
+    2: 'var(--contrib-2)',
+    3: 'var(--contrib-3)',
+    4: 'var(--contrib-4)',
 }
 
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -24,7 +24,61 @@ function GitHubContributions() {
     const scrollRef = useRef(null)
 
     useEffect(() => {
+        let isActive = true
+
+        const generateFallbackData = () => {
+            const today = new Date()
+            const days = []
+            for (let i = 364; i >= 0; i--) {
+                const date = new Date(today)
+                date.setDate(date.getDate() - i)
+                days.push({
+                    date: date.toISOString().split('T')[0],
+                    count: 0,
+                    level: 0,
+                })
+            }
+            setContributions(days)
+            setTotalContributions(0)
+        }
+
+        const fetchContributions = async () => {
+            try {
+                setLoading(true)
+                // Use GitHub's contributions page which returns an SVG
+                const response = await fetch(
+                    `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+                )
+
+                if (!response.ok) throw new Error('Failed to fetch contributions')
+
+                const data = await response.json()
+                if (!isActive) return
+
+                if (data.contributions && data.contributions.length > 0) {
+                    setContributions(data.contributions)
+                    setTotalContributions(data.total?.lastYear || data.contributions.reduce((sum, d) => sum + d.count, 0))
+                } else {
+                    throw new Error('No contribution data')
+                }
+            } catch (err) {
+                if (!isActive) return
+                console.error('GitHub contributions error:', err)
+                setError(err.message)
+                // Generate fallback empty data
+                generateFallbackData()
+            } finally {
+                if (isActive) {
+                    setLoading(false)
+                }
+            }
+        }
+
         fetchContributions()
+
+        return () => {
+            isActive = false
+        }
     }, [])
 
     // Scroll to the end (most recent) on load
@@ -33,50 +87,6 @@ function GitHubContributions() {
             scrollRef.current.scrollLeft = scrollRef.current.scrollWidth
         }
     }, [loading])
-
-    const fetchContributions = async () => {
-        try {
-            setLoading(true)
-            // Use GitHub's contributions page which returns an SVG
-            const response = await fetch(
-                `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
-            )
-
-            if (!response.ok) throw new Error('Failed to fetch contributions')
-
-            const data = await response.json()
-
-            if (data.contributions && data.contributions.length > 0) {
-                setContributions(data.contributions)
-                setTotalContributions(data.total?.lastYear || data.contributions.reduce((sum, d) => sum + d.count, 0))
-            } else {
-                throw new Error('No contribution data')
-            }
-        } catch (err) {
-            console.error('GitHub contributions error:', err)
-            setError(err.message)
-            // Generate fallback empty data
-            generateFallbackData()
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const generateFallbackData = () => {
-        const today = new Date()
-        const days = []
-        for (let i = 364; i >= 0; i--) {
-            const date = new Date(today)
-            date.setDate(date.getDate() - i)
-            days.push({
-                date: date.toISOString().split('T')[0],
-                count: 0,
-                level: 0,
-            })
-        }
-        setContributions(days)
-        setTotalContributions(0)
-    }
 
     const getLevel = (count) => {
         if (count === 0) return 0
@@ -137,10 +147,13 @@ function GitHubContributions() {
                 const date = new Date(firstDay.date)
                 const month = date.getMonth()
                 if (month !== lastMonth) {
-                    months.push({
-                        label: MONTH_LABELS[month],
-                        position: weekIndex,
-                    })
+                    const previous = months[months.length - 1]
+                    if (!previous || weekIndex - previous.position >= 4) {
+                        months.push({
+                            label: MONTH_LABELS[month],
+                            position: weekIndex,
+                        })
+                    }
                     lastMonth = month
                 }
             }
@@ -156,7 +169,7 @@ function GitHubContributions() {
 
     if (loading) {
         return (
-            <div className="pt-8 border-t border-[var(--border)]">
+            <div className="pt-0">
                 <h2 className="text-[24px] font-semibold text-[var(--text-primary)] mb-5">Contributions</h2>
                 <div className="flex items-center gap-3 text-[var(--text-secondary)] text-[14px]">
                     <div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
@@ -167,7 +180,7 @@ function GitHubContributions() {
     }
 
     return (
-        <div className="pt-8 border-t border-[var(--border)]">
+        <div className="pt-0">
             <div className="flex items-baseline justify-between mb-5">
                 <h2 className="text-[24px] font-semibold text-[var(--text-primary)]">Contributions</h2>
                 <a

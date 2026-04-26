@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import ActivityForm from './ActivityForm'
 import ActivityList from './ActivityList'
+import ArchivesView from './ArchivesView'
+import { Archive } from './Icons'
 
-function TodayView({ user, isAdmin }) {
+function TodayView({ user, isAdmin, showArchivesOnLoad = false }) {
   const [activities, setActivities] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showArchives, setShowArchives] = useState(false)
+  const archivesRef = useRef(null)
 
   const handleNewActivity = (newActivity) => {
     // Check if it's from today
@@ -73,8 +77,17 @@ function TodayView({ user, isAdmin }) {
     setActivities((prev) => [newActivity, ...prev])
   }
 
+  const handleShowArchives = () => {
+    setShowArchives(true)
+    window.setTimeout(() => {
+      archivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 0)
+  }
+
+  const archivesVisible = showArchives || showArchivesOnLoad
+
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="mx-auto max-w-2xl">
       {/* Show form only on admin site when logged in */}
       {isAdmin && user && (
         <ActivityForm onActivityAdded={handleActivityAdded} />
@@ -84,6 +97,22 @@ function TodayView({ user, isAdmin }) {
       <div>
         <ActivityList activities={activities} loading={loading} />
       </div>
+
+      <button
+        type="button"
+        onClick={handleShowArchives}
+        aria-expanded={archivesVisible}
+        className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-[var(--text-secondary)] underline decoration-[var(--border-accent)] underline-offset-4 transition-colors duration-150 hover:text-[var(--accent)]"
+      >
+        <span>Archives</span>
+        <Archive size={16} />
+      </button>
+
+      {archivesVisible && (
+        <div ref={archivesRef} className="mt-8">
+          <ArchivesView excludeToday />
+        </div>
+      )}
     </div>
   )
 }
