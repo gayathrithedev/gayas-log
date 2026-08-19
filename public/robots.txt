@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://gayathriperumal.com/sitemap.xml
+Sitemap: https://gayas-log-public.vercel.app/sitemap.xml

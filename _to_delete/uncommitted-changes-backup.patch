@@ -1,0 +1,122 @@
+diff --git a/src/App.jsx b/src/App.jsx
+index d0b2d38..1dfaec4 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase'
+ import Header from './components/Header'
+ import HomeView from './components/HomeView'
+ import TodayView from './components/TodayView'
++import ArchivesView from './components/ArchivesView'
+ import JourneyView from './components/JourneyView'
+ import PomodoroView from './components/PomodoroView'
+ import Footer from './components/Footer'
+@@ -95,11 +96,12 @@ function App() {
+         <div className="w-[92%] max-w-5xl mx-auto mt-4">
+           {visibleTab === 'home' && <HomeView setActiveTab={setActiveTab} />}
+           {visibleTab === 'journey' && <JourneyView />}
+-          {visibleTab === 'today' && (
++          {activeTab === 'archives' && <ArchivesView />}
++          {activeTab !== 'archives' && visibleTab === 'today' && (
+             <TodayView
+               user={user}
+               isAdmin={IS_ADMIN}
+-              showArchivesOnLoad={activeTab === 'archives'}
++              setActiveTab={setActiveTab}
+             />
+           )}
+           {visibleTab === 'pomodoro' && <PomodoroView />}
+diff --git a/src/components/ArchivesView.jsx b/src/components/ArchivesView.jsx
+index 6e45e6a..0de02fa 100644
+--- a/src/components/ArchivesView.jsx
++++ b/src/components/ArchivesView.jsx
+@@ -9,6 +9,7 @@ function ArchivesView({ excludeToday = false }) {
+   const [expandedWeek, setExpandedWeek] = useState(null)
+   const [selectedDate, setSelectedDate] = useState(null)
+   const [filteredActivities, setFilteredActivities] = useState([])
++  const [errorMessage, setErrorMessage] = useState('')
+ 
+   const getWeekNumber = (date) => {
+     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+@@ -90,6 +91,7 @@ function ArchivesView({ excludeToday = false }) {
+ 
+   const fetchAllActivities = async () => {
+     setLoading(true)
++    setErrorMessage('')
+ 
+     let query = supabase
+       .from('activities')
+@@ -106,6 +108,8 @@ function ArchivesView({ excludeToday = false }) {
+ 
+     if (error) {
+       console.error('Error fetching activities:', error)
++      setErrorMessage('Unable to load archived activities right now.')
++      groupByWeek([])
+     } else {
+       groupByWeek(data || [])
+     }
+@@ -163,7 +167,7 @@ function ArchivesView({ excludeToday = false }) {
+   if (!weekGroups.length) {
+     return (
+       <div className="text-center py-12 text-[var(--text-secondary)]">
+-        <p>No archived activities yet.</p>
++        <p>{errorMessage || 'No archived activities yet.'}</p>
+       </div>
+     )
+   }
+diff --git a/src/components/TodayView.jsx b/src/components/TodayView.jsx
+index 28ee7bd..14d00cb 100644
+--- a/src/components/TodayView.jsx
++++ b/src/components/TodayView.jsx
+@@ -1,15 +1,12 @@
+-import { useState, useEffect, useRef } from 'react'
++import { useState, useEffect } from 'react'
+ import { supabase } from '../lib/supabase'
+ import ActivityForm from './ActivityForm'
+ import ActivityList from './ActivityList'
+-import ArchivesView from './ArchivesView'
+ import { Archive } from './Icons'
+ 
+-function TodayView({ user, isAdmin, showArchivesOnLoad = false }) {
++function TodayView({ user, isAdmin, setActiveTab }) {
+   const [activities, setActivities] = useState([])
+   const [loading, setLoading] = useState(true)
+-  const [showArchives, setShowArchives] = useState(false)
+-  const archivesRef = useRef(null)
+ 
+   const handleNewActivity = (newActivity) => {
+     // Check if it's from today
+@@ -78,14 +75,9 @@ function TodayView({ user, isAdmin, showArchivesOnLoad = false }) {
+   }
+ 
+   const handleShowArchives = () => {
+-    setShowArchives(true)
+-    window.setTimeout(() => {
+-      archivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+-    }, 0)
++    setActiveTab('archives')
+   }
+ 
+-  const archivesVisible = showArchives || showArchivesOnLoad
+-
+   return (
+     <div className="mx-auto max-w-2xl">
+       {/* Show form only on admin site when logged in */}
+@@ -101,18 +93,11 @@ function TodayView({ user, isAdmin, showArchivesOnLoad = false }) {
+       <button
+         type="button"
+         onClick={handleShowArchives}
+-        aria-expanded={archivesVisible}
+         className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-[var(--text-secondary)] underline decoration-[var(--border-accent)] underline-offset-4 transition-colors duration-150 hover:text-[var(--accent)]"
+       >
+         <span>Archives</span>
+         <Archive size={16} />
+       </button>
+-
+-      {archivesVisible && (
+-        <div ref={archivesRef} className="mt-8">
+-          <ArchivesView excludeToday />
+-        </div>
+-      )}
+     </div>
+   )
+ }

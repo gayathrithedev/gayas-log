@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 825" width="1200" height="825">
+<defs>
+ <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#8B8B86" stop-opacity=".10"/>
+  <stop offset="1" stop-color="#A3A39C" stop-opacity=".16"/>
+ </linearGradient>
+ <pattern id="d" width="22" height="22" patternUnits="userSpaceOnUse">
+  <circle cx="1.6" cy="1.6" r="1.1" fill="#101010" opacity=".05"/>
+ </pattern>
+</defs>
+<rect width="1200" height="825" fill="#F6F6F4"/>
+<rect width="1200" height="825" fill="url(#g)"/>
+<rect width="1200" height="825" fill="url(#d)"/>
+<g fill="none" stroke="#A3A39C" stroke-opacity=".35" stroke-width="1.4">
+ <circle cx="864" cy="247.5" r="181.5"/>
+ <circle cx="336.00000000000006" cy="561" r="123.75"/>
+ <path d="M0 676.5 Q 300 495 600 660 T 1200 544.5"/>
+</g>
+<text x="600" y="416.5" text-anchor="middle" font-family="ui-monospace, monospace" font-size="45" letter-spacing="3" fill="#101010" fill-opacity=".32">REPLACE ME</text>
+</svg>

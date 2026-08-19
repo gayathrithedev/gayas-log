@@ -1,16 +1,54 @@
-# React + Vite
+# Gayathri Perumal — portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal site for **Gayathri Perumal**, senior software engineer in Bengaluru.
 
-Currently, two official plugins are available:
+Live: https://gayas-log-public.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
 
-## React Compiler
+React 19 · Vite 7 · Tailwind CSS 3 · Motion (Framer Motion) · self-hosted fonts via Fontsource.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Editing the site
 
-## Expanding the ESLint configuration
+**Everything you'd want to change lives in one file: [`src/data/content.js`](src/data/content.js).**
+Hero copy, projects, posts, socials — all of it. Anything marked `TODO` is a
+placeholder waiting for the real thing.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Images
+
+Drop files in `public/` and point `content.js` at them. The current files are
+generated grey placeholders; replacing them is the fastest visual win.
+
+| What | Where | Suggested size |
+| --- | --- | --- |
+| Portrait | `public/portrait.svg` → swap for `.jpg` | 900 × 1125 |
+| Project shots | `public/work/*.svg` → swap for `.png` | 1200 × 825 |
+| Personal photos | `public/life/*.svg` → swap for `.jpg` | ~1200 square-ish |
+| Social preview | `public/og.png` | 1200 × 630 |
+
+Missing images degrade to a labelled grey frame rather than a broken icon, so
+partial updates always look intentional.
+
+### The greeting
+
+`profile.greeting` is Tamil (`வணக்கம்`) by default. Change it to whatever you like.
+If you switch to Latin text, you can delete the Noto Serif Tamil `<link>` in
+`index.html` — the other three faces are bundled locally.
+
+## Design notes
+
+Monochrome on white: ink `#101010`, muted `#4E4E4B`, hairline `#E7E7E3`. No accent
+colour — emphasis comes from scale, italics and whitespace. Type is Instrument
+Serif for display, Instrument Sans for body, JetBrains Mono for labels. Sections
+carry a numbered label. Motion is scroll-triggered and respects
+`prefers-reduced-motion`.
+
+## Commands
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # → dist/
+npm run preview
+npm run lint
+```

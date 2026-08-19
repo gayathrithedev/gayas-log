@@ -9,6 +9,7 @@ function ArchivesView({ excludeToday = false }) {
   const [expandedWeek, setExpandedWeek] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
   const [filteredActivities, setFilteredActivities] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
 
   const getWeekNumber = (date) => {
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
@@ -90,6 +91,7 @@ function ArchivesView({ excludeToday = false }) {
 
   const fetchAllActivities = async () => {
     setLoading(true)
+    setErrorMessage('')
 
     let query = supabase
       .from('activities')
@@ -106,6 +108,8 @@ function ArchivesView({ excludeToday = false }) {
 
     if (error) {
       console.error('Error fetching activities:', error)
+      setErrorMessage('Unable to load archived activities right now.')
+      groupByWeek([])
     } else {
       groupByWeek(data || [])
     }
@@ -163,7 +167,7 @@ function ArchivesView({ excludeToday = false }) {
   if (!weekGroups.length) {
     return (
       <div className="text-center py-12 text-[var(--text-secondary)]">
-        <p>No archived activities yet.</p>
+        <p>{errorMessage || 'No archived activities yet.'}</p>
       </div>
     )
   }
