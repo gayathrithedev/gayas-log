@@ -14,21 +14,18 @@ export const profile = {
   location: "Bengaluru, India",
   city: "Bengaluru",
   timeZone: "Asia/Kolkata",
-  available: true,
-  availableNote: "Open to work",
 
   // Hero headline — keep it two or three lines, it's set in big serif.
   headline: [
-    { text: "I build interfaces that " },
-    { text: "feel obvious", em: true },
-    { text: " — and hold up at 2am on a bad network." },
+    { text: "An engineer who hears " },
+    { text: "\u201cthat\u2019s the hard part\u201d", em: true },
+    { text: " and quietly leans in." },
   ],
 
   blurb:
     "Nine-ish years of shipping React, React Native and TypeScript for teams that care about the last 5%. I like design systems that survive contact with real deadlines, animations that explain rather than decorate, and bundles that stay small.",
 
-  // TODO: drop your photo at public/portrait.jpg (roughly 900×1100)
-  portrait: "/portrait.svg",
+  portrait: "/portrait.jpg",
   portraitCaption: "Somewhere between a stand-up and a side project.",
 
   email: "gayathrithedev@gmail.com",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { profile, socials } from "../data/content";
-import { Button, Frame, Sticker } from "../components/primitives";
+import { Button, Frame } from "../components/primitives";
 import { Mug, Braces, Atom, Sticky, Cursor, Spark } from "../components/Doodles";
 
 /* Doodles live in the empty margins beside the column — only where there's room. */
@@ -96,28 +96,16 @@ export default function Hero() {
           {...rise(0.1)}
           className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2"
         >
-          <p className="font-mono text-[26px] font-medium italic tracking-tight sm:text-[30px]">
+          <p className="font-mono text-[20px] font-medium italic tracking-tight text-inkblue sm:text-[22px]">
             <span className="greeting not-italic">{profile.greeting}</span>
-            <span className="text-ink70">, </span>
+            <span>, </span>
             hello!
           </p>
           <Clock />
         </motion.div>
 
-        {profile.available && (
-          <motion.div {...rise(0.16)} className="mt-5">
-            <Sticker tone="paper2" rotate={-1.5}>
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ink40 opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ink" />
-              </span>
-              {profile.availableNote}
-            </Sticker>
-          </motion.div>
-        )}
-
         {/* intro */}
-        <motion.p {...rise(0.24)} className="mt-8 text-pretty text-[17px] leading-[1.7] text-ink70">
+        <motion.p {...rise(0.24)} className="mt-4 text-pretty text-[17px] leading-[1.7] text-ink70">
           {profile.headline.map((chunk, i) => (
             <span key={i} className={chunk.em ? "italic text-ink" : ""}>
               {chunk.text}

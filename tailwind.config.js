@@ -18,6 +18,8 @@ export default {
         mossSoft: "#F4F4F2",
         ochre:    "#6B6B65",
         ochreSoft:"#F7F7F5",
+        // the one colour on the page — the greeting
+        inkblue:  "#1D4ED8",
       },
       fontFamily: {
         display: ['"Instrument Serif"', 'Georgia', 'serif'],
