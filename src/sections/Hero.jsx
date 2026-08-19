@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { profile, socials } from "../data/content";
-import { Button, Frame } from "../components/primitives";
+import { profile } from "../data/content";
+import { Frame } from "../components/primitives";
+import Circled from "../components/Circled";
 import { Mug, Braces, Atom, Sticky, Cursor, Spark } from "../components/Doodles";
 
 /* Doodles live in the empty margins beside the column — only where there's room. */
@@ -105,39 +106,17 @@ export default function Hero() {
         </motion.div>
 
         {/* intro */}
-        <motion.p {...rise(0.24)} className="mt-4 text-pretty text-[17px] leading-[1.7] text-ink70">
-          {profile.headline.map((chunk, i) => (
-            <span key={i} className={chunk.em ? "italic text-ink" : ""}>
-              {chunk.text}
-            </span>
-          ))}
+        <motion.p {...rise(0.24)} className="mt-4 text-pretty text-[17px] leading-[2] text-ink70">
+          {profile.headline.map((chunk, i) =>
+            chunk.em ? (
+              <Circled key={i}>
+                <span className="italic text-ink">{chunk.text}</span>
+              </Circled>
+            ) : (
+              <span key={i}>{chunk.text}</span>
+            )
+          )}
         </motion.p>
-
-        <motion.p {...rise(0.32)} className="mt-4 text-pretty text-[17px] leading-[1.7] text-ink70">
-          {profile.blurb}
-        </motion.p>
-
-        {/* actions */}
-        <motion.div {...rise(0.38)} className="mt-8 flex flex-wrap items-center gap-3">
-          <Button href="#work">See the work</Button>
-          <Button href={`mailto:${profile.email}`} tone="ghost">Get in touch</Button>
-        </motion.div>
-
-        {/* socials */}
-        <motion.ul {...rise(0.44)} className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-          {socials.map((s) => (
-            <li key={s.label}>
-              <a
-                href={s.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="link-swipe font-mono text-[12px] text-ink40 transition-colors hover:text-ink"
-              >
-                {s.label} ↗
-              </a>
-            </li>
-          ))}
-        </motion.ul>
       </div>
     </section>
   );

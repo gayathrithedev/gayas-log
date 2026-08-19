@@ -15,15 +15,12 @@ export const profile = {
   city: "Bengaluru",
   timeZone: "Asia/Kolkata",
 
-  // Hero headline — keep it two or three lines, it's set in big serif.
+  // The one line under the greeting.
   headline: [
     { text: "An engineer who hears " },
     { text: "\u201cthat\u2019s the hard part\u201d", em: true },
     { text: " and quietly leans in." },
   ],
-
-  blurb:
-    "Nine-ish years of shipping React, React Native and TypeScript for teams that care about the last 5%. I like design systems that survive contact with real deadlines, animations that explain rather than decorate, and bundles that stay small.",
 
   portrait: "/portrait.jpg",
   portraitCaption: "Somewhere between a stand-up and a side project.",
@@ -31,6 +28,13 @@ export const profile = {
   email: "gayathrithedev@gmail.com",
   resume: "/resume.pdf", // TODO: add your resume to /public
 };
+
+/* The icon row under the hero line. */
+export const contactLinks = [
+  { icon: "mail",     label: "Email",    href: "mailto:gayathrithedev@gmail.com" },
+  { icon: "linkedin", label: "LinkedIn", href: "https://linkedin.com/in/gayathrithedev" },
+  { icon: "x",        label: "X",        href: "https://x.com/gayathrithedev" },
+];
 
 export const socials = [
   { label: "GitHub",   handle: "gayathrithedev", href: "https://github.com/gayathrithedev" },
@@ -48,15 +52,11 @@ export const marquee = [
 /* --- ABOUT ---------------------------------------------------------------- */
 
 export const about = {
-  label: "About",
-  title: "A short introduction",
   paragraphs: [
     "I started out because a button wouldn't centre. I stayed because of everything that turned out to be hiding behind that button — state, latency, accessibility, the twelve people who each meant something different by \"simple\".",
     "These days I work on the layer where product decisions become pixels: component libraries teams actually adopt, React Native apps that don't feel like websites in a costume, and the unglamorous performance work that makes all of it feel instant.",
     "Away from the screen I write, review other people's PRs far too enthusiastically, and keep a running list of ideas that will absolutely get built next weekend.",
   ],
-  // Small facts rendered as chips
-  facts: ["Bengaluru", "Design systems", "React Native", "Open source", "Filter coffee"],
 };
 
 /* --- WORK ----------------------------------------------------------------- */
@@ -118,9 +118,15 @@ export const projects = [
 ];
 
 /* --- WRITING -------------------------------------------------------------- */
-/* TODO: point these at your actual Hashnode posts. */
 
 export const writing = [
+  {
+    title: "Breakfast Therapy \ud83e\udd51",
+    where: "Substack",
+    date: "", // TODO: add the publish date, e.g. "Aug 2026"
+    href: "https://gayathrithedev.substack.com/p/breakfast-therapy",
+  },
+  // TODO: these three are placeholders — replace or delete them.
   {
     title: "Making React Native lists that don't drop frames",
     where: "Hashnode",
@@ -140,6 +146,7 @@ export const writing = [
     href: "https://hashnode.com/@gayathrithedev",
   },
 ];
+
 
 /* --- BEYOND CODE ---------------------------------------------------------- */
 /* TODO: drop 5 images into public/life/ and update captions. */

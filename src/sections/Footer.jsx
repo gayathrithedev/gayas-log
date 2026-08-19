@@ -1,12 +1,13 @@
 import { profile, socials } from "../data/content";
 import { Reveal } from "../components/primitives";
+import FlowerPatch from "../components/FlowerPatch";
 
 export default function Footer() {
   return (
     <footer id="contact" className="border-t border-rule bg-paper">
       <div className="shell py-16 sm:py-20">
         <Reveal>
-          <p className="eyebrow"><span className="text-ink40/70">05 — </span>Contact</p>
+          <p className="eyebrow"><span className="text-ink40/70">04 — </span>Contact</p>
         </Reveal>
 
         <Reveal delay={0.06}>
@@ -44,10 +45,20 @@ export default function Footer() {
           </ul>
         </Reveal>
 
-        <div className="mt-12 flex flex-col gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ink40 sm:flex-row sm:items-center sm:justify-between">
+        {/* the meadow */}
+        <Reveal delay={0.24}>
+          <div className="mt-20 flex flex-col items-center">
+            <FlowerPatch className="h-[112px] w-[140px]" />
+
+            <p className="mt-3 text-[15px] text-ink70">
+              Crafted with claude &amp; chaos at 3am :)
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 flex flex-col gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ink40 sm:flex-row sm:items-center sm:justify-between">
           <span>{profile.location}</span>
           <span>© {new Date().getFullYear()} {profile.name}</span>
-          <span>built with react, vite &amp; too much coffee</span>
         </div>
       </div>
     </footer>

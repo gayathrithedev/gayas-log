@@ -55,7 +55,7 @@ function Card({ p }) {
 export default function Work() {
   return (
     <section className="shell py-16 sm:py-20">
-      <SectionHead id="work" index="02" label="Work" title="Selected work" note="Things that shipped." />
+      <SectionHead id="work" index="01" label="Work" title="Selected work" note="Things that shipped." />
       <div className="mt-10 grid gap-12">
         {projects.map((p) => <Card key={p.title} p={p} />)}
       </div>

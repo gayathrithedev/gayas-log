@@ -4,7 +4,7 @@ import { Reveal, SectionHead } from "../components/primitives";
 export default function Writing() {
   return (
     <section className="shell py-16 sm:py-20">
-      <SectionHead id="writing" index="03" label="Writing" title="Notes & writing" note="Thinking out loud." />
+      <SectionHead id="writing" index="02" label="Writing" title="Notes & writing" note="Thinking out loud." />
 
       <ul className="mt-8">
         {writing.map((post, i) => (
@@ -23,7 +23,7 @@ export default function Writing() {
                   </h3>
                 </div>
                 <p className="mt-1 pl-7 font-mono text-[11px] uppercase tracking-[0.16em] text-ink40">
-                  {post.where} · {post.date}
+                  {post.where}{post.date ? ` · ${post.date}` : ""}
                   <span aria-hidden className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">↗</span>
                 </p>
               </a>
