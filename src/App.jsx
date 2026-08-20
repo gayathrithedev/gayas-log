@@ -1,5 +1,4 @@
 import Nav from "./components/Nav";
-import CatCursor from "./components/CatCursor";
 import FloatingIcons from "./components/FloatingIcons";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
@@ -11,7 +10,6 @@ export default function App() {
   return (
     <div className="grain min-h-screen">
       <FloatingIcons />
-      <CatCursor />
       <Nav />
       <main id="main">
         <Hero />

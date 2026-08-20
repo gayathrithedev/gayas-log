@@ -2,10 +2,11 @@ import { life } from "../data/content";
 import { Reveal, SectionHead, Frame } from "../components/primitives";
 
 const SPAN = {
-  tall: "col-span-1 aspect-[3/4]",
-  wide: "col-span-2 aspect-[16/10]",
-  sq:   "col-span-1 aspect-square",
-  full: "col-span-2 aspect-[2/1]",
+  tall:  "col-span-1 aspect-[3/4]",
+  four3: "col-span-1 aspect-[4/3]",
+  wide:  "col-span-2 aspect-[16/9]",
+  sq:    "col-span-1 aspect-square",
+  full:  "col-span-2 aspect-[2/1]",
 };
 
 export default function Life() {

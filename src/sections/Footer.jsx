@@ -4,7 +4,7 @@ import FlowerPatch from "../components/FlowerPatch";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="border-t border-rule bg-paper">
+    <footer id="contact" className="bg-paper">
       <div className="shell py-16 sm:py-20">
         <Reveal>
           <p className="eyebrow"><span className="text-ink40/70">03 — </span>Contact</p>
@@ -50,7 +50,7 @@ export default function Footer() {
           <div className="mt-20 flex flex-col items-center">
             <FlowerPatch className="h-[112px] w-[140px]" />
 
-            <p className="mt-3 text-[15px] text-ink70">
+            <p className="mt-4 text-[15px] text-ink70">
               Crafted with claude &amp; chaos at 3am :)
             </p>
           </div>

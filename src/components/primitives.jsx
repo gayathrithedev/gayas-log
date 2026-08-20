@@ -22,13 +22,10 @@ export function SectionHead({ label, index, title, note, id }) {
   return (
     <header id={id} className="scroll-mt-24">
       <Reveal>
-        <div className="flex items-baseline gap-3">
-          <span className="eyebrow shrink-0">
-            {index && <span className="text-ink40/70">{index} — </span>}
-            {label}
-          </span>
-          <span className="h-px flex-1 bg-rule" />
-        </div>
+        <span className="eyebrow">
+          {index && <span className="text-ink40/70">{index} — </span>}
+          {label}
+        </span>
       </Reveal>
       <Reveal delay={0.05}>
         <h2 className="mt-4 font-display text-[30px] leading-[1.1] tracking-[-0.015em] sm:text-[34px]">

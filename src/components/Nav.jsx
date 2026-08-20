@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { nav, profile } from "../data/content";
 
+/* One pill shape for everything in the header: same height, padding, radius
+   and border box — only the colours differ. Without the border on every
+   variant the outlined ones would sit 2px taller than the filled one. */
+const PILL =
+  "inline-flex h-8 items-center rounded-full border px-3.5 text-[13px] leading-none transition-colors duration-300";
+
 export default function Nav() {
   const [solid, setSolid] = useState(false);
 
@@ -27,19 +33,41 @@ export default function Nav() {
               Gayathri Perumal
             </a>
 
-            <nav aria-label="Sections" className="flex items-center gap-1">
+            <nav aria-label="Sections" className="flex items-center gap-1.5">
               {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-full px-2.5 py-1 text-[13px] text-ink40 transition-colors hover:bg-paper2 hover:text-ink"
-                >
+                <a key={item.href} href={item.href} className={`${PILL} border-transparent text-ink40 hover:bg-paper2 hover:text-ink`}>
                   {item.label}
                 </a>
               ))}
+
+              {profile.resume && (
+                <a
+                  href={profile.resume}
+                  download
+                  title="Download my resume"
+                  className={`${PILL} group gap-1.5 border-rule text-ink70 hover:border-ink hover:text-ink`}
+                >
+                  Resume
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
+                  >
+                    <path d="M8 2.5v8" />
+                    <path d="M4.8 7.6 8 10.8l3.2-3.2" />
+                    <path d="M3 13h10" />
+                  </svg>
+                </a>
+              )}
+
               <a
                 href={`mailto:${profile.email}`}
-                className="ml-1 rounded-full bg-ink px-3 py-1 text-[13px] text-paper transition-colors hover:bg-ink70"
+                className={`${PILL} border-ink bg-ink text-paper hover:border-ink70 hover:bg-ink70`}
               >
                 Hello
               </a>

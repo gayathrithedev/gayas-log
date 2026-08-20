@@ -70,7 +70,23 @@ export const writing = [
     image: "/writing/breakfast-therapy.jpg",
     href: "https://gayathrithedev.substack.com/p/breakfast-therapy",
   },
+  {
+    title: "React Native 0.74 — enabling the bridgeless new architecture",
+    where: "Hashnode",
+    year: "2024",
+    date: "May 2024",
+    // no cover art, so this one renders as a typographic card
+    tags: ["React Native", "New Architecture"],
+    href: "https://gayathri.hashnode.dev/react-native-074-enable-bridgeless-new-architecture",
+  },
 ];
+
+/* Shown as the "more posts" arrow beside the section heading. */
+export const writingMore = {
+  label: "All posts",
+  href: "https://gayathri.hashnode.dev",
+};
+
 
 
 
@@ -78,17 +94,21 @@ export const writing = [
 /* TODO: drop 5 images into public/life/ and update captions. */
 
 export const life = {
-  label: "Beyond work",
-  title: "Outside the editor",
-  note: "The parts that don't fit in a commit message.",
+  label: "Community",
+  title: "Out in the room",
+  note: "Meetups, conferences, and the people who make them.",
+  // TODO: the captions are my read of each photo — reword them in your voice.
   photos: [
-    { src: "/life/one.svg",   caption: "Coffee, first. Always.",        rotate: -3, span: "tall" },
-    { src: "/life/two.svg",   caption: "Weekend hills.",                rotate: 2,  span: "wide" },
-    { src: "/life/three.svg", caption: "Notebook > Notion, sometimes.", rotate: -2, span: "sq" },
-    { src: "/life/four.svg",  caption: "Home, in festival lights.",     rotate: 3,  span: "sq" },
-    { src: "/life/five.svg",  caption: "The 2am build that worked.",    rotate: -1, span: "full" },
+    { src: "/life/chennai-reactjs.jpg", caption: "Chennai React.js.",              rotate: -2, span: "tall" },
+    { src: "/life/meetup-friends.jpg",  caption: "The people you keep running into.", rotate: 2, span: "tall" },
+    { src: "/life/women-who-js.jpg",    caption: "Women Who JS.",                  rotate: -1, span: "wide" },
+    { src: "/life/team-day.jpg",        caption: "Between sessions.",              rotate: 2,  span: "four3" },
+    { src: "/life/off-screen.jpg",      caption: "Away from the screen.",          rotate: -2, span: "tall" },
+    { src: "/life/react-stage.jpg",     caption: "Big screen, bigger crowd.",      rotate: 1,  span: "wide" },
+    { src: "/life/conference-day.jpg",  caption: "Conference day.",                rotate: -1, span: "wide" },
   ],
 };
+
 
 export const nav = [
   { label: "About", href: "#about" },
