@@ -1,0 +1,9 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' width='800' height='1000'>
+<rect width='800' height='1000' fill='#EFEDE8'/>
+<g fill='none' stroke='#C9C5BC' stroke-width='1.6'>
+<circle cx='400' cy='440' r='240'/>
+<circle cx='400' cy='440' r='152'/>
+<path d='M0 780 Q 240 660 440.00000000000006 800 T 800 700'/>
+</g>
+<text x='400' y='930' text-anchor='middle' font-family='ui-monospace, monospace' font-size='38' letter-spacing='3' fill='#9A958C'>ADD COVER PHOTO</text>
+</svg>

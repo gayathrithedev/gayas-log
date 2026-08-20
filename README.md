@@ -11,7 +11,7 @@ React 19 · Vite 7 · Tailwind CSS 3 · Motion (Framer Motion) · self-hosted fo
 ## Editing the site
 
 **Everything you'd want to change lives in one file: [`src/data/content.js`](src/data/content.js).**
-Hero copy, projects, posts, socials — all of it. Anything marked `TODO` is a
+Hero copy, posts, socials — all of it. Anything marked `TODO` is a
 placeholder waiting for the real thing.
 
 ### Images
@@ -22,8 +22,8 @@ generated grey placeholders; replacing them is the fastest visual win.
 | What | Where | Suggested size |
 | --- | --- | --- |
 | Portrait | `public/portrait.svg` → swap for `.jpg` | 900 × 1125 |
-| Project shots | `public/work/*.svg` → swap for `.png` | 1200 × 825 |
 | Personal photos | `public/life/*.svg` → swap for `.jpg` | ~1200 square-ish |
+| Post covers | `public/writing/*.svg` → swap for `.jpg` | 800 × 1000 (4:5) |
 | Social preview | `public/og.png` | 1200 × 630 |
 
 Missing images degrade to a labelled grey frame rather than a broken icon, so

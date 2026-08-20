@@ -7,7 +7,7 @@ export default function Footer() {
     <footer id="contact" className="border-t border-rule bg-paper">
       <div className="shell py-16 sm:py-20">
         <Reveal>
-          <p className="eyebrow"><span className="text-ink40/70">04 — </span>Contact</p>
+          <p className="eyebrow"><span className="text-ink40/70">03 — </span>Contact</p>
         </Reveal>
 
         <Reveal delay={0.06}>

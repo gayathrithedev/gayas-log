@@ -59,93 +59,19 @@ export const about = {
   ],
 };
 
-/* --- WORK ----------------------------------------------------------------- */
-
-export const projects = [
-  {
-    n: "01",
-    title: "react-native-chip-input",
-    kind: "Open source · Library",
-    year: "2021 →",
-    summary:
-      "A material-design chip input for React Native — tokenised entry, keyboard-aware layout and a theming API small enough to remember. Published to npm and used in production apps beyond my own.",
-    contribution: "Design, API surface, docs, releases",
-    stack: ["React Native", "JavaScript", "npm"],
-    href: "https://github.com/gayathrithedev/react-native-chip-input",
-    accent: "flame",
-    // TODO: add an image at public/work/chip-input.svg
-    image: "/work/chip-input.svg",
-  },
-  {
-    n: "02",
-    title: "Blog-post",
-    kind: "Side project · Web app",
-    year: "2020",
-    summary:
-      "A full CRUD blogging app on React and Firebase — auth, rich text, optimistic updates. Built to understand where the real complexity in \"just a blog\" actually lives.",
-    contribution: "End-to-end build",
-    stack: ["React", "Firebase", "CSS"],
-    href: "https://github.com/gayathrithedev/Blog-post",
-    accent: "moss",
-    image: "/work/blog-post.svg",
-  },
-  {
-    n: "03",
-    title: "Auto-SMS",
-    kind: "Side project · Mobile",
-    year: "2019",
-    summary:
-      "Schedule an SMS, forget about it, look thoughtful later. A small utility app that taught me more about Android permissions than I ever planned to know.",
-    contribution: "End-to-end build",
-    stack: ["React Native", "Android"],
-    href: "https://github.com/gayathrithedev/Auto-SMS",
-    accent: "ochre",
-    image: "/work/auto-sms.svg",
-  },
-  {
-    n: "04",
-    title: "Your best case study",
-    kind: "TODO · Replace me",
-    year: "2024",
-    summary:
-      "Swap this card for the work you're proudest of: the problem, what you changed, and the number that moved. Two sentences beat two paragraphs.",
-    contribution: "Your role here",
-    stack: ["Add", "your", "stack"],
-    href: "#",
-    accent: "flame",
-    image: "/work/placeholder.svg",
-  },
-];
-
 /* --- WRITING -------------------------------------------------------------- */
 
 export const writing = [
   {
     title: "Breakfast Therapy \ud83e\udd51",
     where: "Substack",
-    date: "", // TODO: add the publish date, e.g. "Aug 2026"
+    year: "2026",
+    date: "Jan 2026",
+    image: "/writing/breakfast-therapy.jpg",
     href: "https://gayathrithedev.substack.com/p/breakfast-therapy",
   },
-  // TODO: these three are placeholders — replace or delete them.
-  {
-    title: "Making React Native lists that don't drop frames",
-    where: "Hashnode",
-    date: "TODO",
-    href: "https://hashnode.com/@gayathrithedev",
-  },
-  {
-    title: "A component API is a promise you have to keep",
-    where: "Hashnode",
-    date: "TODO",
-    href: "https://hashnode.com/@gayathrithedev",
-  },
-  {
-    title: "Small bundles, boring wins",
-    where: "Hashnode",
-    date: "TODO",
-    href: "https://hashnode.com/@gayathrithedev",
-  },
 ];
+
 
 
 /* --- BEYOND CODE ---------------------------------------------------------- */
@@ -166,6 +92,5 @@ export const life = {
 
 export const nav = [
   { label: "About", href: "#about" },
-  { label: "Work", href: "#work" },
   { label: "Writing", href: "#writing" },
 ];

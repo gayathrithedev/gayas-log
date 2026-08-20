@@ -11,7 +11,7 @@ const SPAN = {
 export default function Life() {
   return (
     <section className="shell py-16 sm:py-20">
-      <SectionHead index="03" label={life.label} title={life.title} note={life.note} />
+      <SectionHead index="02" label={life.label} title={life.title} note={life.note} />
 
       <div className="mt-8 grid grid-cols-2 gap-4">
         {life.photos.map((photo, i) => (
