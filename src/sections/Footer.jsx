@@ -1,6 +1,5 @@
 import { profile, socials } from "../data/content";
 import { Reveal } from "../components/primitives";
-import FlowerPatch from "../components/FlowerPatch";
 
 export default function Footer() {
   return (
@@ -45,13 +44,18 @@ export default function Footer() {
           </ul>
         </Reveal>
 
-        {/* the meadow */}
+        {/* a small engineering signature */}
         <Reveal delay={0.24}>
-          <div className="mt-20 flex flex-col items-center">
-            <FlowerPatch className="h-[112px] w-[140px]" />
-
-            <p className="mt-4 text-[15px] text-ink70">
-              Crafted with claude &amp; chaos at 3am :)
+          <div className="mt-20 rounded-[18px] bg-paper2 px-6 py-7 sm:px-8 sm:py-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="eyebrow">A note from the desk</p>
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink40">/status: curious</span>
+            </div>
+            <p className="mt-5 max-w-[22ch] font-display text-[30px] leading-[1.05] tracking-[-0.015em] text-ink sm:text-[34px]">
+              Still curious. Still building.
+            </p>
+            <p className="mt-5 font-mono text-[11px] text-ink40">
+              while (curious) build();
             </p>
           </div>
         </Reveal>
