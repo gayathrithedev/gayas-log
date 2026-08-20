@@ -30,7 +30,7 @@ export default function Nav() {
               {profile.resume && (
                 <a
                   href={profile.resume}
-                  download
+                  download="Gayathri-Perumal-Resume.pdf"
                   title="Download my resume"
                   className={`${NAV_LINK} group`}
                 >
