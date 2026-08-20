@@ -22,9 +22,9 @@ export default {
         inkblue:  "#1D4ED8",
       },
       fontFamily: {
-        display: ['"Instrument Serif"', 'Georgia', 'serif'],
-        sans: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        display: ['"Caveat"', 'cursive'],
+        sans: ['"Manrope"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"Manrope"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         card:  '0 1px 0 0 #E7E7E3, 0 18px 40px -30px rgba(16,16,16,0.22)',

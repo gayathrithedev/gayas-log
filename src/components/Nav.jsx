@@ -1,22 +1,9 @@
-import { useEffect, useState } from "react";
 import { nav, profile } from "../data/content";
 
-/* One pill shape for everything in the header: same height, padding, radius
-   and border box — only the colours differ. Without the border on every
-   variant the outlined ones would sit 2px taller than the filled one. */
-const PILL =
-  "inline-flex h-8 items-center rounded-full border px-3.5 text-[13px] leading-none transition-colors duration-300";
+const NAV_LINK =
+  "inline-flex min-h-10 items-center gap-1.5 px-1 text-[13px] leading-none text-ink40 transition-colors duration-300 hover:text-ink";
 
 export default function Nav() {
-  const [solid, setSolid] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 32);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <>
       <a
@@ -27,15 +14,15 @@ export default function Nav() {
       </a>
 
       <header className="fixed inset-x-0 top-0 z-50">
-        <div className={`transition-colors duration-500 ${solid ? "bg-paper/90 backdrop-blur-md" : "bg-transparent"}`}>
+        <div className="bg-paper/90 backdrop-blur-md">
           <div className="shell flex items-center justify-between py-3.5">
             <a href="#top" className="font-display text-lg leading-none tracking-[-0.01em]">
               Gayathri Perumal
             </a>
 
-            <nav aria-label="Sections" className="flex items-center gap-1.5">
+            <nav aria-label="Sections" className="flex items-center gap-5">
               {nav.map((item) => (
-                <a key={item.href} href={item.href} className={`${PILL} border-transparent text-ink40 hover:bg-paper2 hover:text-ink`}>
+                <a key={item.href} href={item.href} className={NAV_LINK}>
                   {item.label}
                 </a>
               ))}
@@ -45,7 +32,7 @@ export default function Nav() {
                   href={profile.resume}
                   download
                   title="Download my resume"
-                  className={`${PILL} group gap-1.5 border-rule text-ink70 hover:border-ink hover:text-ink`}
+                  className={`${NAV_LINK} group`}
                 >
                   Resume
                   <svg
@@ -64,16 +51,8 @@ export default function Nav() {
                   </svg>
                 </a>
               )}
-
-              <a
-                href={`mailto:${profile.email}`}
-                className={`${PILL} border-ink bg-ink text-paper hover:border-ink70 hover:bg-ink70`}
-              >
-                Hello
-              </a>
             </nav>
           </div>
-          <div className={`h-px w-full bg-rule transition-opacity duration-500 ${solid ? "opacity-100" : "opacity-0"}`} />
         </div>
       </header>
     </>

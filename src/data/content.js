@@ -53,9 +53,9 @@ export const marquee = [
 
 export const about = {
   paragraphs: [
-    "I started out because a button wouldn't centre. I stayed because of everything that turned out to be hiding behind that button — state, latency, accessibility, the twelve people who each meant something different by \"simple\".",
-    "These days I work on the layer where product decisions become pixels: component libraries teams actually adopt, React Native apps that don't feel like websites in a costume, and the unglamorous performance work that makes all of it feel instant.",
-    "Away from the screen I write, review other people's PRs far too enthusiastically, and keep a running list of ideas that will absolutely get built next weekend.",
+    "I'm a software engineer based in Bengaluru, focused on building thoughtful frontend experiences with React and React Native. I enjoy turning product ideas into clear, accessible interfaces that are reliable and easy to use.",
+    "My work spans UI engineering, design systems, and mobile development. I care about the details that make a product feel polished: maintainable components, good performance, and close collaboration with designers and engineers.",
+    "Outside of work, I write about frontend development, enjoy a good code review, and stay connected to the developer community through meetups and conferences.",
   ],
 };
 

@@ -32,21 +32,26 @@
 }
 
 @layer components {
-  /* paper grain — sits under everything, costs one inline svg */
+  /* A softly fibred paper surface, built from original inline SVG noise. */
   .grain::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 60;
-    opacity: .16;
+    opacity: .15;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+    background-color: #FFFFFF;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' seed='17' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fine)' opacity='.23'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fibre'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.018 .24' numOctaves='2' seed='31' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fibre)' opacity='.12'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 224px 224px;
   }
 
-  /* Hero greeting: Tamil/Devanagari face first, serif fallback after. */
+  /* Tamil greeting uses a script-specific fallback before the site font. */
   .greeting {
-    font-family: "Noto Serif Tamil", "Instrument Serif", "Nirmala UI", "Noto Sans Tamil", Georgia, serif;
+    font-family: "Noto Serif Tamil", "Nirmala UI", "Noto Sans Tamil", "Manrope", sans-serif;
     font-feature-settings: normal;
   }
 

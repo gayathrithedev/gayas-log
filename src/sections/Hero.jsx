@@ -60,8 +60,8 @@ export default function Hero() {
           {...rise(0.1)}
           className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2"
         >
-          <p className="font-mono text-[20px] font-medium italic tracking-tight text-inkblue sm:text-[22px]">
-            <span className="greeting not-italic">{profile.greeting}</span>
+          <p className="font-display text-[28px] font-medium leading-none text-inkblue sm:text-[30px]">
+            <span className="greeting text-[23px] sm:text-[25px]">{profile.greeting}</span>
             <span>, </span>
             hello!
           </p>
