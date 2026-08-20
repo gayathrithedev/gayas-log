@@ -39,14 +39,16 @@
     inset: 0;
     pointer-events: none;
     z-index: 60;
-    opacity: .15;
+    opacity: .19;
     mix-blend-mode: multiply;
     background-color: #FFFFFF;
     background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' seed='17' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fine)' opacity='.23'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fibre'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.018 .24' numOctaves='2' seed='31' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fibre)' opacity='.12'/%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' seed='17' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fine)' opacity='.18'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fibre'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.26 .012' numOctaves='3' seed='31' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fibre)' opacity='.24'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='wash'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .035' numOctaves='2' seed='41' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23wash)' opacity='.08'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 224px 224px;
+    background-position: 0 0, 17px -11px, -23px 13px;
   }
 
   /* Tamil greeting uses a script-specific fallback before the site font. */

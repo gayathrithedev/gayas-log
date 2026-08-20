@@ -42,7 +42,7 @@ function Card({ post }) {
           )}
         </div>
 
-        <p className="mt-4 text-[17px] leading-[1.55] text-ink">
+        <p className="mt-4 text-[14px] leading-[24px] text-ink">
           {post.title}
           {post.date && <span className="text-ink40">{" · "}{post.date}</span>}
           <span

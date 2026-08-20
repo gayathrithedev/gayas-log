@@ -53,9 +53,9 @@ export const marquee = [
 
 export const about = {
   paragraphs: [
-    "I'm a software engineer based in Bengaluru, focused on building thoughtful frontend experiences with React and React Native. I enjoy turning product ideas into clear, accessible interfaces that are reliable and easy to use.",
-    "My work spans UI engineering, design systems, and mobile development. I care about the details that make a product feel polished: maintainable components, good performance, and close collaboration with designers and engineers.",
-    "Outside of work, I write about frontend development, enjoy a good code review, and stay connected to the developer community through meetups and conferences.",
+    "I'm a Senior software engineer based in Bengaluru, focused on building thoughtful frontend experiences with React and React Native. I enjoy turning product ideas into clear, accessible interfaces that are reliable and easy to use.",
+    "My work spans UI engineering, design systems, and mobile development. I care about the details that make a product feel polished: maintainable components, good performance, and close collaboration with CEOs, CTOs and Leaders.",
+    "Outside of work, I tweet (X) a lot, enjoy a good coffee, long walks at Agara Lake and beautiful parks in the city, and stay connected to the developer community through meetups and conferences.",
   ],
 };
 
@@ -100,12 +100,12 @@ export const life = {
   // TODO: the captions are my read of each photo — reword them in your voice.
   photos: [
     { src: "/life/chennai-reactjs.jpg", caption: "Chennai React.js.",              rotate: -2, span: "tall" },
-    { src: "/life/meetup-friends.jpg",  caption: "The people you keep running into.", rotate: 2, span: "tall" },
+    { src: "/life/meetup-friends.jpg",  caption: "Techroast Show — 1st Bangalore Show", rotate: 2, span: "tall" },
     { src: "/life/women-who-js.jpg",    caption: "Women Who JS.",                  rotate: -1, span: "wide" },
     { src: "/life/team-day.jpg",        caption: "Between sessions.",              rotate: 2,  span: "four3" },
     { src: "/life/off-screen.jpg",      caption: "Away from the screen.",          rotate: -2, span: "tall" },
-    { src: "/life/react-stage.jpg",     caption: "Big screen, bigger crowd.",      rotate: 1,  span: "wide" },
-    { src: "/life/conference-day.jpg",  caption: "Conference day.",                rotate: -1, span: "wide" },
+    { src: "/life/react-stage.jpg",     caption: "React India 2025",               rotate: 1,  span: "wide" },
+    { src: "/life/conference-day.jpg",  caption: "CTO Talk, MakeMyTrip",            rotate: -1, span: "wide" },
   ],
 };
 
