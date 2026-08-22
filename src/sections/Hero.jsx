@@ -50,7 +50,8 @@ export default function Hero() {
               src={profile.portrait}
               alt={`${profile.name}, portrait`}
               label="photo"
-              className="h-[104px] w-[104px] rounded-[8px] grayscale sm:h-[120px] sm:w-[120px]"
+              /* exact 2.3:3 portrait ratio */
+              className="aspect-[23/30] w-[92px] rounded-[8px] grayscale sm:w-[115px]"
             />
           </div>
         </motion.div>
@@ -60,8 +61,8 @@ export default function Hero() {
           {...rise(0.1)}
           className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2"
         >
-          <p className="font-display text-[28px] font-medium leading-none text-inkblue sm:text-[30px]">
-            <span className="greeting text-[18px] sm:text-[20px]">{profile.greeting}</span>
+          <p className="font-mono text-[20px] font-medium italic tracking-tight text-inkblue sm:text-[22px]">
+            <span className="greeting not-italic">{profile.greeting}</span>
             <span>, </span>
             hello!
           </p>
@@ -69,7 +70,7 @@ export default function Hero() {
         </motion.div>
 
         {/* intro */}
-        <motion.p {...rise(0.24)} className="mt-4 text-pretty text-[15px] leading-[26px] text-ink70">
+        <motion.p {...rise(0.24)} className="mt-4 text-pretty text-[17px] leading-[2] text-ink70">
           {profile.headline.map((chunk, i) =>
             chunk.em ? (
               <Circled key={i}>

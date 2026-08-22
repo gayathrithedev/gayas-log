@@ -17,9 +17,17 @@ export default function About() {
       <Reveal delay={0.24}>
         <div className="mt-10 border-t border-rule pt-5">
           <p className="eyebrow">Tools of the trade</p>
-          <p className="mt-2.5 font-mono text-[12px] leading-[2] text-ink70">
-            {marquee.join("  ·  ")}
-          </p>
+          <div className="mask-fade-x mt-2.5 overflow-hidden" aria-label="Skills">
+            <div aria-hidden="true" className="flex w-max animate-marquee motion-reduce:animate-none">
+              {[...marquee, ...marquee].map((skill, i) => (
+                <span key={`${skill}-${i}`} className="flex items-center whitespace-nowrap font-mono text-[12px] leading-6 text-ink70">
+                  {skill}
+                  <span className="mx-3 text-ink40" aria-hidden>·</span>
+                </span>
+              ))}
+            </div>
+            <span className="sr-only">{marquee.join(", ")}</span>
+          </div>
         </div>
       </Reveal>
     </section>

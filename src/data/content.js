@@ -44,9 +44,9 @@ export const socials = [
 ];
 
 export const marquee = [
-  "React", "React Native", "TypeScript", "Next.js", "Design systems",
-  "GraphQL", "Gatsby", "Electron", "Jest", "Firebase", "Framer Motion",
-  "Accessibility", "Performance", "Open source",
+  "JavaScript", "TypeScript", "React", "React Native", "Expo", "Next.js",
+  "Redux", "Redux Toolkit", "React Query", "Java", "Spring Boot", "DevOps",
+  "Playwright", "Maestro", "AI-Assisted development",
 ];
 
 /* --- ABOUT ---------------------------------------------------------------- */

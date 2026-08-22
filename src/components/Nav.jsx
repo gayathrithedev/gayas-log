@@ -16,7 +16,7 @@ export default function Nav() {
       <header className="fixed inset-x-0 top-0 z-50">
         <div className="bg-paper/90 backdrop-blur-md">
           <div className="shell flex items-center justify-between py-3.5">
-            <a href="#top" className="font-display text-lg leading-none tracking-[-0.01em]">
+            <a href="#top" className="font-display text-xl leading-none tracking-[-0.01em] sm:text-2xl">
               Gayathri Perumal
             </a>
 
