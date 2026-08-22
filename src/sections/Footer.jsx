@@ -1,5 +1,6 @@
 import { profile, socials } from "../data/content";
 import { Reveal } from "../components/primitives";
+import FooterCat from "../components/FooterCat";
 
 export default function Footer() {
   return (
@@ -59,6 +60,11 @@ export default function Footer() {
             </p>
           </div>
         </Reveal>
+
+        <FooterCat
+          path="/lottie/black-cat.json"
+          className="mx-auto mt-14 h-[150px] w-full max-w-[260px]"
+        />
 
         <div className="mt-14 flex flex-col gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ink40 sm:flex-row sm:items-center sm:justify-between">
           <span>{profile.location}</span>
