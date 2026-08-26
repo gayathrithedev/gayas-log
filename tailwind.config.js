@@ -32,7 +32,7 @@ export default {
         sticker:'0 6px 18px -14px rgba(16,16,16,0.35)',
       },
       keyframes: {
-        marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+        marquee: { '0%': { transform: 'translate3d(0, 0, 0)' }, '100%': { transform: 'translate3d(-50%, 0, 0)' } },
         floaty:  { '0%,100%': { transform: 'translateY(0) rotate(var(--r,0deg))' }, '50%': { transform: 'translateY(-14px) rotate(calc(var(--r,0deg) + 3deg))' } },
         blink:   { '0%,49%': { opacity: 1 }, '50%,100%': { opacity: 0 } },
       },

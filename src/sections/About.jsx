@@ -18,7 +18,7 @@ export default function About() {
         <div className="mt-10 border-t border-rule pt-5">
           <p className="eyebrow">Tools of the trade</p>
           <div className="mask-fade-x mt-2.5 overflow-hidden" aria-label="Skills">
-            <div aria-hidden="true" className="flex w-max animate-marquee motion-reduce:animate-none">
+            <div aria-hidden="true" className="skills-marquee-track flex w-max animate-marquee motion-reduce:animate-none">
               {[...marquee, ...marquee].map((skill, i) => (
                 <span key={`${skill}-${i}`} className="flex items-center whitespace-nowrap font-mono text-[12px] leading-6 text-ink70">
                   {skill}
