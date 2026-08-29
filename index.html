@@ -1,10 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#FFFCF5" />
+    <meta name="theme-color" content="#FFFFFF" />
+
+    <script>
+      (() => {
+        try {
+          const savedTheme = window.localStorage.getItem("gayas-log-theme");
+          if (savedTheme === "dark" || savedTheme === "light") {
+            document.documentElement.dataset.theme = savedTheme;
+            document.documentElement.style.colorScheme = savedTheme;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute(
+              "content",
+              savedTheme === "dark" ? "#121413" : "#FFFFFF"
+            );
+          }
+        } catch {
+          // Fall back to the light theme if storage is unavailable.
+        }
+      })();
+    </script>
 
     <title>Gayathri Perumal — Senior Software Engineer</title>
     <meta name="description" content="Gayathri Perumal — senior software engineer in Bengaluru, building fast, human interfaces with React, React Native and TypeScript." />

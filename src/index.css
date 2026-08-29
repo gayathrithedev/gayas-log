@@ -3,9 +3,57 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: light; }
+  :root {
+    color-scheme: light;
+    --color-paper: 255 255 255;
+    --color-paper2: 246 246 244;
+    --color-ink: 16 16 16;
+    --color-ink70: 78 78 75;
+    --color-ink40: 139 139 134;
+    --color-rule: 231 231 227;
+    --color-flame: 16 16 16;
+    --color-flame-soft: 242 242 240;
+    --color-moss: 58 58 55;
+    --color-moss-soft: 244 244 242;
+    --color-ochre: 107 107 101;
+    --color-ochre-soft: 247 247 245;
+    --color-inkblue: 29 78 216;
+    --shadow-card: 0 1px 0 0 rgb(var(--color-rule) / 1), 0 18px 40px -30px rgb(var(--color-ink) / .22);
+    --shadow-lift: 0 1px 0 0 rgb(var(--color-ink) / 1), 0 26px 50px -32px rgb(var(--color-ink) / .30);
+    --shadow-sticker: 0 6px 18px -14px rgb(var(--color-ink) / .35);
+    --shadow-tape: 0 1px 6px -3px rgb(var(--color-ink) / .50);
+    --grain-opacity: .19;
+    --grain-blend: multiply;
+  }
 
-  html { scroll-behavior: smooth; }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-paper: 18 20 19;
+    --color-paper2: 28 32 29;
+    --color-ink: 242 244 239;
+    --color-ink70: 190 198 191;
+    --color-ink40: 130 141 132;
+    --color-rule: 48 57 50;
+    --color-flame: 242 244 239;
+    --color-flame-soft: 35 41 36;
+    --color-moss: 169 195 174;
+    --color-moss-soft: 31 43 34;
+    --color-ochre: 231 198 126;
+    --color-ochre-soft: 47 39 26;
+    --color-inkblue: 139 181 255;
+    --shadow-card: 0 1px 0 0 rgb(var(--color-rule) / 1), 0 18px 40px -30px rgb(0 0 0 / .55);
+    --shadow-lift: 0 1px 0 0 rgb(var(--color-ink) / .9), 0 26px 50px -32px rgb(0 0 0 / .70);
+    --shadow-sticker: 0 6px 18px -14px rgb(0 0 0 / .65);
+    --shadow-tape: 0 1px 6px -3px rgb(0 0 0 / .75);
+    --grain-opacity: .12;
+    --grain-blend: soft-light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: rgb(var(--color-paper));
+    transition: background-color .35s ease;
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -20,12 +68,13 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    transition: background-color .35s ease, color .35s ease;
   }
 
-  ::selection { background: #101010; color: #FFFFFF; }
+  ::selection { background: rgb(var(--color-ink)); color: rgb(var(--color-paper)); }
 
   :focus-visible {
-    outline: 2px solid #101010;
+    outline: 2px solid rgb(var(--color-ink));
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -39,9 +88,9 @@
     inset: 0;
     pointer-events: none;
     z-index: 60;
-    opacity: .19;
-    mix-blend-mode: multiply;
-    background-color: #FFFFFF;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+    background-color: rgb(var(--color-paper));
     background-image:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fine'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' seed='17' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fine)' opacity='.18'/%3E%3C/svg%3E"),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='224' height='224'%3E%3Cfilter id='fibre'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.26 .012' numOctaves='3' seed='31' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='224' height='224' filter='url(%23fibre)' opacity='.24'/%3E%3C/svg%3E"),
@@ -79,7 +128,7 @@
 
   .tape {
     @apply absolute h-6 w-24 rotate-[-4deg] bg-paper2;
-    box-shadow: 0 1px 6px -3px rgba(23,19,16,.5);
+    box-shadow: var(--shadow-tape);
     mask-image: linear-gradient(90deg, transparent 0, #000 6px, #000 calc(100% - 6px), transparent 100%);
   }
 }

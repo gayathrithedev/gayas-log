@@ -4,22 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Monochrome system — white page, ink type, no colour accents.
-        paper:    "#FFFFFF",
-        paper2:   "#F6F6F4",
-        ink:      "#101010",
-        ink70:    "#4E4E4B",
-        ink40:    "#8B8B86",
-        rule:     "#E7E7E3",
-        // "accent" tokens kept for API stability; all neutral.
-        flame:    "#101010",
-        flameSoft:"#F2F2F0",
-        moss:     "#3A3A37",
-        mossSoft: "#F4F4F2",
-        ochre:    "#6B6B65",
-        ochreSoft:"#F7F7F5",
-        // the one colour on the page — the greeting
-        inkblue:  "#1D4ED8",
+        // Theme-aware tokens. Values are RGB triplets so Tailwind opacity
+        // modifiers (for example bg-paper/90) work in both themes.
+        paper:    "rgb(var(--color-paper) / <alpha-value>)",
+        paper2:   "rgb(var(--color-paper2) / <alpha-value>)",
+        ink:      "rgb(var(--color-ink) / <alpha-value>)",
+        ink70:    "rgb(var(--color-ink70) / <alpha-value>)",
+        ink40:    "rgb(var(--color-ink40) / <alpha-value>)",
+        rule:     "rgb(var(--color-rule) / <alpha-value>)",
+        // "accent" tokens kept for API stability; all theme-aware.
+        flame:    "rgb(var(--color-flame) / <alpha-value>)",
+        flameSoft:"rgb(var(--color-flame-soft) / <alpha-value>)",
+        moss:     "rgb(var(--color-moss) / <alpha-value>)",
+        mossSoft: "rgb(var(--color-moss-soft) / <alpha-value>)",
+        ochre:    "rgb(var(--color-ochre) / <alpha-value>)",
+        ochreSoft:"rgb(var(--color-ochre-soft) / <alpha-value>)",
+        // The greeting accent.
+        inkblue:  "rgb(var(--color-inkblue) / <alpha-value>)",
       },
       fontFamily: {
         display: ['"Caveat"', 'cursive'],
@@ -27,9 +28,9 @@ export default {
         mono: ['"Manrope"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        card:  '0 1px 0 0 #E7E7E3, 0 18px 40px -30px rgba(16,16,16,0.22)',
-        lift:  '0 1px 0 0 #101010, 0 26px 50px -32px rgba(16,16,16,0.30)',
-        sticker:'0 6px 18px -14px rgba(16,16,16,0.35)',
+        card:  'var(--shadow-card)',
+        lift:  'var(--shadow-lift)',
+        sticker:'var(--shadow-sticker)',
       },
       keyframes: {
         marquee: { '0%': { transform: 'translate3d(0, 0, 0)' }, '100%': { transform: 'translate3d(-50%, 0, 0)' } },

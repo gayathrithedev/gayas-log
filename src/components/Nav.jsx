@@ -1,4 +1,5 @@
 import { nav, profile } from "../data/content";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINK =
   "inline-flex min-h-10 items-center gap-1.5 px-1 text-[13px] leading-none text-ink40 transition-colors duration-300 hover:text-ink";
@@ -20,7 +21,7 @@ export default function Nav() {
               Gayathri Perumal
             </a>
 
-            <nav aria-label="Sections" className="flex items-center gap-5">
+            <nav aria-label="Sections" className="flex items-center gap-2.5 sm:gap-5">
               {nav.map((item) => (
                 <a key={item.href} href={item.href} className={NAV_LINK}>
                   {item.label}
@@ -51,6 +52,8 @@ export default function Nav() {
                   </svg>
                 </a>
               )}
+
+              <ThemeToggle />
             </nav>
           </div>
         </div>
