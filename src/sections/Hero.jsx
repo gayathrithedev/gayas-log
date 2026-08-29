@@ -51,7 +51,7 @@ export default function Hero() {
               alt={`${profile.name}, portrait`}
               label="photo"
               /* exact 2.3:3 portrait ratio */
-              className="aspect-[23/30] w-[92px] rounded-[8px] grayscale sm:w-[115px]"
+              className="aspect-[23/30] w-[92px] rounded-[8px] sm:w-[115px]"
             />
           </div>
         </motion.div>
