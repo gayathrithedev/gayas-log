@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes butterfly-flutter {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(.35); }
+}
+
+.nature-butterfly-wings {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: butterfly-flutter .7s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     color-scheme: light;

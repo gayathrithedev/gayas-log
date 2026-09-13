@@ -63,7 +63,7 @@ export default function Writing() {
       <div className="shell relative py-16 sm:py-20">
         <div className="flex items-end justify-between gap-6">
           <div className="min-w-0 flex-1">
-            <SectionHead id="writing" index="01" label="Writing" title="Notes & writing" note="Thinking out loud." />
+            <SectionHead id="writing" label="Writing" title="Notes & writing" note="Thinking out loud." />
           </div>
 
           {writingMore && (

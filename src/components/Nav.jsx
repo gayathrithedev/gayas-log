@@ -1,10 +1,42 @@
+import { useEffect, useRef, useState } from "react";
 import { nav, profile } from "../data/content";
 import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINK =
   "inline-flex min-h-10 items-center gap-1.5 px-1 text-[13px] leading-none text-ink40 transition-colors duration-300 hover:text-ink";
 
-export default function Nav() {
+export default function Nav({ networking = false }) {
+  const header = useRef(null);
+  const [active, setActive] = useState("");
+
+  useEffect(() => {
+    if (networking) return;
+    let frame;
+    const update = () => {
+      const threshold = Math.max((header.current?.getBoundingClientRect().bottom || 80) + 48, window.innerHeight * 0.4);
+      let current = "";
+      for (const id of ["about", "writing", "contact"]) {
+        if (document.getElementById(id)?.getBoundingClientRect().top <= threshold) current = `#${id}`;
+      }
+      setActive(current);
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.body);
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      observer.disconnect();
+    };
+  }, [networking]);
+
   return (
     <>
       <a
@@ -14,19 +46,23 @@ export default function Nav() {
         Skip to content
       </a>
 
-      <header className="fixed inset-x-0 top-0 z-50">
+      <header ref={header} className="fixed inset-x-0 top-0 z-50">
         <div className="bg-paper/90 backdrop-blur-md">
-          <div className="shell flex items-center justify-between py-3.5">
-            <a href="#top" className="font-display text-xl leading-none tracking-[-0.01em] sm:text-2xl">
+          <div className="shell flex flex-wrap items-center justify-between gap-y-2 py-3.5">
+            <a href="/#top" className="font-display text-xl leading-none tracking-[-0.01em] sm:text-2xl">
               Gayathri Perumal
             </a>
 
-            <nav aria-label="Sections" className="flex items-center gap-2.5 sm:gap-5">
+            <nav aria-label="Main navigation" className="flex w-full flex-wrap items-center justify-between gap-1 sm:w-auto sm:gap-3">
               {nav.map((item) => (
-                <a key={item.href} href={item.href} className={NAV_LINK}>
+                <a key={item.href} href={networking ? `/${item.href}` : item.href} aria-current={!networking && active === item.href ? "location" : undefined} className={`${NAV_LINK} ${!networking && active === item.href ? "!text-ink underline decoration-1 underline-offset-[6px]" : ""}`}>
                   {item.label}
                 </a>
               ))}
+
+              <a href="/networking.html" aria-current={networking ? "page" : undefined} className={`${NAV_LINK} ${networking ? "!text-ink" : ""}`}>
+                Out & Networking
+              </a>
 
               {profile.resume && (
                 <a
@@ -53,7 +89,9 @@ export default function Nav() {
                 </a>
               )}
 
-              <ThemeToggle />
+              <div className="absolute right-5 top-3.5 sm:static">
+                <ThemeToggle />
+              </div>
             </nav>
           </div>
         </div>

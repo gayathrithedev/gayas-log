@@ -6,14 +6,16 @@ import Life from "./sections/Life";
 import Footer from "./sections/Footer";
 
 export default function App() {
+  const networking = window.location.pathname === "/networking.html";
   return (
     <div className="grain min-h-screen">
-      <Nav />
+      <Nav networking={networking} />
       <main id="main">
+        {networking ? <Life /> : <>
         <Hero />
         <About />
         <Writing />
-        <Life />
+        </>}
       </main>
       <Footer />
     </div>

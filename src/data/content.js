@@ -17,9 +17,9 @@ export const profile = {
 
   // The one line under the greeting.
   headline: [
-    { text: "An engineer who hears " },
-    { text: "\u201cthat\u2019s the hard part\u201d", em: true },
-    { text: " and quietly leans in." },
+    { text: "When someone says " },
+    { text: "\u201cthat\u2019s hard to build\u201d", em: true },
+    { text: ", it makes me want to try." },
   ],
 
   portrait: "/portrait.jpg",
@@ -53,23 +53,15 @@ export const marquee = [
 
 export const about = {
   paragraphs: [
-    "I'm a Senior software engineer based in Bengaluru, focused on building thoughtful frontend experiences with React and React Native. I enjoy turning product ideas into clear, accessible interfaces that are reliable and easy to use.",
-    "My work spans UI engineering, design systems, and mobile development. I care about the details that make a product feel polished: maintainable components, good performance, and close collaboration with CEOs, CTOs and Leaders.",
-    "Outside of work, I tweet (X) a lot, enjoy a good coffee, long walks at Agara Lake and beautiful parks in the city, and stay connected to the developer community through meetups and conferences.",
+    "Hi, I'm Gayathri Perumal, a senior software engineer living in Bengaluru. I've spent over seven years in tech, working with product companies. I started with frontend development and have worked with React and React Native for over six years. Recently, I've been working on the backend too, so I now call myself a full-stack engineer.",
+    "Outside of work, I enjoy going to conferences, tech events, and community meetups to meet fellow techies. I also mentor college students, freshers, and people navigating challenges in the tech industry. Supporting and encouraging women in tech matters a lot to me.",
+    "I tweet a lot and spend a good chunk of my time on X. I love a good coffee and a peaceful walk around Agara Lake or one of Bengaluru's beautiful parks. I also enjoy making salad bowls and smoothie bowls. I like eating healthy, and making a good bowl is something I look forward to.",
   ],
 };
 
 /* --- WRITING -------------------------------------------------------------- */
 
 export const writing = [
-  {
-    title: "Breakfast Therapy \ud83e\udd51",
-    where: "Substack",
-    year: "2026",
-    date: "Jan 2026",
-    image: "/writing/breakfast-therapy.jpg",
-    href: "https://gayathrithedev.substack.com/p/breakfast-therapy",
-  },
   {
     title: "React Native 0.74 — enabling the bridgeless new architecture",
     where: "Hashnode",
@@ -78,6 +70,14 @@ export const writing = [
     // no cover art, so this one renders as a typographic card
     tags: ["React Native", "New Architecture"],
     href: "https://gayathri.hashnode.dev/react-native-074-enable-bridgeless-new-architecture",
+  },
+  {
+    title: "Breakfast Therapy \ud83e\udd51",
+    where: "Substack",
+    year: "2026",
+    date: "Jan 2026",
+    image: "/writing/breakfast-therapy.jpg",
+    href: "https://gayathrithedev.substack.com/p/breakfast-therapy",
   },
 ];
 
@@ -106,6 +106,11 @@ export const life = {
     { src: "/life/off-screen.jpg",      caption: "Away from the screen.",          rotate: -2, span: "tall" },
     { src: "/life/react-stage.jpg",     caption: "React India 2025",               rotate: 1,  span: "wide" },
     { src: "/life/conference-day.jpg",  caption: "CTO Talk, MakeMyTrip",            rotate: -1, span: "wide" },
+    { src: "/life/react-india-2024.png", caption: "React India 2024",               rotate: 2,  span: "four3" },
+    { src: "/life/memory-labs.png",      caption: "Memory Labs",                    rotate: -1, span: "wide" },
+    { src: "/life/she-builds.png",       caption: "She Builds",                     rotate: 1,  span: "wide" },
+    { src: "/life/maersk-code-and-cargo.png", caption: "Maersk Code and Cargo",        rotate: -2, span: "tall" },
+    { src: "/life/chennai-react-group.png", caption: "Chennai React",                rotate: 1,  span: "full" },
   ],
 };
 

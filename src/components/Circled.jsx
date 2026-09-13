@@ -13,12 +13,12 @@ export default function Circled({ children, delay = 0.9, className = "" }) {
         aria-hidden
         viewBox="0 0 100 40"
         preserveAspectRatio="none"
-        className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 h-[calc(100%+12px)] w-[calc(100%+24px)] overflow-visible"
+        className="pointer-events-none absolute -inset-x-3 -inset-y-1.5 h-[calc(100%+12px)] w-[calc(100%+24px)] overflow-visible text-ink"
       >
         <motion.path
           d="M96.5 15.5 C 94 4.5, 71 1.2, 50 1.2 C 23 1.2, 2.5 7, 2.5 20 C 2.5 32.5, 25.5 38.8, 52 38.8 C 78 38.8, 98.5 32.5, 98.5 18.5 C 98.5 11.5, 92 6.5, 83 3.4"
           fill="none"
-          stroke="#EC4899"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
