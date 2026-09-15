@@ -2,7 +2,7 @@
 
 Personal site for **Gayathri Perumal**, senior software engineer in Bengaluru.
 
-Live: https://gayas-log-public.vercel.app
+Live: https://www.gayathriperumal.in
 
 ## Stack
 
