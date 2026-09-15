@@ -34,16 +34,16 @@
 .empty-scene p { font-family: "Caveat", cursive; font-size: 22px; color: rgb(var(--color-ink70)); text-align: center; }
 .books-signoff { text-align: center; font-family: "Caveat", cursive; font-size: 23px; color: rgb(var(--color-ink70)); }
 .books-signoff span { display: block; margin-top: 5px; }
-.firefly { position: absolute; width: 24px; height: 27px; z-index: 5; pointer-events: none; animation: firefly-flight var(--flight-time, 29s) cubic-bezier(.45, 0, .55, 1) var(--flight-delay, 0s) infinite; }
-.firefly-drift { display: block; position: relative; width: 100%; height: 100%; animation: firefly-bob 3.7s ease-in-out infinite; }
-.firefly-art { position: relative; width: 100%; height: 100%; }
-.firefly-lantern { position: absolute; left: 50%; top: 69%; width: 7px; height: 7px; transform: translate(-50%, -50%); border-radius: 50%; background: #ffe9a7; box-shadow: 0 0 7px 3px #ffdc7980, 0 0 19px 8px #f5cc5633, 0 0 32px 11px #f5cc5612; animation: firefly-glimmer 4.8s ease-in-out var(--flight-delay, 0s) infinite; }
-.firefly-wing { transform-origin: 16px 16px; animation: firefly-wingbeat .17s ease-in-out infinite alternate; }
-.firefly-wing-right { animation-delay: -.085s; }
-.fly-one { --flight-time: 29s; --flight-delay: -4s; }
-.fly-two { --flight-time: 37s; --flight-delay: -17s; animation-direction: reverse; width: 20px; height: 23px; }
+/* Two small butterflies, with patterned wings and gently wandering flight. */
+.butterfly { position: absolute; width: 43px; height: 39px; z-index: 5; pointer-events: none; animation: butterfly-flight var(--flight-time, 32s) ease-in-out var(--flight-delay, 0s) infinite; }
+.butterfly-drift { display: block; width: 100%; height: 100%; animation: butterfly-bob 4s ease-in-out infinite; }
+.butterfly-art { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 1px 3px #b7a7e63b); }
+.butterfly-wing { transform-origin: 40px 36px; animation: butterfly-wingbeat .85s ease-in-out infinite; }
+.butterfly-wing-right { animation-delay: -.04s; }
+.butterfly-one { --flight-time: 32s; --flight-delay: -4s; }
+.butterfly-two { --flight-time: 41s; --flight-delay: -19s; width: 36px; height: 33px; animation-direction: reverse; filter: hue-rotate(65deg); }
 .books-still *, .books-still *::before, .books-still *::after { animation-play-state: paused !important; }
-@keyframes firefly-flight {
+@keyframes butterfly-flight {
   0%, 100% { left: 72%; top: 10%; transform: rotate(-25deg); }
   14% { left: 44%; top: 19%; transform: rotate(-65deg); }
   28% { left: 22%; top: 39%; transform: rotate(-105deg); }
@@ -52,9 +52,8 @@
   70% { left: 61%; top: 87%; transform: rotate(-45deg); }
   84% { left: 87%; top: 42%; transform: rotate(20deg); }
 }
-@keyframes firefly-bob { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-9px) rotate(8deg); } }
-@keyframes firefly-wingbeat { from { transform: scaleX(1); } to { transform: scaleX(.35); } }
-@keyframes firefly-glimmer { 0%, 100% { opacity: .5; transform: translate(-50%, -50%) scale(.8); } 45%, 60% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); } }
+@keyframes butterfly-bob { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-9px) rotate(8deg); } }
+@keyframes butterfly-wingbeat { 0%, 100% { transform: scaleX(1); } 48% { transform: scaleX(.28); } }
 @keyframes cat-breathe { 50% { transform: scale(1.012, 1.025); } }
 /* Keep the complete reading nook in a laptop viewport; small screens scroll naturally. */
 @media (min-width: 640px) {
@@ -89,15 +88,12 @@
 /* Small keepsakes on the three open shelves. */
 .zz-plant, .snake-plant { height: 85px; width: auto; max-width: 75px; object-fit: contain; object-position: bottom; filter: drop-shadow(2px 3px 3px #0003); transform-origin: 50% 95%; animation: plant-sway 8s ease-in-out infinite; }
 .snake-plant { height: 90px; }
-.shelf-photo { width: 51px; height: 64px; margin-bottom: 1px; flex-shrink: 0; border: 6px ridge #c4a67a; transform: rotate(4deg); background: #f3eddf; box-shadow: 3px 4px 4px #0004; display: grid; place-items: center; color: #846a4e; }
+.shelf-photo { width: 51px; height: 64px; margin-bottom: 1px; flex-shrink: 0; border: 2px solid #b8a58b; border-radius: 2px; background: #f2eee5; box-shadow: 1px 1px 0 #796b58, 3px 5px 8px #0003; display: grid; place-items: center; color: #846a4e; }
 
 .shelf-photo img { width: 100%; height: 100%; object-fit: cover; }
 .shelf-clock { width: 112px; height: 66px; flex-shrink: 0; margin: 0 30px 1px auto; border: 5px solid #b69a76; border-radius: 10px; background: #252a28; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 1px 5px #0006, 2px 3px 5px #0003; }
 .shelf-clock time { font-family: "Manrope", sans-serif; font-size: 25px; font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: .04em; line-height: 1.25; color: #f6e9c8; }
 .shelf-clock > span { font-size: 5px; letter-spacing: .13em; color: #b5b9a9; margin-top: 3px; }
-.fairy-lights { position: absolute; inset: 0; pointer-events: none; }
-.fairy-lights::before { content: ""; position: absolute; left: 7%; right: 7%; top: 50%; height: 1px; background: #9d80514d; }
-.fairy-bulb { position: absolute; top: 35%; width: 3px; height: 4px; border-radius: 50%; background: #fff0b3; box-shadow: 0 0 4px 1px #ffce7790, 0 0 10px 3px #f9b34835; }
 @keyframes plant-sway { 0%, 100% { transform: rotate(-.7deg); } 50% { transform: rotate(.7deg); } }
 @media (min-width: 640px) {
   .shelf-book { height: min(112px, 100%); }
@@ -112,7 +108,7 @@
   .progress-scene { gap: 15px; }
   .zz-plant { height: 78px; max-width: 56px; }
   .snake-plant { height: 82px; max-width: 55px; }
-  .shelf-photo { width: 43px; height: 58px; border-width: 5px; }
+  .shelf-photo { width: 43px; height: 58px; border-width: 2px; }
   .shelf-toy { height: 49px; width: 44px; margin-right: 5px; }
   .shelf-clock { width: 96px; height: 59px; margin-right: 5px; }
   .shelf-clock time { font-size: 23px; }
@@ -120,15 +116,10 @@
 }
 
 /* Hazel's memories: three frames, with a two-photo album on the first shelf. */
-.shelf-photo { position: relative; width: 66px; height: 89px; padding: 3px; }
+.shelf-photo { position: relative; width: 66px; height: 89px; padding: 6px 6px 9px; }
 .shelf-photo img { display: block; min-height: 0; }
-.shelf-photo-album { cursor: pointer; }
-.shelf-photo-album:hover { transform: rotate(0deg); }
-.shelf-photo .photo-dots { position: absolute; bottom: -5px; left: 0; right: 0; display: flex; justify-content: center; gap: 4px; }
-.photo-dots i { width: 3px; height: 3px; border-radius: 50%; background: #80613c; }
-.photo-dots i.active { background: #fff1cd; }
 @media (max-width: 639px) {
-  .shelf-photo { width: 48px; height: 70px; padding: 2px; }
+  .shelf-photo { width: 48px; height: 70px; padding: 4px 4px 6px; }
   .completed-scene .reading-note { position: absolute; right: 3px; top: 0; max-width: 150px; margin: 0; }
   .completed-scene .reading-note span { display: inline; margin-left: 6px; }
   .shelf-cat { width: 150px; bottom: -31px; }
@@ -138,3 +129,28 @@
 .shelf-cat img { mask: url('/books/hazel-silhouette.svg') center / 100% 100% no-repeat; }
 
 .photo-print { display: block; width: 100%; height: 100%; min-height: 0; overflow: hidden; }
+
+/* Each keepsake opens its uncropped original in an accessible native dialog. */
+.shelf-photo { width: 80px; height: 106px; cursor: zoom-in; transition: transform .2s ease; }
+.shelf-photo:hover { transform: translateY(-3px); }
+.photo-viewer { position: fixed; inset: 0; width: fit-content; max-width: 94vw; max-height: 94svh; padding: 0; border: 0; border-radius: 9px; background: #191b19; overflow: hidden; box-shadow: 0 20px 80px #0008; }
+.photo-viewer::backdrop { background: #080b09db; backdrop-filter: blur(7px); }
+.photo-viewer > img { display: block; width: auto; height: auto; max-width: 94vw; max-height: 90svh; object-fit: contain; }
+.photo-viewer-close { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; background: #161b18d9; color: white; font-size: 30px; line-height: 1; cursor: pointer; }
+body:has(.photo-viewer[open]) { overflow: hidden; }
+@media (max-width: 639px) {
+  .shelf-photo { width: 59px; height: 84px; }
+  .progress-scene { gap: 10px; }
+  .progress-scene .zz-plant { max-width: 44px; height: 70px; }
+  .progress-scene .shelf-toy { margin-right: 0; min-width: 32px; width: 32px; }
+  .future-scene .snake-plant { max-width: 47px; }
+}
+
+@media (max-width: 639px) {
+  .future-scene { gap: 8px; padding-inline: 8px; }
+  .future-scene .shelf-book { height: 90px; }
+  .future-scene .snake-plant { max-width: 32px; height: 67px; }
+  .future-scene .shelf-photo { width: 53px; height: 78px; }
+  .future-scene .shelf-clock { width: 78px; }
+  .future-scene .shelf-clock time { font-size: 20px; }
+}
