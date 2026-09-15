@@ -41,7 +41,7 @@ export default function BookshelfCat() {
       onBlur={stopPurr}
     >
       <span aria-hidden="true" className="cat-zzz">z z z</span>
-      <img src="/books/sleeping-hazel.png" alt="Hazel sleeping on the bookshelf, with ginger stripes and little white paws" width="1536" height="1024" />
+      <img src="/books/optimized/sleeping-hazel.webp" alt="Hazel sleeping on the bookshelf, with ginger stripes and little white paws" width="1536" height="1024" decoding="async" />
     </button>
     <audio ref={audioRef} src="/sounds/cat-purr.mp3" preload="none" />
   </>;

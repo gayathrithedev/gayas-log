@@ -16,7 +16,7 @@ function Book({ book }) {
   return <article className="shelf-book">
     <h3 className="sr-only">{book.title}</h3>
     <a className="book-link" href={book.href} target="_blank" rel="noopener noreferrer" aria-label={`${book.title} by ${book.author} — official book page (opens in a new tab)`}>
-      <img src={`/books/${book.cover}`} alt={`${book.title} by ${book.author} — book cover`} />
+      <img src={`/books/optimized/${book.cover.replace(/\.[^.]+$/, ".webp")}`} decoding="async" alt={`${book.title} by ${book.author} — book cover`} />
     </a>
   </article>;
 }
@@ -82,7 +82,7 @@ export default function Books() {
       </section>
       <section className="book-row" aria-labelledby="future-books">
         <h2 id="future-books"><span>03</span>Want to read</h2>
-        <div className="shelf-scene future-scene"><Book book={reads[2]} /><Book book={reads[0]} /><img className="snake-plant" src="/books/snake-plant.png" alt="A tiny snake plant in an ivory pot" width="1024" height="1536" /><PhotoFrame photo={{ file: "hazel-cuddle.png", alt: "Sleepy Hazel cuddling Gayathri's arm" }} /><ShelfClock /></div>
+        <div className="shelf-scene future-scene"><Book book={reads[2]} /><Book book={reads[0]} /><img className="snake-plant" src="/books/optimized/snake-plant.webp" decoding="async" alt="A tiny snake plant in an ivory pot" width="1024" height="1536" /><PhotoFrame photo={{ file: "hazel-cuddle.png", alt: "Sleepy Hazel cuddling Gayathri's arm" }} /><ShelfClock /></div>
         <div className="wood-shelf" aria-hidden="true" />
       </section>
     </div>
