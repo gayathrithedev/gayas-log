@@ -3,6 +3,7 @@ import "@fontsource/instrument-serif/400.css";
 import "./books.css";
 import BookshelfCat from "../components/BookshelfCat";
 import BookshelfMushroom from "../components/BookshelfMushroom";
+import { FairyLights, PhotoFrame, ShelfClock, ZZPlant } from "../components/BookshelfDecor";
 
 const reads = [
   { title: "Who Moved My Cheese?", cover: "who-moved-my-cheese.jpg", author: "Spencer Johnson", href: "https://www.penguin.co.uk/books/341689/who-moved-my-cheese-by-johnson-spencer/9780091816971" },
@@ -52,22 +53,25 @@ export default function Books() {
         <div className="shelf-scene completed-scene">
           <Book book={reads[0]} />
           <p className="reading-note">Finished in 1h 25m.<br />So happy about this one.<span>♡</span></p>
+          <PhotoFrame photos={[{ file: "hazel-selfie.png", alt: "Gayathri and little Hazel wearing matching sunglasses", position: "center 65%" }, { file: "hazel-nap.png", alt: "Little Hazel napping on her favourite shelf", position: "center 22%", zoom: 2.5 }]} />
           <BookshelfCat />
         </div>
-        <div className="wood-shelf" aria-hidden="true" />
+        <div className="wood-shelf" aria-hidden="true"><FairyLights /></div>
       </section>
       <section className="book-row" aria-labelledby="progress-books">
         <h2 id="progress-books"><span>02</span>In progress</h2>
         <div className="shelf-scene progress-scene">
           <Book book={reads[2]} />
+          <ZZPlant />
+          <PhotoFrame photos={[{ file: "hazel-desk.png", alt: "Hazel keeping company on a laptop", position: "center 65%" }]} />
           <BookshelfMushroom still={still} />
         </div>
-        <div className="wood-shelf" aria-hidden="true" />
+        <div className="wood-shelf" aria-hidden="true"><FairyLights /></div>
       </section>
       <section className="book-row" aria-labelledby="future-books">
         <h2 id="future-books"><span>03</span>Want to read</h2>
-        <div className="shelf-scene"><Book book={reads[1]} /></div>
-        <div className="wood-shelf" aria-hidden="true" />
+        <div className="shelf-scene future-scene"><Book book={reads[1]} /><img className="snake-plant" src="/books/snake-plant.png" alt="A tiny snake plant in an ivory pot" width="1024" height="1536" /><PhotoFrame photos={[{ file: "hazel-cuddle.png", alt: "Sleepy Hazel cuddling Gayathri's arm" }]} /><ShelfClock /></div>
+        <div className="wood-shelf" aria-hidden="true"><FairyLights /></div>
       </section>
     </div>
     <p className="books-signoff">Same girl, more good books.<span aria-hidden="true">♡</span></p>

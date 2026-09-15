@@ -34,14 +34,14 @@ export default function BookshelfCat() {
     <button
       type="button"
       className="shelf-cat"
-      aria-label="Pet the ginger cat to hear a purr"
+      aria-label="Pet Hazel to hear a purr"
       onClick={playPurr}
       onPointerEnter={(event) => { if (event.pointerType === "mouse") playPurr(); }}
       onPointerLeave={(event) => { if (event.pointerType === "mouse") stopPurr(); }}
       onBlur={stopPurr}
     >
       <span aria-hidden="true" className="cat-zzz">z z z</span>
-      <img src="/books/sleeping-ginger-cat.png" alt="A sleepy ginger cat curled up on the bookshelf" width="1536" height="1024" />
+      <img src="/books/sleeping-hazel.png" alt="Hazel sleeping on the bookshelf, with ginger stripes and little white paws" width="1536" height="1024" />
     </button>
     <audio ref={audioRef} src="/sounds/cat-purr.mp3" preload="none" />
   </>;

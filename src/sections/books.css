@@ -85,3 +85,56 @@
   .empty-scene { min-height: 140px; }
   .empty-scene p { font-size: 20px; max-width: 240px; }
 }
+
+/* Small keepsakes on the three open shelves. */
+.zz-plant, .snake-plant { height: 85px; width: auto; max-width: 75px; object-fit: contain; object-position: bottom; filter: drop-shadow(2px 3px 3px #0003); transform-origin: 50% 95%; animation: plant-sway 8s ease-in-out infinite; }
+.snake-plant { height: 90px; }
+.shelf-photo { width: 51px; height: 64px; margin-bottom: 1px; flex-shrink: 0; border: 6px ridge #c4a67a; transform: rotate(4deg); background: #f3eddf; box-shadow: 3px 4px 4px #0004; display: grid; place-items: center; color: #846a4e; }
+
+.shelf-photo img { width: 100%; height: 100%; object-fit: cover; }
+.shelf-clock { width: 112px; height: 66px; flex-shrink: 0; margin: 0 30px 1px auto; border: 5px solid #b69a76; border-radius: 10px; background: #252a28; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 1px 5px #0006, 2px 3px 5px #0003; }
+.shelf-clock time { font-family: "Manrope", sans-serif; font-size: 25px; font-weight: 400; font-variant-numeric: tabular-nums; letter-spacing: .04em; line-height: 1.25; color: #f6e9c8; }
+.shelf-clock > span { font-size: 5px; letter-spacing: .13em; color: #b5b9a9; margin-top: 3px; }
+.fairy-lights { position: absolute; inset: 0; pointer-events: none; }
+.fairy-lights::before { content: ""; position: absolute; left: 7%; right: 7%; top: 50%; height: 1px; background: #9d80514d; }
+.fairy-bulb { position: absolute; top: 35%; width: 3px; height: 4px; border-radius: 50%; background: #fff0b3; box-shadow: 0 0 4px 1px #ffce7790, 0 0 10px 3px #f9b34835; }
+@keyframes plant-sway { 0%, 100% { transform: rotate(-.7deg); } 50% { transform: rotate(.7deg); } }
+@media (min-width: 640px) {
+  .shelf-book { height: min(112px, 100%); }
+  .reading-note { font-size: 17px; max-width: 185px; margin-top: 3px; }
+  .reading-note span { display: inline; margin-left: 8px; }
+}
+@media (max-width: 639px) {
+  .bookshelves { display: grid; grid-template-rows: repeat(3, 200px); gap: 30px; }
+  .book-row { margin: 0; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) 13px; }
+  .books-motion { top: 95px; z-index: 9; }
+  .shelf-scene { min-height: 0; }
+  .progress-scene { gap: 15px; }
+  .zz-plant { height: 78px; max-width: 56px; }
+  .snake-plant { height: 82px; max-width: 55px; }
+  .shelf-photo { width: 43px; height: 58px; border-width: 5px; }
+  .shelf-toy { height: 49px; width: 44px; margin-right: 5px; }
+  .shelf-clock { width: 96px; height: 59px; margin-right: 5px; }
+  .shelf-clock time { font-size: 23px; }
+  .books-signoff { margin-top: 22px; }
+}
+
+/* Hazel's memories: three frames, with a two-photo album on the first shelf. */
+.shelf-photo { position: relative; width: 66px; height: 89px; padding: 3px; }
+.shelf-photo img { display: block; min-height: 0; }
+.shelf-photo-album { cursor: pointer; }
+.shelf-photo-album:hover { transform: rotate(0deg); }
+.shelf-photo .photo-dots { position: absolute; bottom: -5px; left: 0; right: 0; display: flex; justify-content: center; gap: 4px; }
+.photo-dots i { width: 3px; height: 3px; border-radius: 50%; background: #80613c; }
+.photo-dots i.active { background: #fff1cd; }
+@media (max-width: 639px) {
+  .shelf-photo { width: 48px; height: 70px; padding: 2px; }
+  .completed-scene .reading-note { position: absolute; right: 3px; top: 0; max-width: 150px; margin: 0; }
+  .completed-scene .reading-note span { display: inline; margin-left: 6px; }
+  .shelf-cat { width: 150px; bottom: -31px; }
+  .future-scene { gap: 10px; }
+  .shelf-clock { width: 89px; margin-right: 0; }
+}
+.shelf-cat img { mask: url('/books/hazel-silhouette.svg') center / 100% 100% no-repeat; }
+
+.photo-print { display: block; width: 100%; height: 100%; min-height: 0; overflow: hidden; }
