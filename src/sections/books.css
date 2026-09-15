@@ -1,0 +1,61 @@
+.books-page { position: relative; padding-top: 115px; padding-bottom: 20px; }
+.books-motion { position: absolute; top: 74px; right: 24px; width: 32px; height: 32px; display: grid; place-items: center; color: rgb(var(--color-ink40)); border-radius: 50%; }
+.books-motion:hover { color: rgb(var(--color-ink)); background: rgb(var(--color-paper2)); }
+.bookshelves { position: relative; margin-top: 0; }
+.book-row { position: relative; margin-bottom: 52px; }
+.book-row h2 { display: flex; align-items: baseline; gap: 12px; font-size: 11px; letter-spacing: .14em; margin-bottom: 20px; }
+.book-row h2 > span { font-family: "Instrument Serif", Georgia, serif; color: #967044; font-size: 24px; letter-spacing: 0; }
+.shelf-scene { display: flex; align-items: flex-end; padding: 0 30px; gap: 25px; position: relative; min-height: 150px; }
+.shelf-book { flex-shrink: 0; height: 120px; position: relative; z-index: 2; transition: transform .35s ease; transform-origin: bottom center; }
+.shelf-book img { display: block; height: 100%; width: auto; max-width: 100px; object-fit: contain; border-radius: 2px; box-shadow: 3px 3px 7px #0003; }
+.shelf-book:hover { transform: translateY(-5px) rotate(-2deg); }
+.reading-note { font-family: "Caveat", cursive; font-size: 20px; line-height: 1.2; transform: rotate(-7deg); align-self: flex-start; margin: 9px 0 0 6px; max-width: 175px; }
+.reading-note span { display: block; margin: 7px 0 0 25px; }
+.shelf-cat { position: absolute; width: 235px; right: 14px; bottom: -48px; z-index: 4; transform-origin: 50% 65%; animation: cat-breathe 5s ease-in-out infinite; pointer-events: none; }
+.cat-zzz { position: absolute; top: -10px; right: 45px; font-family: "Caveat", cursive; font-size: 18px; color: rgb(var(--color-ink40)); letter-spacing: 4px; }
+.wood-shelf { position: relative; height: 17px; border-radius: 2px 2px 4px 4px; background: repeating-linear-gradient(2deg, transparent 0 3px, #6c472517 4px, transparent 5px 7px), linear-gradient(#cfad80, #b18b5d); box-shadow: inset 0 3px 1px #ead2b0, inset 0 -2px 2px #7b583840, 0 13px 15px -8px #583c3940; }
+.progress-scene { gap: 24px; }
+.shelf-toy { width: 63px; height: 77px; margin-left: auto; margin-right: 15px; }
+.empty-scene { min-height: 150px; justify-content: center; align-items: center; }
+.empty-scene p { font-family: "Caveat", cursive; font-size: 22px; color: rgb(var(--color-ink70)); text-align: center; }
+.books-signoff { text-align: center; font-family: "Caveat", cursive; font-size: 23px; color: rgb(var(--color-ink70)); }
+.books-signoff span { display: block; margin-top: 5px; }
+.firefly { position: absolute; width: 16px; height: 18px; z-index: 5; pointer-events: none; animation: firefly-wander 12s ease-in-out infinite alternate; }
+.firefly-body { display: block; width: 5px; height: 12px; border-radius: 50%; background: #675b3e; transform: rotate(-35deg); }
+.firefly-body::before { content: ""; position: absolute; width: 7px; height: 7px; border-radius: 50%; background: #ffe993; bottom: -3px; left: -1px; box-shadow: 0 0 9px 3px #f7c94f80, 0 0 23px 7px #f7c94f30; }
+.firefly-body::after { content: ""; position: absolute; width: 17px; height: 7px; border-radius: 50%; top: 2px; left: -6px; background: #b7ad8980; transform: rotate(30deg); }
+.fly-one { right: 8%; top: 4%; }
+.fly-two { right: 14%; top: 48%; animation-delay: -5s; }
+.fly-three { left: 8%; bottom: 12%; animation-delay: -8s; }
+.books-still *, .books-still *::before { animation-play-state: paused !important; }
+@keyframes firefly-wander { 0% { transform: translate(0, 0) rotate(-15deg); } 45% { transform: translate(-26px, -15px) rotate(15deg); } 100% { transform: translate(18px, 15px) rotate(-10deg); } }
+@keyframes cat-breathe { 50% { transform: scale(1.012, 1.025); } }
+/* Keep the complete reading nook in a laptop viewport; small screens scroll naturally. */
+@media (min-width: 640px) {
+  .books-page { height: 100svh; min-height: 620px; padding-top: 104px; padding-bottom: 12px; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+  .bookshelves { margin-top: 0; min-height: 0; display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .book-row { margin-bottom: 0; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) 13px; }
+  .book-row h2 { margin-bottom: 7px; font-size: 10px; }
+  .book-row h2 > span { font-size: 21px; }
+  .shelf-scene { min-height: 0; }
+  .shelf-book { height: min(112px, 100%); }
+  .shelf-cat { width: 185px; bottom: -38px; }
+  .cat-zzz { top: -4px; }
+  .reading-note { font-size: 19px; }
+  .wood-shelf { height: 13px; }
+  .shelf-toy { width: 50px; height: 61px; }
+  .empty-scene p { font-size: 20px; }
+  .books-signoff { font-size: 19px; line-height: 1.2; }
+  .books-signoff span { display: inline; margin-left: 9px; }
+}
+@media (max-width: 480px) {
+  .books-page { position: relative; padding-top: 115px; }
+  .shelf-scene { padding: 0 12px; gap: 15px; min-height: 140px; }
+  .shelf-book { height: 112px; }
+  .reading-note { font-size: 17px; margin-left: 0; max-width: 165px; }
+  .shelf-cat { width: 173px; right: 0; bottom: -36px; }
+  .cat-zzz { top: 0; font-size: 14px; }
+  .shelf-toy { width: 42px; height: 55px; margin-right: 0; }
+  .empty-scene { min-height: 140px; }
+  .empty-scene p { font-size: 20px; max-width: 240px; }
+}

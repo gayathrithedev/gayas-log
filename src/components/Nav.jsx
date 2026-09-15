@@ -5,17 +5,17 @@ import ThemeToggle from "./ThemeToggle";
 const NAV_LINK =
   "inline-flex min-h-10 items-center gap-1.5 px-1 text-[13px] leading-none text-ink40 transition-colors duration-300 hover:text-ink";
 
-export default function Nav({ networking = false }) {
+export default function Nav({ networking = false, books = false }) {
   const header = useRef(null);
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    if (networking) return;
+    if (networking || books) return;
     let frame;
     const update = () => {
       const threshold = Math.max((header.current?.getBoundingClientRect().bottom || 80) + 48, window.innerHeight * 0.4);
       let current = "";
-      for (const id of ["about", "writing", "contact"]) {
+      for (const id of ["about", "contact"]) {
         if (document.getElementById(id)?.getBoundingClientRect().top <= threshold) current = `#${id}`;
       }
       setActive(current);
@@ -35,7 +35,7 @@ export default function Nav({ networking = false }) {
       window.removeEventListener("resize", schedule);
       observer.disconnect();
     };
-  }, [networking]);
+  }, [networking, books]);
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function Nav({ networking = false }) {
 
             <nav aria-label="Main navigation" className="flex w-full flex-wrap items-center justify-between gap-1 sm:w-auto sm:gap-3">
               {nav.map((item) => (
-                <a key={item.href} href={networking ? `/${item.href}` : item.href} aria-current={!networking && active === item.href ? "location" : undefined} className={`${NAV_LINK} ${!networking && active === item.href ? "!text-ink underline decoration-1 underline-offset-[6px]" : ""}`}>
+                <a key={item.href} href={(networking || books) && item.href.startsWith("#") ? `/${item.href}` : item.href} aria-current={books && item.href === "/books.html" ? "page" : !networking && !books && active === item.href ? "location" : undefined} className={`${NAV_LINK} ${((books && item.href === "/books.html") || (!networking && !books && active === item.href)) ? "!text-ink underline decoration-1 underline-offset-[6px]" : ""}`}>
                   {item.label}
                 </a>
               ))}

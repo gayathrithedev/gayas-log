@@ -117,5 +117,5 @@ export const life = {
 
 export const nav = [
   { label: "About", href: "#about" },
-  { label: "Writing", href: "#writing" },
+  { label: "Books", href: "/books.html" },
 ];
