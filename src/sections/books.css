@@ -9,6 +9,20 @@
 .shelf-book { flex-shrink: 0; height: 120px; position: relative; z-index: 2; transition: transform .35s ease; transform-origin: bottom center; }
 .shelf-book img { display: block; height: 100%; width: auto; max-width: 100px; object-fit: contain; border-radius: 2px; box-shadow: 3px 3px 7px #0003; }
 .shelf-book:hover { transform: translateY(-5px) rotate(-2deg); }
+.book-link { display: block; height: 100%; border-radius: 2px; }
+.shelf-book:focus-within { transform: translateY(-5px) rotate(-2deg); }
+.mushroom { display: block; flex-shrink: 0; min-width: 44px; padding: 0; background: transparent; border: 0; cursor: pointer; }
+.mushroom-character { width: 100%; height: 100%; overflow: visible; transform-origin: 50% 90%; }
+.mushroom-dancing .mushroom-character { animation: mushroom-dance 1.6s ease-in-out; }
+@keyframes mushroom-dance {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  15% { transform: translate(-4px, -3px) rotate(-14deg); }
+  30% { transform: translate(4px, 0) rotate(14deg); }
+  45% { transform: translate(-4px, -5px) rotate(-12deg); }
+  60% { transform: translate(4px, 0) rotate(12deg); }
+  78% { transform: translateY(-12px) rotate(-4deg) scale(1.03); }
+  90% { transform: translateY(0) scale(1.06, .94); }
+}
 .reading-note { font-family: "Caveat", cursive; font-size: 20px; line-height: 1.2; transform: rotate(-7deg); align-self: flex-start; margin: 9px 0 0 6px; max-width: 175px; }
 .reading-note span { display: block; margin: 7px 0 0 25px; }
 .shelf-cat { position: absolute; width: 235px; right: 14px; bottom: -48px; z-index: 4; transform-origin: 50% 65%; animation: cat-breathe 5s ease-in-out infinite; cursor: pointer; border: 0; padding: 0; background: transparent; }

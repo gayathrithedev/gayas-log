@@ -2,17 +2,20 @@ import { useState } from "react";
 import "@fontsource/instrument-serif/400.css";
 import "./books.css";
 import BookshelfCat from "../components/BookshelfCat";
+import BookshelfMushroom from "../components/BookshelfMushroom";
 
 const reads = [
-  { title: "Who Moved My Cheese?", cover: "who-moved-my-cheese.jpg", author: "Spencer Johnson" },
-  { title: "The Art of Doing Things You Hate", cover: "art-of-doing-things-you-hate.jpg", author: "Peter Hollins" },
-  { title: "Psycho-Cybernetics", cover: "psycho-cybernetics.jpg", author: "Maxwell Maltz" },
+  { title: "Who Moved My Cheese?", cover: "who-moved-my-cheese.jpg", author: "Spencer Johnson", href: "https://www.penguin.co.uk/books/341689/who-moved-my-cheese-by-johnson-spencer/9780091816971" },
+  { title: "The Art of Doing Things You Hate", cover: "art-of-doing-things-you-hate.jpg", author: "Peter Hollins", href: "https://www.jaicobooks.com/shop/self-help/the-art-of-doing-things-you-hate/" },
+  { title: "Psycho-Cybernetics", cover: "psycho-cybernetics.jpg", author: "Maxwell Maltz", href: "https://www.penguinrandomhouse.com/books/318795/psycho-cybernetics-by-maxwell-maltz-md-fics/" },
 ];
 
 function Book({ book }) {
   return <article className="shelf-book">
     <h3 className="sr-only">{book.title}</h3>
-    <img src={`/books/${book.cover}`} alt={`${book.title} by ${book.author} — book cover`} />
+    <a className="book-link" href={book.href} target="_blank" rel="noopener noreferrer" aria-label={`${book.title} by ${book.author} — official book page (opens in a new tab)`}>
+      <img src={`/books/${book.cover}`} alt={`${book.title} by ${book.author} — book cover`} />
+    </a>
   </article>;
 }
 
@@ -57,7 +60,7 @@ export default function Books() {
         <h2 id="progress-books"><span>02</span>In progress</h2>
         <div className="shelf-scene progress-scene">
           <Book book={reads[2]} />
-          <svg className="shelf-toy" viewBox="0 0 90 100" fill="none" aria-hidden="true"><path d="M33 43 27 87Q45 97 63 87L57 43" fill="#e9dcc0" stroke="#b7a484" strokeWidth="1.5"/><path d="M8 47C8 28 29 8 45 8S82 28 82 47C67 56 23 56 8 47Z" fill="#b96e50"/><ellipse cx="31" cy="28" rx="7" ry="5" fill="#f6e5ce"/><ellipse cx="61" cy="35" rx="6" ry="4" fill="#f6e5ce"/><ellipse cx="39" cy="45" rx="5" ry="3" fill="#f6e5ce"/><path d="M39 71v3m12-3v3m-10 6q4 4 8 0" stroke="#655344" strokeWidth="2" strokeLinecap="round"/></svg>
+          <BookshelfMushroom still={still} />
         </div>
         <div className="wood-shelf" aria-hidden="true" />
       </section>
