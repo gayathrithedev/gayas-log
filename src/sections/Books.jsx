@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "@fontsource/instrument-serif/400.css";
 import "./books.css";
+import BookshelfCat from "../components/BookshelfCat";
 
 const reads = [
   { title: "Who Moved My Cheese?", cover: "who-moved-my-cheese.jpg", author: "Spencer Johnson" },
@@ -16,7 +17,20 @@ function Book({ book }) {
 }
 
 function Firefly({ className }) {
-  return <span className={`firefly ${className}`} aria-hidden="true"><span className="firefly-body" /></span>;
+  return <span className={`firefly ${className}`} aria-hidden="true">
+    <span className="firefly-drift">
+      <span className="firefly-lantern" />
+      <svg viewBox="0 0 32 36" fill="none" className="firefly-art">
+        <path d="M14 9 11 5m7 4 3-4" stroke="#8c754c" strokeWidth="1" strokeLinecap="round" />
+        <g className="firefly-wing firefly-wing-left"><ellipse cx="10" cy="17" rx="5" ry="9" transform="rotate(-32 10 17)" fill="#e9e3c4" fillOpacity=".75" stroke="#c9bf92" strokeWidth=".6" /><path d="m7 12 6 10" stroke="#fffdf0" strokeWidth=".7" /></g>
+        <g className="firefly-wing firefly-wing-right"><ellipse cx="22" cy="17" rx="5" ry="9" transform="rotate(32 22 17)" fill="#e9e3c4" fillOpacity=".75" stroke="#c9bf92" strokeWidth=".6" /><path d="m25 12-6 10" stroke="#fffdf0" strokeWidth=".7" /></g>
+        <ellipse cx="16" cy="20" rx="3.2" ry="7" fill="#827149" />
+        <path d="M13 23q3-2 6 0v2a3 3 0 0 1-6 0Z" fill="#ffe79a" />
+        <ellipse cx="16" cy="13" rx="3" ry="3.5" fill="#ae8850" />
+        <circle cx="16" cy="9" r="2.3" fill="#64573d" />
+      </svg>
+    </span>
+  </span>;
 }
 
 export default function Books() {
@@ -29,13 +43,13 @@ export default function Books() {
       </svg>
     </button>
     <div className="bookshelves">
-      <Firefly className="fly-one" /><Firefly className="fly-two" /><Firefly className="fly-three" />
+      <Firefly className="fly-one" /><Firefly className="fly-two" />
       <section className="book-row" aria-labelledby="completed-books">
         <h2 id="completed-books"><span>01</span>Completed</h2>
         <div className="shelf-scene completed-scene">
           <Book book={reads[0]} />
           <p className="reading-note">Finished in 1h 25m.<br />So happy about this one.<span>♡</span></p>
-          <div className="shelf-cat"><span aria-hidden="true" className="cat-zzz">z z z</span><img src="/books/sleeping-ginger-cat.png" alt="A sleepy ginger cat curled up on the bookshelf" width="1536" height="1024" /></div>
+          <BookshelfCat />
         </div>
         <div className="wood-shelf" aria-hidden="true" />
       </section>

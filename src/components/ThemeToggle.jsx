@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const THEME_KEY = "gayas-log-theme";
 
 function readTheme() {
-  if (typeof document === "undefined") return "light";
+  if (typeof document === "undefined") return "dark";
 
   const domTheme = document.documentElement.dataset.theme;
   if (domTheme === "dark" || domTheme === "light") return domTheme;
@@ -15,7 +15,7 @@ function readTheme() {
     // Private browsing can deny localStorage; the theme still works per visit.
   }
 
-  return "light";
+  return "dark";
 }
 
 function applyTheme(theme) {
