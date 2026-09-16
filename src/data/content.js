@@ -4,6 +4,8 @@
    Anything marked TODO is a placeholder — swap it for the real thing.
 --------------------------------------------------------------------------- */
 
+import { focusHref } from './focus';
+
 export const profile = {
   // Change this greeting to whatever feels like home (नमस्ते / வணக்கம் / ನಮಸ್ಕಾರ / hey)
   greeting: "வணக்கம்",
@@ -118,4 +120,5 @@ export const life = {
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Books", href: "/books.html" },
+  { label: "Focus ↗", href: focusHref },
 ];

@@ -4,6 +4,7 @@ import About from "./sections/About";
 import Books from "./sections/Books";
 import Life from "./sections/Life";
 import Footer from "./sections/Footer";
+import FocusIntro from "./sections/FocusIntro";
 
 export default function App() {
   const networking = window.location.pathname === "/networking.html";
@@ -15,6 +16,7 @@ export default function App() {
         {books ? <Books /> : networking ? <Life /> : <>
         <Hero />
         <About />
+        <FocusIntro />
         </>}
       </main>
       {!books && <Footer />}

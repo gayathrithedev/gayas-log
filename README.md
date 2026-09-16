@@ -52,3 +52,40 @@ npm run build    # → dist/
 npm run preview
 npm run lint
 ```
+
+## Focus
+
+`/focus.html` has three centred, keyboard-accessible tabs: Pomodoro, Focus music,
+and Surprise. It keeps the portfolio's monochrome light/dark themes and has its
+own entry point, without loading the portfolio galleries or animation libraries.
+
+The timer uses a wall-clock deadline to recover correctly after tab throttling
+or refresh. Its session and optional intention are stored in sessionStorage
+for that tab; no server receives them. Switching tabs preserves the running timer.
+Themes are local to each origin.
+
+Music has a player, playback animation, seeking, volume, repeat and track switching.
+The playlist is deliberately empty until Gayathri supplies the tracks and research
+references. Add those to `src/focus/content.js`; no scientific claims are invented.
+Music does not autoplay. Playback can continue while another tool is selected.
+
+Surprise opens a golden gift with an emerging scratch-off reward and colourful confetti,
+with Gayathri's Topmate link directly below the coupon inside the card, followed by a random motivational message. Clearing 35% of the coating
+reveals `HAZEL` for 100% off every booking, as provided by Gayathri. A keyboard
+reveal button and copy-code button are included. This UI displays the offer;
+it does not create or change the coupon in Topmate. All motion respects reduced
+motion preferences. Gift assets load only when the Surprise experience needs them.
+
+Run `node --test src/focus/timer.test.js` for timing and recovery checks.
+
+### Dedicated subdomain
+
+Run `npm run build:focus` and deploy the `dist-focus` directory as a static site
+at `focus.gayathriperumal.in`. Its root `index.html`, fonts, favicon, and gift
+images are included. Add that domain in the hosting provider and follow its DNS
+and HTTPS configuration instructions. This does not replace the portfolio build.
+
+Once the subdomain is live, set `VITE_FOCUS_ORIGIN=https://focus.gayathriperumal.in/`
+when building the main portfolio with `npm run build`. Until then, the navigation
+and homepage introduction use `/focus.html`, so they do not point to an
+unconfigured subdomain. No hosting or DNS changes are made by either build.

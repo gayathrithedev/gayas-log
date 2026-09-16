@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121413" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Focus — Gayathri Perumal</title>
+    <meta name="description" content="My little space for a little more intention. Pomodoro, focus music, and a surprise from Gayathri Perumal." />
+    <link rel="canonical" href="https://focus.gayathriperumal.in/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Focus — Gayathri Perumal" />
+    <meta property="og:description" content="A small practice in showing up for myself." />
+    <meta property="og:url" content="https://focus.gayathriperumal.in/" />
+    <meta name="twitter:card" content="summary" />
+    <script>
+      try {
+        const theme = localStorage.getItem('gayas-log-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+          document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#FFFFFF' : '#121413';
+        }
+      } catch { /* Default to dark when storage is unavailable. */ }
+    </script>
+  </head>
+  <body><div id="root"></div><script type="module" src="/src/focus-main.jsx"></script></body>
+</html>

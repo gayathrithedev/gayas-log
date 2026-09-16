@@ -3,7 +3,7 @@ import { nav, profile } from "../data/content";
 import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINK =
-  "inline-flex min-h-10 items-center gap-1.5 px-1 text-[13px] leading-none text-ink40 transition-colors duration-300 hover:text-ink";
+  "inline-flex min-h-10 items-center gap-1.5 px-0 text-[12px] leading-none text-ink40 transition-colors duration-300 hover:text-ink sm:px-1 sm:text-[13px]";
 
 export default function Nav({ networking = false, books = false }) {
   const header = useRef(null);
