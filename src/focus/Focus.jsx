@@ -26,18 +26,18 @@ export default function Focus() {
   }
   return <div className="focus-page grain">
     <a className="focus-skip" href="#focus-main">Skip to focus tools</a>
-    <header className="focus-header">
+    <header className="focus-header shell">
       <h1 className="sr-only">Focus by Gayathri Perumal</h1>
       <div className="focus-tabs" role="tablist" aria-label="My everyday tools">
         {tabs.map((tab, index) => <button type="button" key={tab.id} id={`tab-${tab.id}`} ref={node => { tabRefs.current[index] = node; }} role="tab" aria-selected={active === tab.id} aria-controls={`panel-${tab.id}`} tabIndex={active === tab.id ? 0 : -1} onKeyDown={event => moveTab(event, index)} onClick={() => setActive(tab.id)}>{tab.name}</button>)}
       </div>
       <div className="focus-header-links"><a href={homeHref} aria-label="Home" title="Home"><House size={18} strokeWidth={1.4} aria-hidden="true" /></a><ThemeToggle /></div>
     </header>
-    <main id="focus-main" className="focus-main">
+    <main id="focus-main" className="focus-main shell">
       <section id="panel-pomodoro" role="tabpanel" aria-labelledby="tab-pomodoro" hidden={active !== 'pomodoro'} tabIndex={0}><Pomodoro /></section>
-      <section id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden={active !== 'music'} tabIndex={0}><FocusMusic /></section>
+      <section id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden={active !== 'music'} tabIndex={0}><FocusMusic active={active === 'music'} /></section>
       <section id="panel-surprise" role="tabpanel" aria-labelledby="tab-surprise" hidden={active !== 'surprise'} tabIndex={0}><Surprise active={active === 'surprise'} /></section>
     </main>
-    <footer className="focus-quiet-footer"><span>Made for a little more intention.</span></footer>
+    <footer className="focus-quiet-footer shell"><span>Made for a little more intention.</span></footer>
   </div>;
 }

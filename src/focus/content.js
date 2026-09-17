@@ -18,6 +18,5 @@ export const motivations = [
   'Let today be a beginning, not a verdict.',
 ];
 
-// Only Gayathri's selected tracks belong here; no unverified research claims.
-// Each track: { id, title, description, src, sourceUrl, researchUrl }.
-export const focusTracks = [];
+// Separate loopable recordings by SoundReality, supplied by Gayathri.
+export const ambientSources = { rain: '/audio/rain.mp3', thunder: '/audio/thunder.mp3', fire: '/audio/fire.mp3' };

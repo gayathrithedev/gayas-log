@@ -50,3 +50,23 @@ test('custom duration accepts only whole minutes in range', () => {
   assert.equal(formatTime(999), '00:01');
   assert.equal(formatTime(180 * 60000), '180:00');
 });
+
+test('custom sessions reach halfway and completion at their actual deadlines', () => {
+  for (const minutes of [25, 30, 180]) {
+    const started = timerReducer(createTimer('focus', minutes), { type: 'start', now: 1000 });
+    const halfway = timerReducer(started, { type: 'tick', now: 1000 + minutes * 30_000 });
+    assert.equal(1 - halfway.remaining / halfway.duration, 0.5);
+    const complete = timerReducer(halfway, { type: 'tick', now: 1000 + minutes * 60_000 });
+    assert.equal(complete.remaining, 0);
+    assert.equal(complete.status, 'complete');
+  }
+});
+
+test('explicitly pausing before switching to a break sets the correct duration', () => {
+  const started = timerReducer(createTimer('focus', 30), { type: 'start', now: 1000 });
+  for (const [mode, minutes] of [['short', 5], ['long', 15]]) {
+    const paused = timerReducer(started, { type: 'pause', now: 61000 });
+    const next = timerReducer(paused, { type: 'configure', mode, minutes });
+    assert.deepEqual(next, createTimer(mode, minutes));
+  }
+});

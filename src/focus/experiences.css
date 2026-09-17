@@ -1,4 +1,4 @@
-.focus-main { max-width: 680px; margin-top: 42px; }
+.focus-main { margin-top: 42px; }
 .focus-tabs { display: flex; align-items: center; gap: 20px; margin: 0; }
 .focus-tabs button { position: relative; padding: 0 4px; min-height: 44px; font-family: inherit; font-size: 13px; line-height: 1; white-space: nowrap; color: rgb(var(--color-ink40)); transition: color .25s; }
 .focus-tabs button:hover { color: rgb(var(--color-ink)); }
@@ -8,11 +8,11 @@
 .focus-main [role="tabpanel"][hidden] { display: none; }
 .focus-main [role="tabpanel"] { outline-offset: 12px; }
 .pomodoro-panel { max-width: 520px; margin: 0 auto; }
-.focus-quiet-footer { max-width: 680px; margin: 48px auto 0; display: flex; align-items: center; gap: 18px; color: rgb(var(--color-ink70)); font-family: 'Caveat', cursive; font-size: 20px; text-align: center; }
+.focus-quiet-footer { margin: 48px auto 0; display: flex; align-items: center; gap: 18px; color: rgb(var(--color-ink70)); font-family: 'Caveat', cursive; font-size: 20px; text-align: center; }
 .focus-quiet-footer::before, .focus-quiet-footer::after { content: ''; height: 1px; background: rgb(var(--color-rule)); flex: 1; }
 .focus-text-button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: rgb(var(--color-ink70)); text-decoration: underline; text-underline-offset: 5px; }
 .focus-text-button:hover { color: rgb(var(--color-ink)); }
-.surprise-panel h2, .music-panel > h2 { font-family: 'Caveat', cursive; font-size: 34px; line-height: 1.2; font-weight: 400; }
+.surprise-panel h2 { font-family: 'Caveat', cursive; font-size: 34px; line-height: 1.2; font-weight: 400; }
 .gift-stage { height: 310px; position: relative; max-width: 480px; margin: 12px auto 0; display: grid; place-items: center; isolation: isolate; }
 .gift-box-button { width: 260px; height: 280px; border: 0; padding: 0; border-radius: 24px; transition: transform .3s ease; animation: gift-bob 5s ease-in-out infinite; }
 .gift-box-button:hover { animation-play-state: paused; transform: translateY(-7px) rotate(-3deg); }
@@ -40,60 +40,27 @@
 .scratch-card.is-revealed { animation: reward-reveal .5s ease both; }
 .scratch-details p { font-size: 12px; margin-top: 13px; color: rgb(var(--color-ink70)); }
 
-.music-panel { max-width: 430px; margin: 0 auto; }
-.music-visual { height: 220px; width: 270px; position: relative; margin: 24px auto 20px; display: grid; place-items: center; }
-.music-orbit { position: absolute; border: 1px solid rgb(var(--color-ink)); border-radius: 50%; opacity: .22; }
-.orbit-one { width: 200px; height: 200px; }
-.orbit-two { width: 176px; height: 176px; opacity: .35; }
-.orbit-three { width: 150px; height: 150px; opacity: .16; }
-.music-wave { display: flex; align-items: center; justify-content: center; gap: 3px; height: 64px; }
-.music-wave span { width: 3px; border-radius: 3px; background: rgb(var(--color-ink)); opacity: .6; }
-.music-is-playing .music-wave span { animation: music-wave 1.6s var(--delay) ease-in-out infinite alternate; }
-.music-is-playing .music-orbit { animation: orbit-breathe 4s ease-in-out infinite; }
-.music-is-playing .orbit-two { animation-delay: -1.3s; }
-.music-is-playing .orbit-three { animation-delay: -2.6s; }
-.music-track-title h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1.2; }
-.music-track-title p { font-size: 13px; line-height: 1.6; color: rgb(var(--color-ink70)); margin-top: 8px; }
-.music-seek { margin: 25px auto 8px; max-width: 320px; }
-.music-seek input { width: 100%; accent-color: rgb(var(--color-ink)); height: 20px; }
-.music-seek > div { display: flex; justify-content: space-between; font-size: 11px; color: rgb(var(--color-ink70)); }
-.music-controls { display: flex; align-items: center; justify-content: center; gap: 25px; margin: 16px 0; }
-.music-play { display: grid; place-items: center; width: 62px; height: 62px; border: 1px solid rgb(var(--color-ink)); color: rgb(var(--color-ink)); border-radius: 50%; transition: background .3s, transform .3s; }
-.music-play:not(:disabled):hover { background: rgb(var(--color-paper2)); transform: scale(1.04); }
-.music-panel button:disabled { opacity: .35; cursor: not-allowed; }
-.music-options { display: flex; justify-content: center; align-items: center; gap: 12px; color: rgb(var(--color-ink70)); }
-.music-options input { accent-color: rgb(var(--color-ink)); width: 100px; height: 24px; }
-.music-options button[aria-pressed="true"] { color: rgb(var(--color-ink)); }
-.music-track-list { margin-top: 28px; border-top: 1px solid rgb(var(--color-rule)); }
-.music-track-list > div { padding: 12px 0; border-bottom: 1px solid rgb(var(--color-rule)); text-align: left; }
-.music-track-list button { display: flex; gap: 15px; align-items: center; font-size: 14px; min-height: 44px; }
-.music-track-list button[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 5px; }
-.music-track-list button > span { font-size: 12px; opacity: .65; }
-.music-track-list a { display: inline-flex; align-items: center; gap: 5px; margin-left: 28px; font-size: 12px; color: rgb(var(--color-ink70)); text-decoration: underline; }
 @keyframes gift-bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
 @keyframes card-from-gift { from { opacity: 0; transform: translateY(120px) scale(.65); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes gift-base-arrive { from { opacity: 0; } to { opacity: 1; } }
 @keyframes gift-confetti { 0% { transform: translate(0,0) rotate(0); opacity: 0; } 8% { opacity: 1; } 45% { transform: translate(var(--x),var(--y)) rotate(var(--turn)); opacity: 1; } 100% { transform: translate(calc(var(--x) + var(--drift)), 140px) rotate(calc(var(--turn) + 180deg)); opacity: 0; } }
 @keyframes gift-followup { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes reward-reveal { from { transform: scale(.97); } to { transform: scale(1); } }
-@keyframes orbit-breathe { 0%,100% { transform: scale(.96); opacity: .18; } 50% { transform: scale(1.06); opacity: .4; } }
-@keyframes music-wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
 @media (max-width: 600px) {
   .focus-main { margin-top: 28px; }
   .focus-tabs { gap: 14px; }
   .focus-tabs button { font-size: 12px; padding-inline: 0; }
   .focus-tabs button::after { left: 0; right: 0; }
-  .surprise-panel h2, .music-panel > h2 { font-size: 30px; }
+  .surprise-panel h2 { font-size: 30px; }
   .gift-stage { height: 280px; }
 
   .gift-box-button { width: 235px; height: 255px; }
   .gift-open-image { width: 220px; height: 220px; }
   .focus-quiet-footer { margin-top: 36px; font-size: 18px; gap: 10px; }
-  .music-visual { height: 200px; margin-top: 20px; }
 }
 @media (max-width: 380px) { .focus-tabs { gap: 10px; } .focus-header { gap: 6px; } .focus-header-links { gap: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .gift-box-button, .gift-is-open .scratch-card, .gift-open-image, .gift-followup, .scratch-card.is-revealed, .music-is-playing .music-wave span, .music-is-playing .music-orbit { animation: none; }
+  .gift-box-button, .gift-is-open .scratch-card, .gift-open-image, .gift-followup, .scratch-card.is-revealed { animation: none; }
   .gift-confetti { display: none; }
   .focus-tabs button::after { transition: none; }
 }
