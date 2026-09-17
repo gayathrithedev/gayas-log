@@ -4,6 +4,10 @@
 .pomodoro-time-row { display: flex; align-items: center; gap: 18px; min-height: 151px; }
 .pomodoro-time, .pomodoro-edit input { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(72px, 9vw, 94px); line-height: 1.1; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.045em; white-space: nowrap; }
 .pomodoro-time { border-radius: 8px; }
+.pomodoro-digits { display: flex; letter-spacing: 0; }
+.pomodoro-digit { display: block; flex: 0 0 .48em; width: .48em; text-align: center; }
+.pomodoro-digit-colon { flex-basis: .24em; width: .24em; }
+.pomodoro-digit-spacer { visibility: hidden; }
 .pomodoro-time:hover { color: rgb(var(--color-ink70)); }
 .pomodoro-play { display: grid; place-items: center; width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; background: rgb(var(--color-ink)); color: rgb(var(--color-paper)); transition: transform .2s; }
 .pomodoro-play:hover { transform: scale(1.07); }

@@ -13,14 +13,19 @@ export default function ScratchCard() {
     const context = canvas.current.getContext('2d', { willReadFrequently: true });
     if (!context) return;
     const gradient = context.createLinearGradient(0, 0, 720, 280);
-    gradient.addColorStop(0, '#dedede'); gradient.addColorStop(0.5, '#bcbcbc'); gradient.addColorStop(1, '#e5e5e5');
+    gradient.addColorStop(0, '#b47a20'); gradient.addColorStop(0.24, '#f1cf73'); gradient.addColorStop(0.46, '#ffe9a4'); gradient.addColorStop(0.7, '#cf9d3c'); gradient.addColorStop(1, '#f3d582');
     context.fillStyle = gradient;
     context.fillRect(0, 0, 720, 280);
     for (let i = 0; i < 1800; i++) {
-      context.fillStyle = i % 2 ? '#ffffff18' : '#55555518';
+      context.fillStyle = i % 2 ? '#fff7d438' : '#80520e18';
       context.fillRect((i * 137.3) % 720, (i * 47.9) % 280, 2, 2);
     }
-    context.textAlign = 'center'; context.fillStyle = '#444444';
+    context.strokeStyle = '#80520e88'; context.lineWidth = 2;
+    context.strokeRect(16, 16, 688, 248);
+    context.strokeStyle = '#fff2bd99'; context.lineWidth = 1;
+    context.strokeRect(23, 23, 674, 234);
+    context.textAlign = 'center'; context.fillStyle = '#50330c';
+    context.font = '16px Georgia, serif'; context.fillText('✦  GOLDEN TICKET  ✦', 360, 68);
     context.font = 'italic 32px Georgia, serif'; context.fillText('A little extra, just for you.', 360, 123);
     context.font = '24px sans-serif'; context.fillText('Scratch to reveal', 360, 173);
   }, [revealed]);

@@ -13,6 +13,7 @@
 .focus-text-button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: rgb(var(--color-ink70)); text-decoration: underline; text-underline-offset: 5px; }
 .focus-text-button:hover { color: rgb(var(--color-ink)); }
 .surprise-panel h2 { font-family: 'Caveat', cursive; font-size: 34px; line-height: 1.2; font-weight: 400; }
+.surprise-panel { overflow-x: clip; }
 .gift-stage { height: 310px; position: relative; max-width: 480px; margin: 12px auto 0; display: grid; place-items: center; isolation: isolate; }
 .gift-box-button { width: 260px; height: 280px; border: 0; padding: 0; border-radius: 24px; transition: transform .3s ease; animation: gift-bob 5s ease-in-out infinite; }
 .gift-box-button:hover { animation-play-state: paused; transform: translateY(-7px) rotate(-3deg); }
@@ -29,7 +30,7 @@
 .gift-followup { max-width: 440px; margin: 12px auto 0; animation: gift-followup .6s .65s ease both; }
 .scratch-gift { width: 100%; text-align: center; }
 .scratch-controls { margin-top: 120px; min-height: 84px; display: grid; place-items: center; }
-.scratch-card { position: relative; aspect-ratio: 18 / 7; min-height: 140px; border-radius: 8px; overflow: hidden; background: #f2f2f2; color: #343434; border: 1px solid #c9c9c9; }
+.scratch-card { position: relative; aspect-ratio: 18 / 7; min-height: 140px; border-radius: 8px; overflow: hidden; background: linear-gradient(120deg, #d2a34a, #fff0bb 40%, #edca73 72%, #bb872c); color: #50330c; border: 1px solid #b5852e; box-shadow: inset 0 0 0 5px #f7dfa3, inset 0 0 0 6px #ad7b2e; }
 .scratch-reward { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
 .scratch-topmate-link { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; font-size: 13px; color: inherit; text-decoration: underline; text-underline-offset: 5px; }
 .scratch-topmate-link:hover { text-decoration-thickness: 2px; }

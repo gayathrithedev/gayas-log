@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { motivations } from './content';
 import ScratchCard from './ScratchCard';
@@ -12,6 +12,12 @@ const confetti = Array.from({ length: 64 }, (_, i) => ({
 }));
 
 export default function Surprise({ active }) {
+  useEffect(() => {
+    if (!active) return;
+    const image = new Image();
+    image.src = '/focus/gift-open.webp';
+    image.decode().catch(() => {});
+  }, [active]);
   const [opened, setOpened] = useState(false);
   const [note, setNote] = useState(0);
   const [burst, setBurst] = useState(0);
@@ -28,9 +34,9 @@ export default function Surprise({ active }) {
       {opened && <>
         <div className="gift-confetti" key={`confetti-${burst}`} aria-hidden="true">{confetti.map((piece, i) => <i key={i} style={{ '--x': `${piece.x}px`, '--y': `${piece.y}px`, '--drift': `${piece.drift}px`, '--turn': `${piece.rotate}deg`, '--delay': `${i % 8 * 24}ms`, background: piece.color }} />)}</div>
         <ScratchCard />
-        <img className="gift-open-image" src="/focus/gift-open.png" alt="An opened gift box with a ribbon" width="1254" height="1254" />
+        <img className="gift-open-image" src="/focus/gift-open.webp" alt="An opened gift box with a ribbon" width="560" height="560" decoding="async" />
       </>}
-      {!opened && <button type="button" className="gift-box-button" onClick={openGift} aria-label="Open your surprise">{active && <img src="/focus/gift-closed.png" alt="A gift box tied with a satin bow" width="1254" height="1254" />}</button>}
+      {!opened && <button type="button" className="gift-box-button" onClick={openGift} aria-label="Open your surprise"><img src="/focus/gift-closed.webp" alt="A gift box tied with a satin bow" width="560" height="560" loading="eager" decoding="async" /></button>}
     </div>
     {!opened && <div className="gift-action"><button type="button" className="focus-primary" onClick={openGift}>Open my surprise</button></div>}
     {opened && <section className="gift-followup" aria-label="A note from Gayathri">

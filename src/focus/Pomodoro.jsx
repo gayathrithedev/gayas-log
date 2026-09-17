@@ -15,6 +15,9 @@ export default function Pomodoro() {
   const [error, setError] = useState('');
   const running = timer.status === 'running';
   const complete = timer.status === 'complete';
+  const time = formatTime(timer.remaining);
+  // Reserve each digit slot for the whole session, including 100:00 → 99:59.
+  const digits = time.padStart(formatTime(timer.duration).length, ' ');
   const progress = Math.max(0, Math.min(1, 1 - timer.remaining / timer.duration));
 
   function configure(mode, minutes) {
@@ -49,7 +52,7 @@ export default function Pomodoro() {
           <span className="pomodoro-edit-unit">min</span>
           <div className="pomodoro-edit-actions"><button type="submit" aria-label="Save duration"><Check size={19} /></button><button type="button" onClick={cancelEdit} aria-label="Cancel editing"><X size={18} /></button></div>
         </form> : <>
-          <button className="pomodoro-time" type="button" onClick={editTime} aria-label={`Edit duration, ${formatTime(timer.remaining)} remaining`}><span role="timer" aria-label="Time remaining" aria-live="off">{formatTime(timer.remaining)}</span></button>
+          <button className="pomodoro-time" type="button" onClick={editTime} aria-label={`Edit duration, ${time} remaining`}><span role="timer" aria-label={`${time} remaining`} aria-live="off" className="pomodoro-digits">{Array.from(digits, (digit, index) => <span key={index} aria-hidden="true" className={`pomodoro-digit${digit === ':' ? ' pomodoro-digit-colon' : digit === ' ' ? ' pomodoro-digit-spacer' : ''}`}>{digit === ' ' ? '0' : digit}</span>)}</span></button>
           <button type="button" className="pomodoro-play" aria-label={running ? 'Pause timer' : complete ? 'Restart timer' : timer.status === 'paused' ? 'Resume timer' : 'Start timer'} onClick={() => dispatch({ type: running ? 'pause' : 'start', now: Date.now() })}>{running ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}</button>
         </>}
       </div>

@@ -28,7 +28,7 @@ export const profile = {
   portraitCaption: "Somewhere between a stand-up and a side project.",
 
   email: "gayathrithedev@gmail.com",
-  resume: "/resume.pdf", // TODO: add your resume to /public
+  resume: "/resume.pdf",
 };
 
 /* The icon row under the hero line. */
