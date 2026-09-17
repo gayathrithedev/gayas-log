@@ -154,3 +154,13 @@ body:has(.photo-viewer[open]) { overflow: hidden; }
   .future-scene .shelf-clock { width: 78px; }
   .future-scene .shelf-clock time { font-size: 20px; }
 }
+
+/* Keep the third wish-list cover alongside the shelf keepsakes on narrow screens. */
+@media (max-width: 639px) {
+  .future-scene { gap: clamp(3px, 1vw, 6px); padding-inline: 0; }
+  .future-scene .shelf-book { height: clamp(48px, 15vw, 90px); }
+  .future-scene .snake-plant { max-width: 24px; height: 58px; }
+  .future-scene .shelf-photo { width: 40px; height: 60px; }
+  .future-scene .shelf-clock { width: 60px; }
+  .future-scene .shelf-clock time { font-size: 16px; }
+}
