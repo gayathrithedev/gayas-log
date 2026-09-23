@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { life } from "../data/content";
+import lifeImages from "../data/life-images.json";
 import { Reveal } from "../components/primitives";
 
 // Pair matching shapes; an unpaired photo gets a complete row of its own.
@@ -39,18 +40,25 @@ export default function Life() {
       </header>
 
       <div className="space-y-4 sm:space-y-5">
-        {rows.map((row) => (
+        {rows.map((row, rowIndex) => (
           <div key={row[0].src} className={`grid gap-3 sm:gap-4 ${row.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}>
             {row.map((photo, i) => (
               <Reveal key={photo.src} delay={i * 0.06} className="min-w-0">
                 <figure className="flex h-full flex-col">
                   <button type="button" onClick={() => openPhoto(photo)} aria-label={`View ${photo.caption}`} className="group block w-full cursor-zoom-in overflow-hidden rounded-lg shadow-[0_4px_14px_-8px_rgb(0_0_0_/_0.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink">
                   <img
-                    src={photo.src}
+                    src={lifeImages[photo.src]?.src || photo.src}
+                    srcSet={lifeImages[photo.src]?.srcSet}
+                    sizes={row.length === 2
+                      ? "(min-width: 672px) 304px, (min-width: 640px) calc((100vw - 64px) / 2), calc((100vw - 52px) / 2)"
+                      : "(min-width: 672px) 624px, (min-width: 640px) calc(100vw - 48px), calc(100vw - 40px)"}
+                    width={lifeImages[photo.src]?.width}
+                    height={lifeImages[photo.src]?.height}
                     alt={photo.caption}
-                    loading="lazy"
+                    loading={rowIndex === 0 ? "eager" : "lazy"}
+                    fetchPriority={rowIndex === 0 ? "high" : "auto"}
                     decoding="async"
-                    className={`block w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.025] ${row.length === 2 ? pairedAspect[photo.span] || "" : "h-auto"}`}
+                    className={`block h-auto w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.025] ${row.length === 2 ? pairedAspect[photo.span] || "" : ""}`}
                   />
                   </button>
                   <figcaption className="px-1 pb-1 pt-2.5 text-center font-sans text-[11px] leading-relaxed text-ink70 sm:text-[12px]">

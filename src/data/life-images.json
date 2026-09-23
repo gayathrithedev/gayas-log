@@ -1,0 +1,74 @@
+{
+  "/life/chennai-react-group.png": {
+    "width": 2048,
+    "height": 934,
+    "src": "/life/optimized/chennai-react-group-800.webp",
+    "srcSet": "/life/optimized/chennai-react-group-400.webp 400w, /life/optimized/chennai-react-group-800.webp 800w, /life/optimized/chennai-react-group-1280.webp 1280w"
+  },
+  "/life/chennai-reactjs.jpg": {
+    "width": 825,
+    "height": 1100,
+    "src": "/life/optimized/chennai-reactjs-800.webp",
+    "srcSet": "/life/optimized/chennai-reactjs-400.webp 400w, /life/optimized/chennai-reactjs-800.webp 800w, /life/optimized/chennai-reactjs-825.webp 825w"
+  },
+  "/life/conference-day.jpg": {
+    "width": 1500,
+    "height": 844,
+    "src": "/life/optimized/conference-day-800.webp",
+    "srcSet": "/life/optimized/conference-day-400.webp 400w, /life/optimized/conference-day-800.webp 800w, /life/optimized/conference-day-1280.webp 1280w"
+  },
+  "/life/maersk-code-and-cargo.png": {
+    "width": 1280,
+    "height": 1706,
+    "src": "/life/optimized/maersk-code-and-cargo-800.webp",
+    "srcSet": "/life/optimized/maersk-code-and-cargo-400.webp 400w, /life/optimized/maersk-code-and-cargo-800.webp 800w, /life/optimized/maersk-code-and-cargo-1280.webp 1280w"
+  },
+  "/life/meetup-friends.jpg": {
+    "width": 825,
+    "height": 1100,
+    "src": "/life/optimized/meetup-friends-800.webp",
+    "srcSet": "/life/optimized/meetup-friends-400.webp 400w, /life/optimized/meetup-friends-800.webp 800w, /life/optimized/meetup-friends-825.webp 825w"
+  },
+  "/life/memory-labs.png": {
+    "width": 1600,
+    "height": 900,
+    "src": "/life/optimized/memory-labs-800.webp",
+    "srcSet": "/life/optimized/memory-labs-400.webp 400w, /life/optimized/memory-labs-800.webp 800w, /life/optimized/memory-labs-1280.webp 1280w"
+  },
+  "/life/off-screen.jpg": {
+    "width": 825,
+    "height": 1100,
+    "src": "/life/optimized/off-screen-800.webp",
+    "srcSet": "/life/optimized/off-screen-400.webp 400w, /life/optimized/off-screen-800.webp 800w, /life/optimized/off-screen-825.webp 825w"
+  },
+  "/life/react-india-2024.png": {
+    "width": 800,
+    "height": 600,
+    "src": "/life/optimized/react-india-2024-800.webp",
+    "srcSet": "/life/optimized/react-india-2024-400.webp 400w, /life/optimized/react-india-2024-800.webp 800w"
+  },
+  "/life/react-stage.jpg": {
+    "width": 1500,
+    "height": 845,
+    "src": "/life/optimized/react-stage-800.webp",
+    "srcSet": "/life/optimized/react-stage-400.webp 400w, /life/optimized/react-stage-800.webp 800w, /life/optimized/react-stage-1280.webp 1280w"
+  },
+  "/life/she-builds.png": {
+    "width": 1280,
+    "height": 720,
+    "src": "/life/optimized/she-builds-800.webp",
+    "srcSet": "/life/optimized/she-builds-400.webp 400w, /life/optimized/she-builds-800.webp 800w, /life/optimized/she-builds-1280.webp 1280w"
+  },
+  "/life/team-day.jpg": {
+    "width": 1300,
+    "height": 975,
+    "src": "/life/optimized/team-day-800.webp",
+    "srcSet": "/life/optimized/team-day-400.webp 400w, /life/optimized/team-day-800.webp 800w, /life/optimized/team-day-1280.webp 1280w"
+  },
+  "/life/women-who-js.jpg": {
+    "width": 1500,
+    "height": 844,
+    "src": "/life/optimized/women-who-js-800.webp",
+    "srcSet": "/life/optimized/women-who-js-400.webp 400w, /life/optimized/women-who-js-800.webp 800w, /life/optimized/women-who-js-1280.webp 1280w"
+  }
+}
