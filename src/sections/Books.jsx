@@ -6,19 +6,17 @@ import BookshelfMushroom from "../components/BookshelfMushroom";
 import { PhotoFrame, ShelfClock, ZZPlant } from "../components/BookshelfDecor";
 
 const reads = [
-  { title: "A Dog Called Money", cover: "a-dog-called-money.jpg", thumbnail: "a-dog-called-money.jpg", author: "Bodo Schäfer", href: "https://www.jaicobooks.com/shop/business/personal-finance/a-dog-called-money/" },
-  { title: "Anxious People", cover: "anxious-people.jpg", author: "Fredrik Backman", href: "https://www.simonandschuster.com/books/Anxious-People/Fredrik-Backman/9781501160844" },
+  { title: "Protocols: An Operating Manual for the Human Body", cover: "protocols.jpg", thumbnail: "protocols.jpg", author: "Andrew D. Huberman", href: "https://www.simonandschuster.com/books/Protocols/Andrew-D-Huberman/9781668032145" },
   { title: "Who Moved My Cheese?", cover: "who-moved-my-cheese.jpg", author: "Spencer Johnson", href: "https://www.penguin.co.uk/books/341689/who-moved-my-cheese-by-johnson-spencer/9780091816971" },
   { title: "The Art of Doing Things You Hate", cover: "art-of-doing-things-you-hate.jpg", author: "Peter Hollins", href: "https://www.jaicobooks.com/shop/self-help/the-art-of-doing-things-you-hate/" },
   { title: "Psycho-Cybernetics", cover: "psycho-cybernetics.jpg", author: "Maxwell Maltz", href: "https://www.penguinrandomhouse.com/books/318795/psycho-cybernetics-by-maxwell-maltz-md-fics/" },
 ];
 
-function Book({ book, spine = false }) {
-  return <article className={`shelf-book${spine ? ' shelf-book-spine' : ''}`}>
+function Book({ book }) {
+  return <article className="shelf-book">
     <h3 className="sr-only">{book.title}</h3>
     <a className="book-link" href={book.href} target="_blank" rel="noopener noreferrer" aria-label={`${book.title} by ${book.author} — official book page (opens in a new tab)`}>
       <img src={`/books/optimized/${book.thumbnail || book.cover.replace(/\.[^.]+$/, ".webp")}`} decoding="async" alt={`${book.title} by ${book.author} — book cover`} />
-      {spine && <span className="book-spine" aria-hidden="true"><span>{book.title}</span></span>}
     </a>
   </article>;
 }
@@ -65,7 +63,7 @@ export default function Books() {
       <section className="book-row" aria-labelledby="completed-books">
         <h2 id="completed-books"><span>01</span>Completed</h2>
         <div className="shelf-scene completed-scene">
-          <Book book={reads[2]} />
+          <Book book={reads[1]} />
           <PhotoFrame photo={{ file: "hazel-selfie.png", alt: "Gayathri and little Hazel wearing matching sunglasses", position: "center 65%" }} />
           <BookshelfCat />
         </div>
@@ -74,7 +72,7 @@ export default function Books() {
       <section className="book-row" aria-labelledby="progress-books">
         <h2 id="progress-books"><span>02</span>Reading</h2>
         <div className="shelf-scene progress-scene">
-          <Book book={reads[4]} />
+          <Book book={reads[3]} />
           <ZZPlant />
           <PhotoFrame photo={{ file: "hazel-desk.png", alt: "Hazel keeping company on a laptop", position: "center 65%" }} />
           <PhotoFrame photo={{ file: "hazel-nap.png", alt: "Little Hazel napping on her favourite shelf", position: "center 22%", zoom: 2.5 }} />
@@ -84,7 +82,7 @@ export default function Books() {
       </section>
       <section className="book-row" aria-labelledby="future-books">
         <h2 id="future-books"><span>03</span>Want to read</h2>
-        <div className="shelf-scene future-scene"><Book book={reads[3]} spine /><Book book={reads[1]} spine /><Book book={reads[0]} spine /><img className="snake-plant" src="/books/optimized/snake-plant.webp" decoding="async" alt="A tiny snake plant in an ivory pot" width="1024" height="1536" /><PhotoFrame photo={{ file: "hazel-cuddle.png", alt: "Sleepy Hazel cuddling Gayathri's arm" }} /><ShelfClock /></div>
+        <div className="shelf-scene future-scene"><Book book={reads[2]} /><Book book={reads[0]} /><img className="snake-plant" src="/books/optimized/snake-plant.webp" decoding="async" alt="A tiny snake plant in an ivory pot" width="1024" height="1536" /><PhotoFrame photo={{ file: "hazel-cuddle.png", alt: "Sleepy Hazel cuddling Gayathri's arm" }} /><ShelfClock /></div>
         <div className="wood-shelf" aria-hidden="true" />
       </section>
     </div>
