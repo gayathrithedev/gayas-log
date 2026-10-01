@@ -67,8 +67,7 @@ export default function Nav({ networking = false, books = false }) {
               {profile.resume && (
                 <a
                   href={profile.resume}
-                  download="Gayathri-Perumal-Resume.pdf"
-                  title="Download my resume"
+                  title="View my resume"
                   className={`${NAV_LINK} group`}
                 >
                   Resume

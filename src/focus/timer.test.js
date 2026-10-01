@@ -52,7 +52,7 @@ test('custom duration accepts only whole minutes in range', () => {
 });
 
 test('custom sessions reach halfway and completion at their actual deadlines', () => {
-  for (const minutes of [25, 30, 180]) {
+  for (const minutes of [1, 30, 180]) {
     const started = timerReducer(createTimer('focus', minutes), { type: 'start', now: 1000 });
     const halfway = timerReducer(started, { type: 'tick', now: 1000 + minutes * 30_000 });
     assert.equal(1 - halfway.remaining / halfway.duration, 0.5);
@@ -64,9 +64,28 @@ test('custom sessions reach halfway and completion at their actual deadlines', (
 
 test('explicitly pausing before switching to a break sets the correct duration', () => {
   const started = timerReducer(createTimer('focus', 30), { type: 'start', now: 1000 });
-  for (const [mode, minutes] of [['short', 5], ['long', 15]]) {
+  for (const [mode, minutes] of [['short', 5], ['long', 10]]) {
     const paused = timerReducer(started, { type: 'pause', now: 61000 });
     const next = timerReducer(paused, { type: 'configure', mode, minutes });
     assert.deepEqual(next, createTimer(mode, minutes));
   }
 });
+
+for (const [minutes, breakMinutes, mode] of [[25, 5, 'short'], [50, 10, 'long']]) {
+  test(`${minutes}-minute focus automatically starts a ${breakMinutes}-minute break`, () => {
+    const started = timerReducer(createTimer('focus', minutes), { type: 'start', now: 1000 });
+    const now = started.deadline + 500;
+    for (const next of [timerReducer(started, { type: 'tick', now }), timerReducer(started, { type: 'pause', now }), restoreTimer(started, now)]) {
+      assert.equal(next.mode, mode);
+      assert.equal(next.status, 'running');
+      assert.equal(next.remaining, breakMinutes * 60_000);
+      assert.equal(next.deadline, now + breakMinutes * 60_000);
+      assert.equal(next.completedAt, started.deadline);
+      const finished = timerReducer(next, { type: 'tick', now: next.deadline });
+      assert.equal(finished.status, 'complete');
+      assert.equal(finished.remaining, 0);
+      assert.notEqual(finished.completedAt, next.completedAt);
+      assert.equal(timerReducer(finished, { type: 'tick', now: next.deadline + 1000 }), finished);
+    }
+  });
+}
