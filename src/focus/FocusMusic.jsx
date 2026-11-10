@@ -10,7 +10,6 @@ export default function FocusMusic({ active }) {
   const [layers, setLayers] = useState(['rain']);
   const [status, setStatus] = useState('idle');
   const [volume, setVolume] = useState(0.4);
-  const [motion, setMotion] = useState(true);
   const ready = layers.length > 0 && layers.every(layer => Boolean(ambientSources[layer]));
   const scene = layers.includes('fire') ? 'fire' : layers.includes('thunder') ? 'thunder' : 'rain';
   const playing = status === 'playing';
@@ -30,8 +29,7 @@ export default function FocusMusic({ active }) {
 
   return <div className="soundscape">
     <div className="soundscape-art">
-      <SoundBloom scene={scene} playing={playing} active={active} motion={motion} />
-      <div className="soundscape-art-caption"><span>Move gently. Make a little ripple.</span><button type="button" onClick={() => setMotion(!motion)} aria-label={motion ? 'Pause visual motion' : 'Resume visual motion'}>{motion ? <Pause size={13} /> : <Play size={13} />}</button></div>
+      <SoundBloom scene={scene} playing={playing} active={active} motion={true} />
     </div>
     <div className="soundscape-sidebar">
       <fieldset className="soundscape-scenes">
@@ -46,7 +44,6 @@ export default function FocusMusic({ active }) {
         <Volume2 size={16} aria-hidden="true" />
         <input type="range" aria-label="Sound volume" min="0" max="1" step="0.01" value={volume} onChange={event => { const next = Number(event.target.value); setVolume(next); mixer.current?.setVolume(next); }} />
       </div>
-      <p className="soundscape-status" role="status">{!layers.length ? 'Choose any sounds to combine.' : !ready ? 'Sound is on its way.' : status === 'error' ? 'Couldn’t play this sound. Try again.' : loading ? 'Tuning in…' : playing ? 'Now playing' : status === 'paused' ? 'Paused' : 'Choose any sounds to combine.'}</p>
     </div>
   </div>;
 }

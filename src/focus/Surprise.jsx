@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { RotateCcw } from 'lucide-react';
 import { motivations } from './content';
 import ScratchCard from './ScratchCard';
 
@@ -41,7 +40,6 @@ export default function Surprise({ active }) {
     {!opened && <div className="gift-action"><button type="button" className="focus-primary" onClick={openGift}>Open my surprise</button></div>}
     {opened && <section className="gift-followup" aria-label="A note from Gayathri">
       <p className="motivation-message" aria-live="polite">{motivations[note]}</p>
-      <button type="button" className="focus-text-button" onClick={nextNote}><RotateCcw size={14} aria-hidden="true" /> Another little nudge</button>
     </section>}
   </div>;
 }

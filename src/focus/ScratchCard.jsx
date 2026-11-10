@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Check, Copy, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { topmate } from './content';
 
 export default function ScratchCard() {
@@ -7,7 +7,6 @@ export default function ScratchCard() {
   const drawing = useRef(false);
   const previous = useRef(null);
   const [revealed, setRevealed] = useState(false);
-  const [copyStatus, setCopyStatus] = useState('');
   useEffect(() => {
     if (revealed) return;
     const context = canvas.current.getContext('2d', { willReadFrequently: true });
@@ -54,15 +53,11 @@ export default function ScratchCard() {
     for (let i = 3; i < pixels.length; i += 64) { samples++; if (pixels[i] < 128) cleared++; }
     if (cleared / samples > 0.35) setRevealed(true);
   }
-  async function copyCode() {
-    try { await navigator.clipboard.writeText(topmate.coupon); setCopyStatus('Copied!'); }
-    catch { setCopyStatus('Select HAZEL above to copy it.'); }
-  }
   return <div className="scratch-gift">
     <div className={`scratch-card ${revealed ? 'is-revealed' : ''}`}>
       <div className="scratch-reward" aria-hidden={!revealed}><span>{topmate.offer}</span><strong>{topmate.coupon}</strong><a className="scratch-topmate-link" href={topmate.url} target="_blank" rel="noopener noreferrer" tabIndex={revealed ? 0 : -1}>Connect with me on Topmate <ArrowUpRight size={15} aria-hidden="true" /></a></div>
       {!revealed && <canvas ref={canvas} width="720" height="280" aria-hidden="true" onPointerDown={event => { if (event.button !== 0) return; drawing.current = true; event.currentTarget.setPointerCapture(event.pointerId); scratch(event); }} onPointerMove={scratch} onPointerUp={finishScratch} onPointerCancel={finishScratch} onLostPointerCapture={finishScratch} />}
     </div>
-    <div className="scratch-controls">{revealed ? <div className="scratch-details"><p role="status">Use <b>{topmate.coupon}</b> at checkout. Your booking is on me.</p><div className="scratch-next-actions"><button type="button" className="focus-text-button" onClick={copyCode}>{copyStatus === 'Copied!' ? <Check size={15} /> : <Copy size={15} />} {copyStatus || 'Copy code'}</button></div></div> : <button type="button" className="focus-text-button" onClick={() => setRevealed(true)}><Sparkles size={14} /> Or reveal without scratching</button>}</div>
+    <div className="scratch-controls">{revealed ? <div className="scratch-details"><p role="status">Use <b>{topmate.coupon}</b> at checkout. Your booking is on me.</p></div> : <button type="button" className="focus-text-button" onClick={() => setRevealed(true)}><Sparkles size={14} /> Or reveal without scratching</button>}</div>
   </div>;
 }

@@ -1,0 +1,24 @@
+.lotus-pond { position: relative; isolation: isolate; width: 120%; max-width: 480px; aspect-ratio: 1.25; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent), linear-gradient(to bottom, transparent, black 22%, black 78%, transparent 100%); mask-composite: intersect; }
+.lotus-scene { position: absolute; inset: 0 0 auto; aspect-ratio: 1; transform: translateY(-18%); background-image: url('/focus/lotus-bloom-oval-pond.png'); background-size: 300% 100%; background-repeat: no-repeat; }
+.lotus-bud { background-position: left center; }
+.lotus-opening { background-position: center center; }
+.lotus-open { background-position: right center; }
+.lotus-water { position: absolute; inset: 0; pointer-events: none; }
+.lotus-ripple { position: absolute; left: 50%; top: 56%; width: 23%; height: 5%; border: 1px solid #48655870; transition: border-color .35s ease; border-radius: 50%; opacity: 0; animation: lotus-ripple 9s linear infinite; animation-play-state: paused; }
+.lotus-ripple:nth-child(2) { animation-delay: -3s; }
+.lotus-ripple:nth-child(3) { animation-delay: -6s; }
+.lotus-pond.is-running .lotus-ripple { animation-play-state: running; }
+@keyframes lotus-ripple { 0% { transform: translate(-50%, -50%) scale(.5); opacity: 0; } 25% { opacity: .55; } 100% { transform: translate(-50%, -50%) scale(3.4); opacity: 0; } }
+@media (max-width: 760px) { .focus-main .pomodoro-panel:has(.lotus-pond) { grid-template-columns: minmax(0, 1fr); } .pomodoro-object:has(.lotus-pond) { min-width: 0; grid-template-columns: minmax(0, 1fr); } .lotus-pond { width: 100vw; max-width: none; margin-top: 0; } }
+@media (prefers-reduced-motion: reduce) { .lotus-ripple { animation: none; } }
+.lotus-theme-dark .lotus-scene { background-image: url('/focus/lotus-bloom-moonlit.png'); }
+
+/* Keep both assets painted and fade at the same pace as the page theme. */
+.lotus-theme { position: absolute; inset: 0; transition: opacity .35s ease; }
+.lotus-theme-light { opacity: 1; }
+.lotus-theme-dark { opacity: 0; }
+:root[data-theme="dark"] .lotus-theme-light { opacity: 0; }
+:root[data-theme="dark"] .lotus-theme-dark { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .lotus-theme { transition: none; } }
+
+:root[data-theme="dark"] .lotus-ripple { border-color: #e4e7c735; }

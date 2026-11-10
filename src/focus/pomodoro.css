@@ -22,7 +22,6 @@
 .pomodoro-status { font-size: 12px; color: rgb(var(--color-ink70)); }
 .pomodoro-object { display: grid; place-items: center; }
 .timer-vessel { width: 100%; max-width: 400px; height: auto; overflow: visible; }
-.sand-stream { animation: sand-trickle .35s linear infinite; }
 .coffee-steam { opacity: .24; }
 .coffee-steam path { transform-box: fill-box; transform-origin: center bottom; animation: steam-drift 4.8s ease-in-out infinite; }
 .coffee-steam path:nth-child(1) { --steam-drift: -7px; animation-delay: -1.6s; }
@@ -36,7 +35,6 @@
 .pomodoro-edit-actions button:hover { background: rgb(var(--color-paper2)); }
 .pomodoro-hint.has-error { color: #b04d37; }
 :root[data-theme="dark"] .timer-vessel { filter: drop-shadow(0 0 24px #e5d1ab09); }
-@keyframes sand-trickle { to { stroke-dashoffset: -8; } }
 @keyframes steam-drift {
   0% { transform: translate(0, 5px) scale(.9, .85); opacity: 0; }
   25% { opacity: .85; }
@@ -55,6 +53,5 @@
   .pomodoro-bottom { min-height: 44px; margin-top: 10px; }
   .pomodoro-object { margin-top: -5px; }
   .timer-vessel { max-width: 265px; }
-  .focus-page:has(#panel-pomodoro:not([hidden])) .focus-quiet-footer { margin-top: 12px; }
 }
-@media (prefers-reduced-motion: reduce) { .sand-stream, .coffee-steam path { animation: none; } .pomodoro-play { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .lotus-ripple, .coffee-steam path { animation: none; } .pomodoro-play { transition: none; } }

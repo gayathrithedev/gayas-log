@@ -38,6 +38,5 @@ export default function Focus() {
       <section id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden={active !== 'music'} tabIndex={0}><FocusMusic active={active === 'music'} /></section>
       <section id="panel-surprise" role="tabpanel" aria-labelledby="tab-surprise" hidden={active !== 'surprise'} tabIndex={0}><Surprise active={active === 'surprise'} /></section>
     </main>
-    <footer className="focus-quiet-footer shell"><span>Made for a little more intention.</span></footer>
   </div>;
 }
